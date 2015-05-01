@@ -7,10 +7,10 @@
 		</div>
 		<div>
 			<ul class="nav navbar-nav">
-				<li><a href="#">Home</a></li>
-				<li><a href="#">Page 1</a></li>
-				<li><a href="#">Page 2</a></li>
-				<li><a href="#">Page 3</a></li>
+				<li><a href="#">회사소개</a></li>
+				<li><a href="#">영화리뷰</a></li>
+				<li><a href="/myCINE/request/requestList.jsp">요청게시판</a></li>
+				<li><a href="/myCINE/event/event.jsp">이벤트</a></li>
 			</ul>
 			<div class="pull-right">
 				<ul class="nav navbar-nav">
