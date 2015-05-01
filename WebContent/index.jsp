@@ -6,10 +6,10 @@
 <title>Bootstrap Case</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/myCINE/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="/bootstrap/js/bootstrap.min.js"></script>
+<script src="/myCINE/js/bootstrap.min.js"></script>
 <style>
 .carousel-inner>.item>img, .carousel-inner>.item>a>img {
 	width: 70%;
@@ -18,11 +18,38 @@
 </style>
 </head>
 <body>
-<%@include file="header.jsp" %>
+	<%@include file="header.jsp"%>
 
 	<div class="container">
-		<h3>최신 영화를 한번에!</h3>
-		<p>가장 Hot한 영화 베스트5</p>
+		<div class="col-sm-8">
+			<h3>최신 영화를 한번에!</h3>
+			<p>가장 Hot한 영화 베스트5</p>
+		</div>
+		<div class="col-sm-4">
+			<form>
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<th>여기는 타임라인</th>
+						</thead>
+						<tbody>
+							<tr>
+								<td>홍길동 님께서 고스트맘마 영화를 요청하였습니다.</td>
+							</tr>
+							<tr>
+								<td>lwh0102 님께서 로마의 휴일 영화를 요청하였습니다.</td>
+							</tr>
+							<tr>
+								<td>haha</td>
+							</tr>
+							<tr>
+								<td>haha</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</form>
+		</div>
 	</div>
 
 	<div class="container">
@@ -71,31 +98,7 @@
 				</a>
 			</div>
 		</div>
-		<div class="col-sm-4">
-			<form>
-			<div class="table-responsive">
-				<table class="table">
-					<thead>
-					<th>여기는 타임라인</th>
-					</thead>
-					<tbody>
-						<tr>
-							<td>홍길동 님께서 고스트맘마 영화를 요청하였습니다.</td>
-						</tr>
-						<tr>
-							<td>lwh0102 님께서 로마의 휴일 영화를 요청하였습니다.</td>
-						</tr>
-						<tr>
-							<td>haha</td>
-						</tr>
-						<tr>
-							<td>haha</td>
-						</tr>
-					</tbody>
-				</table>
-				</div>
-			</form>
-		</div>
+		
 	</div>
 	<%@ include file="footer.jsp"%>
 </body>

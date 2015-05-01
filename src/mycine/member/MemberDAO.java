@@ -38,4 +38,29 @@ public class MemberDAO {
 			}
 		}
 	}
+	/**
+	 * 영화 요청 관련 메서드
+	 */
+	public int request(String requestName) {
+		try { 
+			conn = mycine.db.DBInfo.getConn();
+			String sql = "insert into mycine_request (r_request_name, r_request_check) values(?,?)";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, requestName);
+			ps.setInt(2, 1);
+			int count = ps.executeUpdate();
+			
+			return count;
+		} catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		} finally {
+			try {
+				if(ps != null) ps.close();
+				if(conn != null) conn.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }
