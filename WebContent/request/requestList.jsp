@@ -6,6 +6,7 @@
 <jsp:useBean id="rDTO" class="mycine.rboard.RequestBoardDTO" />
 <jsp:setProperty property="*" name="rDTO" />
 <%
+	String movieName = request.getParameter("moviename");
 	int totalCnt = rDAO.getTotalCnt(); //총 게시글 수
 	int listSize = 10; //보여줄 리스트의 수
 	int pageSize = 5; //보여줄 페이지의 수
@@ -37,6 +38,11 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="/myCINE/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+function request(){
+	window.open("request.jsp", "request", "width=500 height=300");
+}
+</script>
 <style>
 .carousel-inner>.item>img, .carousel-inner>.item>a>img {
 	width: 70%;
@@ -53,7 +59,7 @@
 		<div class="col-sm-12">
 			<div class="container">
 				<h2>요청 게시판</h2>
-				<p>여기는 영화를 요청하는 게시판입니다.</p>
+				<p>여기는 영화를 요청하는 게시판입니다.<a href="javascript:request()">요청하기</a></p>
 				<form role="form" action="">
 					<table class="table table-hover">
 						<thead>
@@ -75,7 +81,7 @@
 							%>
 							<tr class="info">
 								<td><%=arr.get(i).getIdx()%></td>
-								<td><%=session.getAttribute("id")%>님께서 영화 <%=arr.get(i).getMovieName()%>을
+								<td><%=session.getAttribute("id")%>님께서 영화 <%=movieName%>을
 									요청하셨습니다.</td>
 							</tr>
 							<%
@@ -84,7 +90,7 @@
 							%>
 							<tr class="info">
 								<td>1</td>
-								<td>Doe 님께서 영화 어벤져스를 요청하였습니다.</td>
+								<td>Doe 님께서 영화 <%=movieName %>를 요청하였습니다.</td>
 							</tr>
 							<tr class="info">
 								<td>2</td>

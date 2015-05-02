@@ -15,6 +15,38 @@ public class MemberDTO {
 	private String point;
 	private Date joindate;
 	
+	public MemberDTO(){
+		
+	}
+	
+	public MemberDTO(String id, String pwd, String name, String addr,
+			String email, String tel, String birthday) {
+		super();
+		this.id = id;
+		this.pwd = pwd;
+		this.name = name;
+		this.addr = addr;
+		this.email = email;
+		this.tel = tel;
+		this.birthday = birthday;
+	}
+
+	public MemberDTO(int idx, String id, String pwd, String name, String addr,
+			String email, String tel, String birthday, String point,
+			Date joindate) {
+		super();
+		this.idx = idx;
+		this.id = id;
+		this.pwd = pwd;
+		this.name = name;
+		this.addr = addr;
+		this.email = email;
+		this.tel = tel;
+		this.birthday = birthday;
+		this.point = point;
+		this.joindate = joindate;
+	}
+
 	public int getIdx() {
 		return idx;
 	}

@@ -7,15 +7,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/myCINE/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="/myCINE/js/bootstrap.min.js"></script>
 <style>
 .carousel-inner>.item>img, .carousel-inner>.item>a>img {
 	width: 70%;
 	margin: auto;
 }
 </style>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="/myCINE/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<%@include file="header.jsp"%>
@@ -67,16 +67,16 @@
 				<!-- Wrapper for slides -->
 				<div class="carousel-inner" role="listbox">
 					<div class="item active">
-						<img src="/bootstrap/image/movie.jpg" alt="Chania" width="700"
+						<img src="http://movie.naver.com/movie/bi/mi/photoViewPopup.nhn?movieCode=114249" alt="킹스맨" width="700"
 							height="345">
 					</div>
 					<div class="item">
-						<img src="/bootstrap/image/movie.jpg" alt="Chania" width="460"
+						<img src="http://movie.naver.com/movie/bi/mi/photoViewPopup.nhn?movieCode=124041" alt="차이나타운" width="460"
 							height="345">
 					</div>
 
 					<div class="item">
-						<img src="/bootstrap/image/movie.jpg" alt="Flower" width="460"
+						<img src="http://movie.naver.com/movie/bi/mi/photoViewPopup.nhn?movieCode=103381" alt="위험한상견례" width="460"
 							height="345">
 					</div>
 
