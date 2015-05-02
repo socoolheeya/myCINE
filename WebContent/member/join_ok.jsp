@@ -11,9 +11,10 @@
 	String tel = request.getParameter("tel");
 	String birthday = request.getParameter("year")+"/"+request.getParameter("month")+"/"+request.getParameter("day");
 	String addr = request.getParameter("addr")+" "+request.getParameter("addr2");
-	out.println(email);
-	MemberDTO mdto = new MemberDTO(id, pwd, name, addr, email, tel, birthday);
+	MemberDTO mdto = new MemberDTO(id,pwd,name, addr, email, tel, birthday);
+
 	int result = mDAO.joinMember(mdto);
+
 	String msg = result > 0 ? "가입 성공" : "가입 실패";
 %>
 <script>

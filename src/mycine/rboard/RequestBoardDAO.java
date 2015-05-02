@@ -135,5 +135,31 @@ public class RequestBoardDAO {
 			}
 		}
 	}
+	
+	public boolean movieCheck(String movieName){
+		try {
+			conn = mycine.db.DBInfo.getConn();
+			String sql = "select subject from mycine_movie from where subject=?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, movieName);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			try {
+				if(rs !=null) rs.close();
+				if(ps !=null) ps.close();
+				if(conn !=null) conn.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
 }

@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:useBean id="mDAO" class="mycine.member.MemberDAO" />
-<jsp:useBean id="mDTO" class="mycine.member.MemberDTO" />
-<jsp:setProperty property="*" name="mDTO" />
+<jsp:useBean id="memberDAO" class="mycine.member.MemberDAO" />
+<jsp:useBean id="memberDTO" class="mycine.member.MemberDTO" />
+<jsp:setProperty property="*" name="memberDTO" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,12 +15,12 @@
 		String pwd = request.getParameter("pwd");
 		String rememberId = request.getParameter("rememberId");
 		String name = "";
-		int count = mDAO.loginCheck(id, pwd);
-		out.println(count);
-		if (count > 0) {
-			if (id.equals(mDTO.getId())) {
-				if (pwd.equals(mDTO.getPwd())) {
-					name = mDAO.getUserInfo(id);			
+		int result = memberDAO.loginCheck(id, pwd);
+		out.println(result);
+		if (result > 0) {
+			if (id.equals(memberDTO.getId())) {
+				if (pwd.equals(memberDTO.getPwd())) {
+					name = memberDAO.getUserInfo(id);			
 					if (rememberId == null && rememberId.equals("")) {
 						Cookie ck = new Cookie("rememberId", id);
 						ck.setMaxAge(0);		

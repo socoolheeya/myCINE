@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="requestList.jsp">
+	<form name="requestForm">
 		<table>
 			<tr>
 				<td>영화제목</td>

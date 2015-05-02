@@ -22,25 +22,28 @@
 				"width=800 height=500 left=200 top=100");
 	}
 	function email_change() {
-		if (document.join.email.options[document.join.email.selectedIndex].value == '0') {
+		if (document.join.email3.options[document.join.email3.selectedIndex].value == '0') {
 			document.join.email2.disabled = true;
 			document.join.email2.value = "";
 		}
-		if (document.join.email.options[document.join.email.selectedIndex].value == '9') {
+		if (document.join.email3.options[document.join.email3.selectedIndex].value == '9') {
 			document.join.email2.disabled = false;
 			document.join.email2.value = "";
 			document.join.email2.focus();
 		} else {
 			document.join.email2.disabled = true;
-			document.join.email2.value = document.join.email.options[document.join.email.selectedIndex].value;
+			document.join.email2.value = document.join.email3.options[document.join.email.selectedIndex].value;
 		}
+	}
+	function cancel(){
+		location.href="/myCINE/index.jsp";
 	}
 </script>
 </head>
 <body>
 	<div class="container-fluid">
-		<h1>Hello World!</h1>
-		<p>Resize the browser window to see the effect.</p>
+		<h1>회원가입</h1>
+		<p>회원가입해서 복 받으세요</p>
 		<div class="row">
 			<div class="col-sm-3" style="background-color: lavender;"></div>
 			<div class="col-sm-6" style="background-color: lavenderblush;">
@@ -66,7 +69,7 @@
 									<td>Email</td>
 									<td><input type="text" name="email1"
 										onfocus="this.value='';"> @ <input type="text"
-										name="email2" value="" disabled> <select name="email"
+										name="email2" disabled> <select name="email3"
 										onchange="email_change()">
 											<option value="0">선택하세요</option>
 											<option value="9">직접입력</option>
@@ -402,7 +405,7 @@
 								</tr>
 								<tr>
 									<td colspan="2"><input type="submit" value="가입"> <input
-										type="reset" value="재작성"></td>
+										type="reset" value="재작성"><input type="button" value="취소" onclick="cancel()"></td>
 								</tr>
 							</table>
 						</form>

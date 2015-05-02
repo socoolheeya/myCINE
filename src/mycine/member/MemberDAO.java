@@ -10,6 +10,9 @@ public class MemberDAO {
 	private PreparedStatement ps;
 	private ResultSet rs;
 	
+	public MemberDAO(){
+		
+	}
 	
 	/**
 	 * 회원가입 관련 메서드
@@ -18,8 +21,8 @@ public class MemberDAO {
 	 */
 	public int joinMember(MemberDTO memberDTO){
 		try{
-			String sql = "insert into mycine_member values("
-					+ "jsp_member_idx.nextval,?,?,?,?,?,?,?,1000,sysdate)";
+			conn = mycine.db.DBInfo.getConn();
+			String sql = "insert into mycine_member values(mycine_member_idx.nextval,?,?,?,?,?,?,?,1000,sysdate)";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, memberDTO.getId());	
 			ps.setString(2, memberDTO.getPwd());
@@ -49,7 +52,8 @@ public class MemberDAO {
 	 * @return
 	 */
 	public boolean idCheck(String requestId){
-		try{		
+		try{
+			conn = mycine.db.DBInfo.getConn();
 			String sql = "select id from mycine_member where id = ?";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, requestId);
@@ -64,35 +68,6 @@ public class MemberDAO {
 				if(rs!=null)rs.close();
 				if(ps!=null)ps.close();
 				if(conn!=null)conn.close();
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	/**
-	 * 검색 관련 메서드
-	 * @param requestSearchWord
-	 * @return
-	 */
-	public boolean search(String requestSearchWord){
-		try{
-			conn = mycine.db.DBInfo.getConn();
-			String sql = "select * from mycine_movie where subject=? or director=? or actor=?";
-			ps = conn.prepareStatement(sql);
-			ps.setString(1, requestSearchWord);
-			ps.setString(2, requestSearchWord);
-			ps.setString(3, requestSearchWord);
-			rs = ps.executeQuery();
-			
-			return rs.next();
-		} catch(Exception e) {
-			e.printStackTrace();
-			return false;
-		} finally {
-			try{
-				if(rs != null) rs.close();
-				if(ps != null) ps.close();
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -133,13 +108,13 @@ public class MemberDAO {
 			ps.setString(2, pwd);
 			rs = ps.executeQuery();
 			int count = 0;
-			if(rs.next()){
+			if(rs.next()) {
 				count = count + 1;
 			}
 			return count;
 		} catch(Exception e) {
 			e.printStackTrace();
-			return -1;
+			return -3;
 		}
 	}
 	

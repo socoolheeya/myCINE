@@ -6,7 +6,6 @@
 <jsp:useBean id="rDTO" class="mycine.rboard.RequestBoardDTO" />
 <jsp:setProperty property="*" name="rDTO" />
 <%
-	String movieName = request.getParameter("moviename");
 	int totalCnt = rDAO.getTotalCnt(); //총 게시글 수
 	int listSize = 10; //보여줄 리스트의 수
 	int pageSize = 5; //보여줄 페이지의 수
@@ -52,6 +51,7 @@ function request(){
 </head>
 <body>
 	<%
+	String movieName = request.getParameter("moviename");
 		ArrayList<RequestBoardDTO> arr = rDAO.requestList(cp, listSize);
 	%>
 	<%@include file="../header.jsp"%>
@@ -60,7 +60,7 @@ function request(){
 			<div class="container">
 				<h2>요청 게시판</h2>
 				<p>여기는 영화를 요청하는 게시판입니다.<a href="javascript:request()">요청하기</a></p>
-				<form role="form" action="">
+				<form role="form" name="requestListForm">
 					<table class="table table-hover">
 						<thead>
 							<tr>
@@ -99,6 +99,10 @@ function request(){
 							<tr class="info">
 								<td>3</td>
 								<td>나는자바왕 님께서 영화 벤허를 요청하였습니다.</td>
+							</tr>
+								<tr class="info">
+								<td>3</td>
+								<td>나는자바왕 님께서 영화 <input type="text" name="moviename">를 요청하였습니다.</td>
 							</tr>
 						</tbody>
 					</table>

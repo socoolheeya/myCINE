@@ -17,6 +17,17 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="/myCINE/js/bootstrap.min.js"></script>
 </head>
+<%
+	String rememberId = "";
+	Cookie cks[] = request.getCookies();
+	if (cks != null && cks.length != 0) {
+		for (int i = 0; i < cks.length; i++) {
+			if (cks[i].getName().equals("rememberId")) {
+				rememberId = cks[i].getValue();
+			}
+		}
+	}
+%>
 <body>
 	<section>
 		<article>
@@ -24,7 +35,7 @@
 				<legend>
 					<h2>로그인</h2>
 				</legend>
-				<form role="form" method="post" action="login_ok.jsp">
+				<form role="form" action="login_ok.jsp">
 					<div class="row">
 						<div class="col-sm-4">
 							<div class="form-group">
@@ -36,9 +47,9 @@
 									class="form-control" id="pwd" name="pwd" placeholder="Password 입력">
 							</div>
 							<div class="checkbox">
-								<label><input type="checkbox"> Remember me</label>
+								<label><input type="checkbox" name="rememberId" value="on" <%=rememberId.equals("") ? "" : "checked"%>> Remember me</label>
 							</div>
-							<button type="submit" class="btn btn-default">Submit</button>
+							<button type="submit" class="btn btn-default">로그인</button>
 						</div>
 					</div>
 
