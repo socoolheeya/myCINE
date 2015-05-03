@@ -51,7 +51,7 @@ function request(){
 </head>
 <body>
 	<%
-	String movieName = request.getParameter("moviename");
+		String movieName = request.getParameter("moviename");
 		ArrayList<RequestBoardDTO> arr = rDAO.requestList(cp, listSize);
 	%>
 	<%@include file="../header.jsp"%>
@@ -83,27 +83,12 @@ function request(){
 								<td><%=arr.get(i).getIdx()%></td>
 								<td><%=session.getAttribute("id")%>님께서 영화 <%=movieName%>을
 									요청하셨습니다.</td>
+									<td><input type="text" name="moviename"></td>
 							</tr>
 							<%
 								}
 							}
 							%>
-							<tr class="info">
-								<td>1</td>
-								<td>Doe 님께서 영화 <%=movieName %>를 요청하였습니다.</td>
-							</tr>
-							<tr class="info">
-								<td>2</td>
-								<td>lwh0102 님께서 영화 타이타닉를 요청하였습니다.</td>
-							</tr>
-							<tr class="info">
-								<td>3</td>
-								<td>나는자바왕 님께서 영화 벤허를 요청하였습니다.</td>
-							</tr>
-								<tr class="info">
-								<td>3</td>
-								<td>나는자바왕 님께서 영화 <input type="text" name="moviename">를 요청하였습니다.</td>
-							</tr>
 						</tbody>
 					</table>
 				</form>

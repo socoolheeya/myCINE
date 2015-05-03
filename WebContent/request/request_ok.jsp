@@ -4,7 +4,8 @@
 <jsp:useBean id="rDTO" class="mycine.rboard.RequestBoardDTO" />
 <jsp:setProperty property="*" name="rDTO" />
 <%
-	String movieName = request.getParameter("moviename");
+	String movieName = request.getParameter("searchword");
+	String id = (String)session.getAttribute("id");
 	boolean result = rDAO.movieCheck(movieName);
 	if(result) {
 		%>
@@ -14,13 +15,19 @@
 		</script>
 		<%
 	} else {
-		%>
-		<script>
-		alert("요청이 성공하였습니다.");
-		opener.document.requestListForm.moviename.value = movieName;
-		self.close();
-		location.href="request.jsp";
-		</script>
-		<%
+		out.println(movieName);
+		out.println("id:"+id);
+		int count = rDAO.request(id, movieName);
+		out.print(count);
+		if(count > 0) {
+			%>
+			<script>		
+			alert("요청이 성공하였습니다.");
+			self.close();
+			opener.document.requestListForm.moviename.value = "<%=movieName%>";
+			</script>
+			<%
+		}
 	}
+	
 %>

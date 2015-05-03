@@ -66,6 +66,24 @@ public class RequestBoardDAO {
 			}
 		}
 	}
+	/**
+	 * 요청한 사람 요청 영화 넣기
+	 */
+	public int request(String id, String movieName){
+		try{
+			conn = mycine.db.DBInfo.getConn();
+			String sql = "insert into mycine_request values(mycine_request_idx.nextval,?,?,false,0,0,0,0)";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, id);
+			ps.setString(2, movieName);
+			int count = ps.executeUpdate();
+			
+			return count;
+		} catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
+	}
 
 	public ArrayList<RequestBoardDTO> requestList(int cp, int listSize) {
 		try {
@@ -84,12 +102,12 @@ public class RequestBoardDAO {
 				String writer = rs.getString("writer");
 				String movieName = rs.getString("moviename");
 				Date writeDate = rs.getDate("writedate");
+				Boolean requestCheck = rs.getBoolean("requestcheck");
 				int recommend = rs.getInt("recommend");
 				int ref = rs.getInt("ref");
 				int lev = rs.getInt("lev");
 				int sunbun = rs.getInt("sunbun");
-				RequestBoardDTO rdto = new RequestBoardDTO(idx, writer,
-						movieName, writeDate, recommend, ref, lev, sunbun);
+				RequestBoardDTO rdto = new RequestBoardDTO(idx, writer, movieName, writeDate, requestCheck, recommend, ref, lev, sunbun);
 				list.add(rdto);
 			}
 			return list;
@@ -156,6 +174,28 @@ public class RequestBoardDAO {
 				if(rs !=null) rs.close();
 				if(ps !=null) ps.close();
 				if(conn !=null) conn.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public int writeRequestContent(String movieName, String user){
+		try{
+			conn = mycine.db.DBInfo.getConn();
+			String sql ="insert into mycine_request values(mycine_request_idx.nextval,?,?,0)";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, movieName);
+			ps.setString(2, user);
+			int count = ps.executeUpdate();
+			return count;
+		} catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		} finally {
+			try{
+				if(ps!=null) ps.close();
+				if(conn!=null)conn.close();
 			} catch(Exception e) {
 				e.printStackTrace();
 			}

@@ -39,8 +39,7 @@
 					<div class="row">
 						<div class="col-sm-4">
 							<div class="form-group">
-								<label for="focusedInput">ID: </label> <input
-									class="form-control" id="focusedInput" name="id" type="text" placeholder="ID 입력">
+								<label for="focusedInput">ID: </label> <input type="text" class="form-control" id="focusedInput" name="id" value="<%=rememberId%>" placeholder="ID 입력">
 							</div>
 							<div class="form-group">
 								<label for="pwd">Password:</label> <input type="password"

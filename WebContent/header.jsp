@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <script>
-function login(){
-	window.open("/myCINE/member/login.jsp", "login", "width=600 height=400");
-}
+	function login() {
+		window
+				.open("/myCINE/member/login.jsp", "login",
+						"width=600 height=400");
+	}
 </script>
 <nav class="navbar navbar-inverse">
 	<div class="container-fluid">
@@ -15,7 +17,7 @@ function login(){
 				<li><a href="#">회사소개</a></li>
 				<li><a href="#">영화리뷰</a></li>
 				<li><a href="/myCINE/request/requestList.jsp">요청게시판</a></li>
-				<li><a href="/myCINE/event/event.jsp">이벤트</a></li>
+				<li><a href="/myCINE/event/event_Main.jsp">이벤트</a></li>
 			</ul>
 			<div class="pull-right">
 				<ul class="nav navbar-nav">
@@ -37,6 +39,10 @@ function login(){
 					</li>
 				</ul>
 			</div>
+			<%
+				String id = (String) session.getAttribute("id");
+				if (id == null || id.equals("")) {
+			%>
 			<div class="pull-right">
 				<ul class="nav navbar-nav">
 					<li><a href="javascript:login()"> <span
@@ -48,6 +54,21 @@ function login(){
 							title="회원가입"></span></a></li>
 				</ul>
 			</div>
+			<%
+				} else {
+			%>
+			<div class="pull-right">
+				<ul class="nav navbar-nav">
+					<li><a href="/myCINE/member/memberInfo.jsp" id="logining"><%=id %>님 로그인중</a></li>
+					<li><a href="/myCINE/member/logout.jsp"><span
+							class="glyphicon glyphicon-off" data-toggle="tooltip"
+							title="로그이웃"></span></a></li>
+				</ul>
+			</div>
+			<%
+				}
+			%>
+
 		</div>
 	</div>
 </nav>

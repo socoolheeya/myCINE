@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Bootstrap Case</title>
+<title>myCINE</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/myCINE/css/bootstrap.min.css">
@@ -12,6 +12,10 @@
 	width: 70%;
 	margin: auto;
 }
+
+#logining {
+	font-size: 12px;
+}
 </style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -19,7 +23,6 @@
 </head>
 <body>
 	<%@include file="header.jsp"%>
-
 	<div class="container">
 		<div class="col-sm-8">
 			<h3>최신 영화를 한번에!</h3>
@@ -30,7 +33,9 @@
 				<div class="table-responsive">
 					<table class="table">
 						<thead>
-							<th>여기는 타임라인</th>
+							<tr>
+								<th>여기는 타임라인</th>
+							</tr>
 						</thead>
 						<tbody>
 							<tr>
@@ -67,17 +72,20 @@
 				<!-- Wrapper for slides -->
 				<div class="carousel-inner" role="listbox">
 					<div class="item active">
-						<img src="http://movie.naver.com/movie/bi/mi/photoViewPopup.nhn?movieCode=114249" alt="킹스맨" width="700"
-							height="345">
+						<img
+							src="http://movie.naver.com/movie/bi/mi/photoViewPopup.nhn?movieCode=114249"
+							alt="킹스맨" width="700" height="345">
 					</div>
 					<div class="item">
-						<img src="http://movie.naver.com/movie/bi/mi/photoViewPopup.nhn?movieCode=124041" alt="차이나타운" width="460"
-							height="345">
+						<img
+							src="http://movie.naver.com/movie/bi/mi/photoViewPopup.nhn?movieCode=124041"
+							alt="차이나타운" width="460" height="345">
 					</div>
 
 					<div class="item">
-						<img src="http://movie.naver.com/movie/bi/mi/photoViewPopup.nhn?movieCode=103381" alt="위험한상견례" width="460"
-							height="345">
+						<img
+							src="http://movie.naver.com/movie/bi/mi/photoViewPopup.nhn?movieCode=103381"
+							alt="위험한상견례" width="460" height="345">
 					</div>
 
 					<div class="item">
@@ -98,7 +106,7 @@
 				</a>
 			</div>
 		</div>
-		
+
 	</div>
 	<%@ include file="footer.jsp"%>
 </body>
