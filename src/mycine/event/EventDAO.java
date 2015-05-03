@@ -2,24 +2,20 @@ package mycine.event;
 
 import java.sql.*;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-
 public class EventDAO {
 	private Connection conn;
 	private PreparedStatement ps;
 	private ResultSet rs;
 
 	// 내 포인트 조회
-	public EventDTO eventMypoint(int idx) {
+	public EventDTO eventMypoint(String id) {
 
 		try {
 			EventDTO dto = null;
 			conn = mycine.db.DBInfo.getConn();
-			String sql = "select * from mycine_member where idx=?";
+			String sql = "select * from mycine_member where id=?";
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, idx);
+			ps.setString(1, id);
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
@@ -27,7 +23,7 @@ public class EventDAO {
 				String name = rs.getString("name");
 				int point = rs.getInt("point");
 
-				dto = new EventDTO(idx, name, point);
+				dto = new EventDTO(id, name, point);
 
 			}
 			return dto;
@@ -47,5 +43,4 @@ public class EventDAO {
 			}
 		}
 	}
-
 }

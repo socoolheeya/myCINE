@@ -7,27 +7,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/myCINE/css/bootstrap.min.css">
-<style>
-body {
-	margin: 0px auto;
-}
-
-#eventMain_left {
-	width: 200px;
-	height: 300px;
-	float: left;
-}
-
-a {
-	text-decoration: none;
-}
-</style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="/myCINE/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<%@include file="../header.jsp"%>
+<header>
+<%@include file="../header.jsp"%>
+</header>
 	<div class="row">
 	<section>
 	<div class="col-sm-3">
@@ -43,7 +30,7 @@ a {
 		</article>
 </div>
 	<div class="col-sm-8">
-		<article id="eventMain_rigth">
+		<article>
 			<fieldset>
 				<legend>포인트 사용안내</legend>
 				<h2>POINT 적립방법</h2>

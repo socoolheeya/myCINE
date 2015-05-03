@@ -20,7 +20,8 @@
 		if (result > 0) {
 			if (id.equals(memberDTO.getId())) {
 				if (pwd.equals(memberDTO.getPwd())) {
-					name = memberDAO.getUserInfo(id);			
+					name = memberDAO.getUserInfo(id);
+					memberDTO.setPoint(5);
 					if (rememberId == null && rememberId.equals("")) {
 						Cookie ck = new Cookie("rememberId", id);
 						ck.setMaxAge(0);		

@@ -16,7 +16,8 @@
 			<ul class="nav navbar-nav">
 				<li><a href="#">회사소개</a></li>
 				<li><a href="#">영화리뷰</a></li>
-				<li><a href="/myCINE/request/requestList.jsp">요청게시판</a></li>
+				<li><a href="/myCINE/request/requestList.jsp">영화요청</a></li>
+				<li><a href="/myCINE/qna/QnAList.jsp">QnA</a></li>
 				<li><a href="/myCINE/event/event_Main.jsp">이벤트</a></li>
 			</ul>
 			<div class="pull-right">

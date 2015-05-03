@@ -1,7 +1,5 @@
 package mycine.event;
 
-import java.sql.*;
-
 public class EventDTO {
 	int idx;
 	String id;
@@ -26,12 +24,9 @@ public class EventDTO {
 		this.e_point = e_point;
 		this.e_prize = e_prize;
 	}
-	
-	
-	
-	public EventDTO(int idx, String name, int point) {
+	public EventDTO(String id, String name, int point) {
 		super();
-		this.idx = idx;
+		this.id = id;
 		this.name = name;
 		this.point = point;
 	}
@@ -91,7 +86,4 @@ public class EventDTO {
 	public void setE_prize(String e_prize) {
 		this.e_prize = e_prize;
 	}
-	
-	
-	
 }

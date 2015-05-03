@@ -16,17 +16,15 @@ a {
 }
 </style>
 <%	
-	//String id_p = (String)session.getAttribute("id");
-	String idx_s = request.getParameter("idx");
-	if (idx_s == null || idx_s.equals("")) {
-		idx_s = "0";
+	String id_s = (String)session.getAttribute("id");
+	if (id_s == null || id_s.equals("")) {
+		id_s = "0";
 	}
-	int idx = Integer.parseInt(idx_s);
-	EventDTO dto = eDAO.eventMypoint(idx);
+	EventDTO dto = eDAO.eventMypoint(id_s);
 	if (dto == null) {
 %>
 <script>
-	window.alert("잘못된접근 또는 삭제된 게시글입니다.")
+	window.alert("로그인 하고 이용해주세요!")
 	location.href = "event_Main.jsp";
 </script>
 <%
@@ -54,7 +52,7 @@ a {
 				</article>
 			</div>
 			<div class="col-sm-8">
-				<article id="eventMain_rigth">
+				<article>
 					<fieldset>
 						<legend>내 포인트 조회</legend>
 						<h2>
@@ -62,7 +60,6 @@ a {
 							<%=session.getAttribute("id")%>고객님의 포인트는
 							<%=dto.getPoint()%>p 입니다.
 						</h2>
-
 						<p>교환 가능하신 상품은 어쩌구,저쩌구 입니다.</p>
 					</fieldset>
 				</article>

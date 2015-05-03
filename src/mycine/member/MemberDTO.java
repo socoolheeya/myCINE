@@ -12,7 +12,7 @@ public class MemberDTO {
 	private String email;
 	private String tel;
 	private String birthday;
-	private String point;
+	private int point;
 	private Date joindate;
 	
 	public MemberDTO(){
@@ -32,7 +32,7 @@ public class MemberDTO {
 	}
 
 	public MemberDTO(int idx, String id, String pwd, String name, String addr,
-			String email, String tel, String birthday, String point,
+			String email, String tel, String birthday, int point,
 			Date joindate) {
 		super();
 		this.idx = idx;
@@ -95,11 +95,11 @@ public class MemberDTO {
 	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
-	public String getPoint() {
+	public int getPoint() {
 		return point;
 	}
-	public void setPoint(String point) {
-		this.point = point;
+	public void setPoint(int point) {
+		this.point += point;
 	}
 	public Date getJoindate() {
 		return joindate;
