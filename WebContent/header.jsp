@@ -10,7 +10,7 @@
 <nav class="navbar navbar-inverse">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="/myCINE/index.jsp">myCINE</a>
+			<a href="/myCINE/index.jsp"><img src="/myCINE/image/logo.jpg" id="logo" /></a>
 		</div>
 		<div>
 			<ul class="nav navbar-nav">

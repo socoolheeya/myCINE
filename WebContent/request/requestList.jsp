@@ -6,6 +6,7 @@
 <jsp:useBean id="rDTO" class="mycine.rboard.RequestBoardDTO" />
 <jsp:setProperty property="*" name="rDTO" />
 <%
+	
 	int totalCnt = rDAO.getTotalCnt(); //총 게시글 수
 	int listSize = 10; //보여줄 리스트의 수
 	int pageSize = 5; //보여줄 페이지의 수
@@ -30,7 +31,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Bootstrap Case</title>
+<title>영화 요청</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/myCINE/css/bootstrap.min.css">
@@ -39,8 +40,9 @@
 <script src="/myCINE/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 function request(){
-	window.open("request.jsp", "request", "width=500 height=300");
+	location.href="request.jsp";
 }
+
 </script>
 <style>
 .carousel-inner>.item>img, .carousel-inner>.item>a>img {
@@ -51,7 +53,16 @@ function request(){
 </head>
 <body>
 	<%
-		String movieName = request.getParameter("moviename");
+	String ids = (String)session.getAttribute("id");
+	if(ids == null || ids.equals("")) {
+		%>
+		<script>
+		window.alert("로그인 후에 이용할 수 있습니다.");
+		location.href="/myCINE/index.jsp";
+		</script>
+		<%
+		
+	}
 		ArrayList<RequestBoardDTO> arr = rDAO.requestList(cp, listSize);
 	%>
 	<%@include file="../header.jsp"%>
@@ -60,7 +71,7 @@ function request(){
 			<div class="container">
 				<h2>요청 게시판</h2>
 				<p>여기는 영화를 요청하는 게시판입니다.<a href="javascript:request()">요청하기</a></p>
-				<form role="form" name="requestListForm">
+				<form role="form" name="requestList">
 					<table class="table table-hover">
 						<thead>
 							<tr>
@@ -81,14 +92,47 @@ function request(){
 							%>
 							<tr class="info">
 								<td><%=arr.get(i).getIdx()%></td>
-								<td><%=session.getAttribute("id")%>님께서 영화 <%=movieName%>을
-									요청하셨습니다.</td>
-									<td><input type="text" name="moviename"></td>
+								<%
+								for(int z = 1; z<=arr.get(i).getLev(); z++){
+									out.println("&nbsp;&nbsp;");
+								}
+								%>	
+								
+								<td><%=arr.get(i).getWriter()%>님께서 <span id=requestMovieName><%=arr.get(i).getMovieName() %></span> 영화를 요청하셨습니다.</td>
+									<td><a href="recommend.jsp?idx=<%=arr.get(i).getIdx() %>" class="btn btn-info btn"><span
+												class="glyphicon glyphicon-thumbs-up" data-toggle="tooltip"
+												title="추천" id="recommend"></span><%=arr.get(i).getRecommend() %></a></td>
 							</tr>
+					
 							<%
 								}
 							}
 							%>
+							<tr>
+								<td colspan="4">
+									<%
+										if (groupNumber != 0) {
+									%> <a
+									href="requestList.jsp?cp=<%=(groupNumber - 1) * pageSize + pageSize%>">&lt;&lt;</a>
+									<%
+										}
+
+										for (int i = ((groupNumber * pageSize) + 1); i <= (groupNumber * pageSize)
+												+ pageSize; i++) {
+									%> <a href="requestList.jsp?cp=<%=i%>"><%=i%></a>&nbsp;&nbsp;&nbsp;
+									<%
+										if (i == pageCnt)
+												break;
+										}
+										if (groupNumber != ((pageCnt / pageSize) - (pageCnt % pageSize == 0 ? 1
+												: 0))) {
+									%> <a
+									href="requestList.jsp?cp=<%=(groupNumber + 1) * pageSize + 1%>">&gt;&gt;</a>
+									<%
+										}
+									%>
+								</td>
+							</tr>
 						</tbody>
 					</table>
 				</form>

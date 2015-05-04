@@ -6,7 +6,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/myCINE/css/bootstrap.min.css">
-<title>Insert title here</title>
+<title>내 이벤트 페이지</title>
 <style>
 a {
 	text-decoration: none;

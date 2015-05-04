@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="/myCINE/css/bootstrap.min.css">
 <style>
 .carousel-inner>.item>img, .carousel-inner>.item>a>img {
-	width: 70%;
+	width: 70%;	
 	margin: auto;
 }
 </style>

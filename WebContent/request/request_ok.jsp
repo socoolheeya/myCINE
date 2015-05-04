@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("utf-8");
+%>
 <jsp:useBean id="rDAO" class="mycine.rboard.RequestBoardDAO" />
 <jsp:useBean id="rDTO" class="mycine.rboard.RequestBoardDTO" />
 <jsp:setProperty property="*" name="rDTO" />
@@ -15,16 +18,19 @@
 		</script>
 		<%
 	} else {
-		out.println(movieName);
-		out.println("id:"+id);
 		int count = rDAO.request(id, movieName);
-		out.print(count);
 		if(count > 0) {
 			%>
 			<script>		
 			alert("요청이 성공하였습니다.");
-			self.close();
-			opener.document.requestListForm.moviename.value = "<%=movieName%>";
+			location.href="requestList.jsp";
+			</script>
+			<%
+		} else {
+			%>
+			<script>
+			alert("요청 실패하였습니다.");
+			location.href="requestList.jsp";
 			</script>
 			<%
 		}

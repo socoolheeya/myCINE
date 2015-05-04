@@ -43,4 +43,35 @@ public class EventDAO {
 			}
 		}
 	}
+	/**
+	 * 
+	 * @param idx
+	 * @param usepoint
+	 * @return
+	 */
+	public int updatePoint(String id, int usepoint) {
+		try {
+			conn = mycine.db.DBInfo.getConn();
+			String sql = "update mycine_member set point = point-? where id=?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, usepoint);
+			ps.setString(2, id);
+
+			int count = ps.executeUpdate();
+			return count;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -1;
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+		}
+	}
 }

@@ -16,7 +16,6 @@
 		String rememberId = request.getParameter("rememberId");
 		String name = "";
 		int result = memberDAO.loginCheck(id, pwd);
-		out.println(result);
 		if (result > 0) {
 			if (id.equals(memberDTO.getId())) {
 				if (pwd.equals(memberDTO.getPwd())) {

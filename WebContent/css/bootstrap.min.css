@@ -1365,7 +1365,6 @@ a {
 
 a:focus, a:hover {
 	color: #23527c;
-	text-decoration: underline
 }
 
 a:focus {
@@ -7236,4 +7235,13 @@ button.close {
 
 #logining {
 	font-size: 12px;
+}
+
+#logo{
+	margin: 0px;
+	padding: 0px;
+	height:55px;	
+}
+#requestMovieName{
+	color: blue;
 }

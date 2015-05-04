@@ -4,12 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>영화 요청</title>
 </head>
 <body>
 	<form name="requestForm" action="request_ok.jsp">
 		<table>
-			<tr>
+			<tr>	
 				<td>영화제목</td>
 				<td><input type="text" name="searchword"></td>
 			</tr>

@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Insert title here</title>
+<title>이벤트 교환</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/myCINE/css/bootstrap.min.css">
@@ -52,6 +52,7 @@ tfoot tr {
 				<article>
 					<fieldset>
 						<legend>상품 교환</legend>
+						<form name="eventForm" action="event_Exchange_ok.jsp">
 						<table>
 							<tfoot>
 								<tr>
@@ -77,13 +78,13 @@ tfoot tr {
 								</tr>
 								<tr>
 									<td>point: 700 p
-										<button type="button" class="btn btn-warning">교환</button>
+										<button type="submit" class="btn btn-warning" name="c1" value="700">교환</button>
 									</td>
 									<td>point: 800 p
-										<button type="button" class="btn btn-warning">교환</button>
+										<button type="submit" class="btn btn-warning">교환</button>
 									</td>
 									<td>point: 900 p
-										<button type="button" class="btn btn-warning">교환</button>
+										<button type="submit" class="btn btn-warning" name="c" value="300">교환</button>
 									</td>
 								</tr>
 
@@ -119,6 +120,7 @@ tfoot tr {
 								</tr>
 							</tbody>
 						</table>
+						</form>
 					</fieldset>
 				</article>
 			</div>
