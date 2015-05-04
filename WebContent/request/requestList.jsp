@@ -99,7 +99,7 @@ function request(){
 								%>	
 								
 								<td><%=arr.get(i).getWriter()%>님께서 <span id=requestMovieName><%=arr.get(i).getMovieName() %></span> 영화를 요청하셨습니다.</td>
-									<td><a href="recommend.jsp?idx=<%=arr.get(i).getIdx() %>" class="btn btn-info btn"><span
+									<td><a href="recommend.jsp?idx=<%=arr.get(i).getIdx() %>" class="btn btn-info btn" id="recommendButton"><span
 												class="glyphicon glyphicon-thumbs-up" data-toggle="tooltip"
 												title="추천" id="recommend"></span><%=arr.get(i).getRecommend() %></a></td>
 							</tr>

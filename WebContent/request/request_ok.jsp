@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	request.setCharacterEncoding("utf-8");
-%>
+<%@page import="mycine.rboard.RequestBoardDTO"%>
 <jsp:useBean id="rDAO" class="mycine.rboard.RequestBoardDAO" />
 <jsp:useBean id="rDTO" class="mycine.rboard.RequestBoardDTO" />
 <jsp:setProperty property="*" name="rDTO" />
 <%
+	request.setCharacterEncoding("utf-8");
 	String movieName = request.getParameter("searchword");
 	String id = (String)session.getAttribute("id");
 	boolean result = rDAO.movieCheck(movieName);
@@ -22,14 +21,14 @@
 		if(count > 0) {
 			%>
 			<script>		
-			alert("요청이 성공하였습니다.");
+			alert("요청 성공!");
 			location.href="requestList.jsp";
 			</script>
 			<%
 		} else {
 			%>
 			<script>
-			alert("요청 실패하였습니다.");
+			alert("요청 실패!");
 			location.href="requestList.jsp";
 			</script>
 			<%

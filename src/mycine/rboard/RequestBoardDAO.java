@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Date;
 
+import mycine.recommend.RecommendDAO;
+import mycine.recommend.RecommendDTO;
+
 public class RequestBoardDAO {
 
 	private Connection conn;
@@ -104,6 +107,7 @@ public class RequestBoardDAO {
 	public int request(String id, String movieName){
 		try{
 			conn = mycine.db.DBInfo.getConn();
+			RecommendDAO rdao = new RecommendDAO();
 			int ref = getMaxRef();
 			String sql = "insert into mycine_request values(mycine_request_idx.nextval,?,?,0,?,0,0,2,sysdate)";
 			ps = conn.prepareStatement(sql);
@@ -216,5 +220,5 @@ public class RequestBoardDAO {
 			}
 		}
 	}
-	
+
 }

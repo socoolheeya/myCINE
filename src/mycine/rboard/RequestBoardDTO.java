@@ -11,7 +11,7 @@ public class RequestBoardDTO {
 	private int ref;
 	private int lev;
 	private int sunbun;
-	private int requestCheck; // 1이면 true, 2이면 false
+	private int requestCheck; // -1이면 true, 0이면 false
 	private Date writeDate;
 
 	public RequestBoardDTO() {
