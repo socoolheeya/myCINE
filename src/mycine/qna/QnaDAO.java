@@ -9,7 +9,6 @@ public class QnaDAO {
 	private ResultSet rs;
 	
 	public QnaDAO() {
-		System.out.println("myCINE생성자 호출됨");
 	}
 	
 	/**q_ref최고값*/

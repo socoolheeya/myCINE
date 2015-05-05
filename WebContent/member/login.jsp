@@ -29,7 +29,7 @@
 	}
 %>
 <body>
-	<section>
+	<section style="margin: 10px auto; padding-left: 50px; padding-right: 50px; padding: 20px;">
 		<article>
 			<fieldset>
 				<legend>
@@ -37,21 +37,27 @@
 				</legend>
 				<form role="form" action="login_ok.jsp">
 					<div class="row">
+						<div class="col-sm-4"></div>
 						<div class="col-sm-4">
 							<div class="form-group">
-								<label for="focusedInput">ID: </label> <input type="text" class="form-control" id="focusedInput" name="id" value="<%=rememberId%>" placeholder="ID 입력">
+								<label for="focusedInput">ID: </label> <input type="text"
+									class="form-control" id="focusedInput" name="id"
+									value="<%=rememberId%>" placeholder="ID 입력">
 							</div>
 							<div class="form-group">
 								<label for="pwd">Password:</label> <input type="password"
-									class="form-control" id="pwd" name="pwd" placeholder="Password 입력">
+									class="form-control" id="pwd" name="pwd"
+									placeholder="Password 입력">
 							</div>
-							<div class="checkbox">
-								<label><input type="checkbox" name="rememberId" value="on" <%=rememberId.equals("") ? "" : "checked"%>> Remember me</label>
-							</div>
-							<button type="submit" class="btn btn-default">로그인</button>
+							<span class="checkbox">
+								<label><input type="checkbox" name="rememberId"
+									value="on" <%=rememberId.equals("") ? "" : "checked"%>>
+									Remember me</label>
+							</span>
+							<button type="submit" class="btn btn-primary">로그인</button>
 						</div>
+						<div class="col-sm-4"></div>
 					</div>
-
 				</form>
 			</fieldset>
 		</article>

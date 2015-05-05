@@ -38,8 +38,8 @@ function autoInput(zipcode){
 		<table border="1" id="addrlist">
 			<thead>
 				<tr>
-					<th id="zipcode">우편번호</th>
-					<th>주소</th>
+					<th style="font-size:15px; font-weight: bold; text-align: center;">우편번호</th>
+					<th style="font-size:15px; font-weight: bold; text-align: center;">주소</th>
 				</tr>
 			</thead>
 			<%
@@ -68,8 +68,8 @@ function autoInput(zipcode){
 						addr = sido + gugun + dong + ri + bunji + bldg;
 			%>
 			<tr>
-				<td width="100px;"><%=zipcode %></td>
-				<td width="800px"><a href="searchAddr_ok.jsp?zipcode=<%=zipcode %>&addr=<%=addr%>"><%=addr %></a></td>
+				<td width="125px;" style="text-align: center; padding: 5px;"><%=zipcode %></td>
+				<td width="700px" style="padding-left: 15px;"><a href="searchAddr_ok.jsp?zipcode=<%=zipcode %>&addr=<%=addr%>"><%=addr %></a></td>
 			</tr>
 			<%
 				}

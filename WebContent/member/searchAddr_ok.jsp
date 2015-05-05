@@ -12,12 +12,15 @@
 <body>
 	<%
 		String zipcode = request.getParameter("zipcode");
+		String zip[] = zipcode.split("-");
+		String zipcode1 = zip[0];
+		String zipcode2 = zip[1];
 		String addr = request.getParameter("addr");
-		out.println(zipcode);
 	%>
 	<script>
-		opener.document.join.addr.value = "<%=addr%>";
-		opener.document.join.zipcode.value = "<%=zipcode%>";
+		opener.document.join.addr1.value = "<%=addr%>";
+		opener.document.join.zipcode1.value = "<%=zipcode1%>";
+		opener.document.join.zipcode2.value = "<%=zipcode2%>";
 		self.close();
 	</script>
 </body>

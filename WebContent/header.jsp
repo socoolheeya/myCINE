@@ -2,9 +2,8 @@
 	pageEncoding="UTF-8"%>
 <script>
 	function login() {
-		window
-				.open("/myCINE/member/login.jsp", "login",
-						"width=600 height=400");
+		window.open("/myCINE/member/login.jsp", "login",
+						"width=400 height=400 left=500 top=100");
 	}
 </script>
 <nav class="navbar navbar-inverse">
@@ -25,14 +24,14 @@
 					<li>
 						<div class="col-sm-12"
 							style="padding-bottom: 8px; padding-top: 8px;">
-							<form action="">
+							<form action="/myCINE/search/search.jsp">
 								<table>
 									<tr>
-										<td><input type="text" class="form-control"
+										<td><input type="text" name="search" class="form-control"
 											placeholder="search"></td>
-										<td><a href="#" class="btn btn-info btn"><span
-												class="glyphicon glyphicon-search" data-toggle="tooltip"
-												title="검색"></span> Search</a></td>
+										<td><button type="submit" class="btn btn-info">
+										<span class="glyphicon glyphicon-search" data-toggle="tooltip" title="검색"></span>검색
+										</button></td>
 									</tr>
 								</table>
 							</form>

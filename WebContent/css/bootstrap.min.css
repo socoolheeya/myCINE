@@ -12,6 +12,15 @@ body {
 	margin: 0
 }
 
+.searchBody{
+	margin: 10px;
+	padding: 10px;
+}
+#searchBody{
+	margin: 10px;
+	padding: 10px;
+}
+
 article, aside, details, figcaption, figure, footer, header, hgroup,
 	main, menu, nav, section, summary {
 	display: block
@@ -2593,12 +2602,12 @@ th {
 	padding: 8px;
 	line-height: 1.42857143;
 	vertical-align: top;
-	border-top: 1px solid #ddd
+	border-top: 1px solid #ffcc00
 }
 
 .table>thead>tr>th {
 	vertical-align: bottom;
-	border-bottom: 2px solid #ddd
+	border-bottom: 2px solid #ffcc00
 }
 
 .table>caption+thead>tr:first-child>td, .table>caption+thead>tr:first-child>th,
@@ -2779,7 +2788,7 @@ fieldset {
 	min-width: 0;
 	padding: 0;
 	margin: 0;
-	border: 0
+	border: 1
 }
 
 legend {
@@ -2790,7 +2799,7 @@ legend {
 	font-size: 21px;
 	line-height: inherit;
 	color: #333;
-	border: 0;
+	border: 1;
 	border-bottom: 1px solid #e5e5e5
 }
 
@@ -4409,7 +4418,7 @@ select[multiple].input-group-sm>.form-control, select[multiple].input-group-sm>.
 .navbar {
 	position: relative;
 	min-height: 50px;
-	margin-bottom: 20px;
+	margin-bottom: 0px;
 	border: 1px solid transparent
 }
 
@@ -7244,4 +7253,11 @@ button.close {
 }
 #requestMovieName{
 	color: blue;
+}
+#id{
+	width: 200px;
+}
+#joinFont{
+	font-size: 18px;
+	font-weight: bold;
 }

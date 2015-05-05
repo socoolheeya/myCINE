@@ -22,122 +22,158 @@
 				"width=800 height=500 left=200 top=100");
 	}
 	function email_change() {
-		if (document.join.email3.options[document.join.email3.selectedIndex].value == '0') {
-			document.join.email2.disabled = true;
-			document.join.email2.value = "";
+		if (document.join.email2.options[document.join.email2.selectedIndex].value == '0') {
+			document.join.email3.disabled = true;
+			document.join.email3.value = "";
 		}
-		if (document.join.email3.options[document.join.email3.selectedIndex].value == '9') {
-			document.join.email2.disabled = false;
-			document.join.email2.value = "";
-			document.join.email2.focus();
+		if (document.join.email2.options[document.join.email2.selectedIndex].value == '9') {
+			document.join.email3.disabled = false;
+			document.join.email3.value = "";
+			document.join.email3.focus();
 		} else {
-			document.join.email2.disabled = true;
-			document.join.email2.value = document.join.email3.options[document.join.email.selectedIndex].value;
+			document.join.email3.disabled = true;
+			document.join.email3.value = document.join.email2.options[document.join.email2.selectedIndex].value;
 		}
 	}
-	function cancel(){
-		location.href="/myCINE/index.jsp";
+	function cancel() {
+		location.href = "/myCINE/index.jsp";
 	}
 </script>
 </head>
 <body>
 	<div class="container-fluid">
-		<h1>회원가입</h1>
-		<p>회원가입해서 복 받으세요</p>
+		<header>
+			<div class="row">
+				<span class="col-sm-2"></span> <span class="col-sm-8"
+					style="background-color: #ffcc00;"> <a
+					href="/myCINE/index.jsp"><img src="/myCINE/image/logo.jpg" /></a>
+				</span> <span class="col-sm-2"></span>
+			</div>
+		</header>
 		<div class="row">
-			<div class="col-sm-3" style="background-color: lavender;"></div>
-			<div class="col-sm-6" style="background-color: lavenderblush;">
+			<div class="col-sm-2"></div>
+			<div class="col-sm-8" style="background-color: lavenderblush;">
 				<section>
 					<article>
-						<h2>회원가입</h2>
+						<h2 style="font-size: 40px; font-weight: bold;">회원가입</h2>
 						<form name="join" action="join_ok.jsp">
-							<table border="1">
-								<tr>
-									<td>ID</td>
-									<td><input type="text" name="id" readonly="readonly">
-										<input type="button" value="중복확인" onclick="idCheck()"></td>
-								</tr>
-								<tr>
-									<td>Password</td>
-									<td><input type="password" name="pwd"></td>
-								</tr>
-								<tr>
-									<td>이름</td>
-									<td><input type="text" name="name"></td>
-								</tr>
-								<tr>
-									<td>Email</td>
-									<td><input type="text" name="email1"
-										onfocus="this.value='';"> @ <input type="text"
-										name="email2" disabled> <select name="email3"
-										onchange="email_change()">
-											<option value="0">선택하세요</option>
-											<option value="9">직접입력</option>
-											<option value="naver.com">naver.com</option>
-											<option value="nate.com">nate.com</option>
-											<option value="hanmail.net">hanmail.net</option>
-											<option value="paran.com">paran.com</option>
-											<option value="hotmail.com">hotmail.com</option>
-											<option value="gmail.com">gmail.com</option>
-									</select></td>
-								</tr>
-								<tr>
-									<td>전화번호</td>
-									<td><input type="text" name="tel"></td>
-								</tr>
-								<tr>
-									<td>생년월일</td>
-									<td><select name="year">
-											<option>년</option>
-											<%
-												for (int i = 1950; i <= 2015; i++) {
-											%>
-											<option value="<%=i%>"><%=i%></option>
-											<%
-												}
-											%>
-									</select>년 <select name="month">
-											<option>월</option>
-											<%
-												for (int i = 1; i <= 12; i++) {
-											%>
-											<option value="<%=i%>"><%=i%></option>
-											<%
-												}
-											%>
-									</select>월 <select name="day">
-											<option>일</option>
-											<%
-												for (int i = 1; i <= 31; i++) {
-											%>
-											<option value="<%=i%>"><%=i%></option>
-											<%
-												}
-											%>
-									</select>일</td>
-								</tr>
-								<%
-									String zipcode = request.getParameter("zipcode");
-									String addr = request.getParameter("addr");
-								%>
-								<tr>
-									<td>우편번호</td>
-									<td><input type="text" name="zipcode" value=""
-										readonly="readonly"></td>
-								</tr>
-								<tr>
-									<td rowspan="2">주소</td>
-									<td><input type="text" name="addr" value=""
-										readonly="readonly"> <input type="button" value="검색"
-										onclick="searchAddr()"></td>
-								</tr>
-								<tr>
-									<td><input type="text" name="addr2"></td>
-								</tr>
-									
-								<tr>
-									<td colspan="2">
-										<textarea rows="10" cols="55"> [ myCINE 이용 약관 ]
+							<div class="form-group">
+								<table class="table table-bordered">
+									<tr>
+										<td width="130px" style="font-size: 19px; font-weight: bold;">아이디(ID)</td>
+										<td><div class="col-xs-3">
+												<input type="text" class="form-control" name="id" placeholder="아이디 입력"
+													readonly="readonly" required="required">
+											</div>
+											<button type="button" class="btn btn-primary"
+												onclick="idCheck()">중복확인</button></td>
+									</tr>
+									<tr>
+										<td style="font-size: 19px; font-weight: bold;">비밀번호</td>
+										<td><div class="col-xs-3">
+												<input type="password" class="form-control" name="pwd" placeholder="비밀번호 입력">
+											</div></td>
+									</tr>
+									<tr>
+										<td style="font-size: 19px; font-weight: bold;">이름</td>
+										<td><div class="col-xs-3">
+												<input type="text" class="form-control" name="name" placeholder="이름 입력">
+											</div></td>
+									</tr>
+
+									<tr>
+										<td style="font-size: 19px; font-weight: bold;">Email</td>
+										<td><span class="col-xs-4"> <input type="text"
+												class="form-control" name="email1" onfocus="this.value='';" placeholder="예)example">
+										</span> <span class="col-xs-1">@</span> <span class="col-xs-3">
+												<input type="text" class="form-control" name="email3"
+												disabled="disabled" placeholder="naver.com">
+										</span> <span class="col-xs-3"> <select class="form-control"
+												name="email2" onchange="email_change()">
+													<option value="0">선택하세요</option>
+													<option value="9">직접입력</option>
+													<option value="naver.com">naver.com</option>
+													<option value="nate.com">nate.com</option>
+													<option value="hanmail.net">hanmail.net</option>
+													<option value="paran.com">paran.com</option>
+													<option value="hotmail.com">hotmail.com</option>
+													<option value="gmail.com">gmail.com</option>
+											</select>
+										</span></td>
+									</tr>
+									<tr>
+										<td style="font-size: 19px; font-weight: bold;">전화번호</td>
+										<td><input type="text" name="tel1" size="3" style="height: 30px;"> - <input
+											type="text" name="tel2" size="3" style="height: 30px;"> - <input
+											type="text" name="tel3" size="3" style="height: 30px;"></td>
+									</tr>
+									<tr>
+										<td style="font-size: 19px; font-weight: bold;">생년월일</td>
+										<td><select
+												name="birthday1" style="height: 30px;">
+													<option>년</option>
+													<%
+														for (int i = 1950; i <= 2015; i++) {
+													%>
+													<option value="<%=i%>"><%=i%></option>
+													<%
+														}
+													%>
+											</select> 년
+												<select name="birthday2" style="height: 30px;">
+													<option>월</option>
+													<%
+														for (int i = 1; i <= 12; i++) {
+													%>
+													<option value="<%=i%>"><%=i%></option>
+													<%
+														}
+													%>
+											</select> 월
+												<select name="birthday3" style="height: 30px;">
+													<option>일</option>
+													<%
+														for (int i = 1; i <= 31; i++) {
+													%>
+													<option value="<%=i%>"><%=i%></option>
+													<%
+														}
+													%>
+											</select>
+									 일</td>
+									</tr>
+									<%
+										String zipcode = request.getParameter("zipcode");
+
+										String addr = request.getParameter("addr");
+									%>
+									<tr>
+										<td style="font-size: 19px; font-weight: bold;">우편번호</td>
+										<td><input type="text" name="zipcode1" value=""
+											readonly="readonly" size="3">- <input type="text"
+											name="zipcode2" value="" readonly="readonly" size="3">
+										</td>
+									</tr>
+									<tr>
+										<td rowspan="2" style="font-size: 19px; font-weight: bold;">주소</td>
+										<td><div class="col-xs-7">
+												<input class="form-control" type="text" name="addr1"
+													value="" readonly="readonly" size="40">
+											</div>
+											<button type="button" class="btn btn-primary"
+												onclick="searchAddr()">검색</button></td>
+									</tr>
+									<tr>
+										<td><div class="col-xs-7">
+												<input class="form-control" type="text" name="addr2"
+													size="40" placeholder="나머지 주소 입력">
+											</div></td>
+									</tr>
+
+
+									<tr>
+										<td colspan="2"><textarea rows="10" cols="100"
+												readonly="readonly"> [ myCINE 이용 약관 ]
 
 제 1 조 (목적)
 이 약관은 주식회사 myCINE(이하 ”회사”라 한다)가 운영하는 인터넷사이트(이하 “사이트”라 한다)에서 제공하는 인터넷 관련 서비스(이하 “서비스”라 한다)를 이용함에 있어 회원의 권리•의무 및 책임사항을 규정함을 목적으로 합니다.
@@ -400,20 +436,26 @@
 부칙
 1. 이 약관은 2013년 8월 30일부터 시행합니다.
 부칙
-1. 이 약관은 2015년 1월 2일부터 시행합니다.</textarea>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="2"><input type="submit" value="가입"> <input
-										type="reset" value="재작성"><input type="button" value="취소" onclick="cancel()"></td>
-								</tr>
-							</table>
+1. 이 약관은 2015년 1월 2일부터 시행합니다.</textarea></td>
+									</tr>
+									<tr>
+										<td colspan="2" align="right">
+											<button class="btn btn-success" type="submit">가입</button>
+											<button class="btn btn-warning" type="reset">재작성</button>
+											<button class="btn btn-info" type="button" onclick="cancel()">취소</button>
+										</td>
+									</tr>
+								</table>
+							</div>
 						</form>
 					</article>
 				</section>
 			</div>
-			<div class="col-sm-3" style="background-color: lavender;"></div>
+			<div class="col-sm-2"></div>
 		</div>
 	</div>
+	<footer>
+		<%@ include file="../footer.jsp"%>
+	</footer>
 </body>
 </html>

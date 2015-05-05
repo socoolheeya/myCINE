@@ -15,12 +15,16 @@
 		String pwd = request.getParameter("pwd");
 		String rememberId = request.getParameter("rememberId");
 		String name = "";
+		int loginCount = 0; //로그인 횟수 체크 카운트
 		int result = memberDAO.loginCheck(id, pwd);
 		if (result > 0) {
 			if (id.equals(memberDTO.getId())) {
 				if (pwd.equals(memberDTO.getPwd())) {
 					name = memberDAO.getUserInfo(id);
-					memberDTO.setPoint(5);
+					loginCount++;
+					if(loginCount <= 3) {
+						memberDAO.getLoginPoint(id);
+					}
 					if (rememberId == null && rememberId.equals("")) {
 						Cookie ck = new Cookie("rememberId", id);
 						ck.setMaxAge(0);		
