@@ -107,7 +107,6 @@ public class RequestBoardDAO {
 	public int request(String id, String movieName){
 		try{
 			conn = mycine.db.DBInfo.getConn();
-			RecommendDAO rdao = new RecommendDAO();
 			int ref = getMaxRef();
 			String sql = "insert into mycine_request values(mycine_request_idx.nextval,?,?,0,?,0,0,2,sysdate)";
 			ps = conn.prepareStatement(sql);
@@ -220,5 +219,38 @@ public class RequestBoardDAO {
 			}
 		}
 	}
-
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public ArrayList<RequestBoardDTO> getRequestEvent(String id){
+		try {
+			conn = mycine.db.DBInfo.getConn();
+			String sql = "select * from mycine_request where writer = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, id);
+			rs = ps.executeQuery();
+			ArrayList<RequestBoardDTO> arr = new ArrayList<RequestBoardDTO>();
+			while(rs.next()) {
+				String writer = rs.getString("writer");
+				String movieName = rs.getString("moviename");
+				Date writeDate = rs.getDate("writedate");
+				RequestBoardDTO rbDTO = new RequestBoardDTO(writer, movieName, writeDate);
+				arr.add(rbDTO);
+			}
+			return arr;
+		} catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				if(conn!=null) conn.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }

@@ -4,10 +4,10 @@
 <jsp:setProperty property="*" name="mDTO" />
 <jsp:useBean id="qDAO" class="mycine.qna.QnaDAO" scope="session" />
 <%
-	int result = qDAO.QnAReWrite(qDTO);
+	int result = qDAO.QnAwriter(qDTO);
 	String msg = result > 0 ? "질문하기 성공!" : "질문하기 실패!";
 %>
 <script>
 window.alert("<%=msg%>");
-	location.href = "QnAList.jsp"
+	self.close();
 </script>

@@ -3,104 +3,179 @@
 <%@ page import="java.util.*"%>
 <%@ page import="mycine.review.*"%>
 <jsp:useBean id="reDAO" class="mycine.review.ReviewDAO" scope="session" />
+<%
+	int totalCnt=reDAO.getTotalCnt();//총 게시물 수
+int listSize=15;//보여줄 리스트 수
+int pageSize=10;//보여줄 페이지 수
+
+String cp_s=request.getParameter("cp");
+if(cp_s==null||cp_s.equals("")){
+	cp_s="1";
+}
+
+int cp=Integer.parseInt(cp_s);
+
+int pageCnt=(totalCnt/listSize)+1;//게시물 그룹의 갯수
+if(totalCnt%listSize==0)pageCnt--;
+
+int groupNumber=cp/pageSize;//게시물 그룹의 그룹의 갯수
+if(cp%pageSize==0)groupNumber--;
+
+String fkey=request.getParameter("fkey");
+String fvalue=request.getParameter("fvalue");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>리뷰 리스트</title>
-<script type="text/javascript">
-	function main() {
-		location.href = "/myCINE/index.jsp";
-
+<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/myCINE/css/bootstrap.min.css">
+<script>
+	function reviewFind() {
+		location.href = "reviewFind.jsp";
 	}
 </script>
-<style>
-table {
-	margin: 0px auto;
-	width: 900px;
-	border-top: 3px double;
-	border-spacing: 0px;
-	text-align: center;
-}
-
-thead th {
-	width: 50px;
-	height: 50px;
-	border-bottom: 3px double;
-}
-
-tbody td {
-	height: 30px;
-	border-bottom: 1px solid;
-}
-
-#subject {
-	width: 400px;
-}
-</style>
 </head>
 <body>
-	<section>
-		<article>
+	<%
+		ArrayList<ReviewDTO> arr = reDAO.reviewList(cp, listSize);
+	%>
+	<header>
+		<%@include file="../header.jsp"%>
+	</header>
+	<div class="row">
+		<div class="col-sm-2"></div>
+		<div class="col-sm-8">
+			<div class="container">
+				<h2>리뷰 게시판</h2>
+				<p style="font-size: 15px; color: gray;">여기는 영화를 요청하는 게시판입니다</p>
+			</div>
+		</div>
+		<div class="col-sm-2"></div>
+	</div>
+	<hr>
+	<div class="row">
+		<div class="col-sm-2"></div>
+		<div class="col-sm-8">
+			<%
+				if (request.getMethod().equals("GET")) {
+			%>
 			<form name="reviewlist" action="reviewWrite.jsp">
-				<table>
+				<table class="table table-hover">
 					<thead>
-						<tr>
+						<tr style="background-color: #ffcc00;">
 							<th>번호</th>
 							<th id="subject">제목</th>
 							<th>작성자</th>
 							<th>등록일</th>
+							<th>평점</th>
 							<th>조회</th>
 							<th>추천</th>
 						</tr>
 					</thead>
 					<tfoot>
 						<tr>
-							<td colspan="3" align="center">페이징</td>
-							<td colspan="3" align="right"><input type="button"
+							<td colspan="3" align="center">
+								<%
+									if (groupNumber != 0) {
+								%><a
+								href="reviewList.jsp?cp=<%=(groupNumber - 1) * pageSize + pageSize%>">&lt;&lt;</a>
+								<%
+									}
+										for (int i = ((groupNumber * pageSize) + 1); i <= ((groupNumber * pageSize) + pageSize); i++) {
+								%> <a href="reviewList.jsp?cp=<%=i%>"><%=i%></a>&nbsp;&nbsp;&nbsp;
+								<%
+									if (i == pageCnt)
+												break;
+										}
+										if (groupNumber != ((pageCnt / pageSize) - (pageCnt % pageSize == 0 ? 1
+												: 0))) {
+								%> <a
+								href="reviewList.jsp?cp=<%=(groupNumber + 1) * pageSize + 1%>">&gt;&gt;</a>
+								<%
+									}
+								%>
+							</td>
+							<td colspan="4" align="right"><input type="button"
 								value="내글보기" onclick=""> <input type="submit"
-								value="글쓰기"> <input type="button" value="메인화면으로가기"
-								onclick="main()"></td>
+								value="글쓰기"></td>
 						</tr>
-						<tr>
-							<td colspan="6" align="right"><select name="searchlist">
-									<option value="name">작성자</option>
-									<option value="subject">제목</option>
-									<option value="content">내용</option>
-							</select> <input type="text" name="search"> <input type="button"
-								name="search" value="검색" onclick=""></td>
-						</tr>
+						<%-- 
+				<tr>
+					<td colspan="7" align="right">
+					<select name="fkey">
+						<option value="writer">작성자</option>
+						<option value="subject">제목</option>
+						<option value="content">내용</option>
+					</select>
+					<input type="text" name="fvalue">
+					<input type="button" name="search" value="검색" onclick="reviewFind()">
+					</td>
+				</tr>
+				 --%>
 					</tfoot>
 					<tbody>
 						<%
-							ArrayList<ReviewDTO> arr = reDAO.reviewList();
 							if (arr == null || arr.size() == 0) {
 						%>
 						<tr>
-							<td colspan="6">글이 없습니다.</td>
+							<td colspan="7">글이 없습니다.</td>
 						</tr>
 						<%
 							} else {
-								for (int i = 0; i < arr.size(); i++) {
+									for (int i = 0; i < arr.size(); i++) {
 						%>
 						<tr>
 							<td><%=arr.get(i).getIdx()%></td>
-							<td><a
-								href="reviewContent.jsp?idx=<%=arr.get(i).getIdx()%>"> <%=arr.get(i).getSubject()%>
+							<td><a href="reviewContent.jsp?idx=<%=arr.get(i).getIdx()%>">
+									<%=arr.get(i).getSubject()%>
 							</a></td>
+								<%
+								for (int z = 1; z <= arr.get(i).getLev(); z++) {
+											out.println("&nbsp;&nbsp;");
+								}
+							%>
 							<td><%=arr.get(i).getWriter()%></td>
 							<td><%=arr.get(i).getWritedate()%></td>
+							<td><%=arr.get(i).getGrade()%>
 							<td><%=arr.get(i).getReadnum()%></td>
-							<td><%=arr.get(i).getRecommend()%></td>
+							<td style="text-align: center;"><a
+								href="reviewRecommend.jsp?idx=<%=arr.get(i).getIdx()%>"
+								class="btn btn-primary btn" id="recommendButton"><span
+									class="glyphicon glyphicon-thumbs-up" data-toggle="tooltip"
+									title="추천" id="recommend"></span><%=arr.get(i).getRecommend()%></a></td>
 						</tr>
 						<%
 							}
-						 }
+								}
 						%>
 					</tbody>
 				</table>
 			</form>
-		</article>
-	</section>
+			<%
+				} else {
+			%>
+			<jsp:include page="reviewFind.jsp" />
+			<%
+				}
+			%>
+			<form name="reviewList" method="post">
+				<table>
+					<select name="fkey">
+						<option value="writer">작성자</option>
+						<option value="subject">제목</option>
+						<option value="content">내용</option>
+					</select>
+					<input type="text" name="fvalue">
+					<input type="submit" value="검색">
+				</table>
+			</form>
+		</div>
+		<div class="col-sm-2"></div>
+	</div>
+	<header>
+		<%@include file="../footer.jsp"%>
+	</header>
 </body>
 </html>

@@ -14,6 +14,9 @@
 a {
 	text-decoration: none;
 }
+legend{
+	font-size: 30px;
+}
 </style>
 <%	
 	String id_s = (String)session.getAttribute("id");
@@ -38,33 +41,24 @@ a {
 <body>
 	<%@include file="../header.jsp"%>
 	<div class="row">
-		<section>
-			<div class="col-sm-3">
-				<article>
-					<fieldset>
-						<ul>
-							<li><a href="event_Main.jsp">포인트 사용안내</a></li>
-							<li><a href="event_Exchange.jsp">상품 교환</a></li>
-							<li>내 포인트 조회</li>
-							<li><a href="event_Myprize.jsp">내가 보유한 상품</a></li>
-						</ul>
-					</fieldset>
-				</article>
-			</div>
-			<div class="col-sm-8">
-				<article>
-					<fieldset>
-						<legend>내 포인트 조회</legend>
-						<h2>
-							현재
-							<%=session.getAttribute("id")%>고객님의 포인트는
-							<%=dto.getPoint()%>p 입니다.
-						</h2>
-						<p>교환 가능하신 상품은 어쩌구,저쩌구 입니다.</p>
-					</fieldset>
-				</article>
-			</div>
-		</section>
+		<div class="col-sm-3" style="border: 1px solid #cccccc; margin: 10px; padding: 10px;">
+			<ul>
+				<li><a href="event_Main.jsp">포인트 사용안내</a></li>
+				<li><a href="event_Exchange.jsp">상품 교환</a></li>
+				<li>내 포인트 조회</li>
+				<li><a href="event_Myprize.jsp">내가 보유한 상품</a></li>
+			</ul>
+		</div>
+		<div class="col-sm-7" style="border: 1px solid #cccccc; margin: 10px; padding: 10px;">
+
+			<legend><span class="glyphicon glyphicon-ok"></span>내 포인트 조회</legend>
+			<h2>
+				현재
+				<%=session.getAttribute("id")%>고객님의 포인트는
+				<%=dto.getPoint()%>p 입니다.
+			</h2>
+			<p>교환 가능하신 상품은 어쩌구,저쩌구 입니다.</p>s
+		</div>
 	</div>
 	<%@include file="../footer.jsp"%>
 </body>

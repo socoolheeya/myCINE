@@ -13,19 +13,21 @@
 		location.href = "QnAList.jsp";
 	}
 </script>
-
+<%
+	String q_idx = request.getParameter("q_idx");
+%>
 </head>
 <body>
-
 	<article>
 		<section>
 			<form name="QnADel" action="QnADel_ok.jsp">
 				<fieldset>
 					게시물을 삭제하시겠습니까?
 					<h3>비밀번호를 입력해 주세요</h3>
-					<input type="password" name="q_pwd"><br> <input
-						type="submit" value="삭제하기"> <input type="Button"
-						value="취소" onclick="show()">
+					<input type="hidden" name="q_idx" value="<%=q_idx%>"> pwd:<input
+						type="password" name="q_pwd"> <input type="submit"
+						value="삭제하기"> <input type="Button" value="취소"
+						onclick="show()">
 				</fieldset>
 			</form>
 		</section>

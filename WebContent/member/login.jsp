@@ -29,37 +29,31 @@
 	}
 %>
 <body>
-	<section
-		style="margin: 10px auto; padding-left: 50px; padding-right: 50px; padding: 20px;">
-		<article>
-			<fieldset>
-				<legend> 로그인 </legend>
-				<form role="form" action="login_ok.jsp">
-					<div class="row">
-						<div class="col-sm-4"></div>
-						<div class="col-sm-4">
-							<div class="form-group">
-								<label for="focusedInput">ID: </label> <input type="text"
-									class="form-control" id="focusedInput" name="id"
-									value="<%=rememberId%>" placeholder="ID 입력">
-							</div>
-							<div class="form-group">
-								<label for="pwd">Password:</label> <input type="password"
-									class="form-control" id="pwd" name="pwd"
-									placeholder="Password 입력">
-							</div>
-							<span class="checkbox"> <label><input
-									type="checkbox" name="rememberId" value="on"
-									<%=rememberId.equals("") ? "" : "checked"%>> Remember
-									me</label>
-							</span>
-							<button type="submit" class="btn btn-primary">로그인</button>
-						</div>
-						<div class="col-sm-4"></div>
+	<div style="border:1px solid #cccccc; padding: 10px; margin: 10px;">
+		<legend style="font-size: 30px; font-weight: bold;"> 로그인 </legend>
+		<form role="form" action="login_ok.jsp">
+			<div class="row">
+				<div class="col-sm-4"></div>
+				<div class="col-sm-4">
+					<div class="form-group">
+						<label for="focusedInput">ID: </label> <input type="text"
+							class="form-control" id="focusedInput" name="id"
+							value="<%=rememberId%>" placeholder="ID 입력">
 					</div>
-				</form>
-			</fieldset>
-		</article>
-	</section>
+					<div class="form-group">
+						<label for="pwd">Password:</label> <input type="password"
+							class="form-control" id="pwd" name="pwd"
+							placeholder="Password 입력">
+					</div>
+					<span class="checkbox"> <label style="font-size: 15px;"><input
+							type="checkbox" name="rememberId" value="on"
+							<%=rememberId.equals("") ? "" : "checked"%>> Remember me</label>
+					</span>
+					<button type="submit" class="btn btn-primary">로그인</button>
+				</div>
+				<div class="col-sm-4"></div>
+			</div>
+		</form>
+	</div>
 </body>
 </html>

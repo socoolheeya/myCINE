@@ -9,5 +9,5 @@ String msg=result>0?"수정완료":"수정실패";
 %>
 <script>
 window.alert("<%=msg%>");
-location.href="/myCINE/review/reviewList.jsp";
+location.href="reviewList.jsp";
 </script>

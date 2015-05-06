@@ -17,7 +17,7 @@ function cancel() {
 <body>
 <h3>글을 삭제하시겠습니까?</h3>
 <form name="reviewDel" action="reviewDel_ok.jsp">
-	<input type="hidden" value="<%= idx_s %>">
+	<input type="hidden" name=idx value="<%= idx_s %>">
 	<input type="submit" name="reviewdel" value="삭제">
 	<input type="button" name="cancel" value="취소" onclick="javascript:window.self.close()">
 </form>

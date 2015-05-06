@@ -8,6 +8,6 @@
 	String msg = result > 0 ? "질문하기 성공!" : "질문하기 실패!";
 %>
 <script>
-window.alert("<%=msg%>");
-	location.href = "QnAList.jsp"
+	window.alert("<%=msg%>");
+	self.close();
 </script>

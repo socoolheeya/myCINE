@@ -98,7 +98,6 @@
 		</div>
 		<div class="col-sm-2"></div>
 	</div>
-
 	<footer>
 		<%@ include file="../footer.jsp"%>
 	</footer>

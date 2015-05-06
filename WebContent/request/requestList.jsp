@@ -83,9 +83,11 @@
 			<form role="form" name="requestList">
 				<table class="table table-hover">
 					<thead>
-						<tr>
-							<th>번호</th>
-							<th>요청내용</th>
+						<tr style="background-color: #ffcc00;">
+							<th style="text-align: center;">번호</th>
+							<th style="text-align: center;">요청내용</th>
+							<th style="text-align: center;">요청날짜</th>
+							<th style="text-align: center;">추천</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -100,16 +102,16 @@
 								for (int i = 0; i < arr.size(); i++) {
 						%>
 						<tr>
-							<td><%=arr.get(i).getIdx()%></td>
+							<td style="text-align: center;"><%=arr.get(i).getIdx()%></td>
 							<%
 								for (int z = 1; z <= arr.get(i).getLev(); z++) {
 											out.println("&nbsp;&nbsp;");
 										}
 							%>
-
 							<td><%=arr.get(i).getWriter()%>님께서 <span id=requestMovieName><%=arr.get(i).getMovieName()%></span>
 								영화를 요청하셨습니다.</td>
-							<td><a href="recommend.jsp?idx=<%=arr.get(i).getIdx()%>"
+							<td style="text-align: center; font-size: 17px; color: gray;"><%=arr.get(i).getWriteDate() %></td>
+							<td style="text-align: center;"><a href="recommend.jsp?idx=<%=arr.get(i).getIdx()%>"
 								class="btn btn-primary btn" id="recommendButton"><span
 									class="glyphicon glyphicon-thumbs-up" data-toggle="tooltip"
 									title="추천" id="recommend"></span><%=arr.get(i).getRecommend()%></a></td>
@@ -118,8 +120,8 @@
 							}
 							}
 						%>
-						<tr align="center">
-							<td colspan="4" class="pagination">
+						<tr>
+							<td  colspan="4" align="center">
 								<%
 									if (groupNumber != 0) {
 								%> <a

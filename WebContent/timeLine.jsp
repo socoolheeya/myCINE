@@ -1,14 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
-<jsp:useBean id="mDTO" class="mycine.member.MemberDTO"/>
-<jsp:useBean id="mDAO" class="mycine.member.MemberDAO"/>
-<jsp:setProperty property="*" name="mDTO" />
+<%@page import="mycine.rboard.RequestBoardDTO"%>
 <jsp:useBean id="tDTO" class="mycine.timeline.TimeLineDTO" />
 <jsp:useBean id="tDAO" class="mycine.timeline.TimeLineDAO" />
 <jsp:setProperty property="*" name="tDTO" />
+<jsp:useBean id="rDAO" class="mycine.rboard.RequestBoardDAO" />
+<jsp:useBean id="rDTO" class="mycine.rboard.RequestBoardDTO" />
+<jsp:setProperty property="*" name="rDTO" />
+<%
+String logined = null;
+ArrayList<RequestBoardDTO> arr = null;
+if(session.getAttribute("id") == null || session.getAttribute("id").equals("")) {
+	
+} else {
+	logined = (String)session.getAttribute("id");	
+	arr = rDAO.getRequestEvent(logined);
+}
+
+%>
 <div class="col-sm-4" style="background-color: #ffff99;">
-	<form>
+	<form name="timeLineForm">
 		<div class="table-responsive">
 			<table class="table">
 				<thead>
@@ -17,21 +29,15 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>홍길동 님께서 고스트맘마 영화를 요청하였습니다.</td>
-					</tr>
-					<tr>
-						<td>lwh0102 님께서 로마의 휴일 영화를 요청하였습니다.</td>
-					</tr>
-					<tr>
-						<td>babo 님께서 타이타닉 영화를 요청하였습니다.</td>
-					</tr>
-					<tr>
-						<td>보희 님께서 올드보이 영화를 요청하였습니다.</td>
-					</tr>
-					<tr>
-						<td></td>
-					</tr>
+				<%
+					for(int i = 0; i < arr.size(); i++) {
+						%>
+						<tr>
+							<td><%=logined%>님께서 <%=arr.get(i).getMovieName() %> 영화를 요청하였습니다. <span style="font-size: 10px; color: gray;"><%=arr.get(i).getWriteDate()%></span></td>
+						</tr>
+						<%
+					}
+				%>
 				</tbody>
 			</table>
 		</div>

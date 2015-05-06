@@ -18,6 +18,7 @@ table {
 thead td{
 	height: 50px;
 	border-bottom: 3px double;
+	width: 100px;
 }
 </style>
 </head>
@@ -27,6 +28,7 @@ int idx_s=Integer.parseInt(request.getParameter("idx"));
 String writer=request.getParameter("writer");
 String subject=request.getParameter("subject");
 String content=request.getParameter("content");
+int grade_s=Integer.parseInt(request.getParameter("grade"));
 %>
 <section>
 	<article>
@@ -36,7 +38,8 @@ String content=request.getParameter("content");
 		<thead>
 			<tr>
 				<td>작성자&nbsp;&nbsp;&nbsp;<%= writer %></td>
-				<td>제목:<input type="text" name="subject" value="<%= subject %>"></td>
+				<td>제목&nbsp;&nbsp;&nbsp;<input type="text" name="subject" value="<%= subject %>"></td>
+				<td>평점&nbsp;&nbsp;&nbsp;<input type="text" name="grade" value="<%= grade_s %>"></td>
 			</tr>
 		</thead>
 		<tfoot>

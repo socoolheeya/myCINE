@@ -16,13 +16,14 @@ public class ReviewDTO {
 	private int lev;
 	private int sunbun;
 	
-	/**DTO�깮�꽦�옄*/
+	/**DTO생성자*/
 	public ReviewDTO(){
 	}
 
-	public ReviewDTO(int idx, String writer, String subject,
-			String content, Date writedate, int readnum, int recommend,
-			int grade, int ref, int lev, int sunbun) {
+	public ReviewDTO(int idx, String writer, String subject, String content,
+			Date writedate, int readnum, int recommend, int grade, int ref,
+			int lev, int sunbun) {
+		super();
 		this.idx = idx;
 		this.writer = writer;
 		this.subject = subject;
@@ -123,5 +124,6 @@ public class ReviewDTO {
 	public void setSunbun(int sunbun) {
 		this.sunbun = sunbun;
 	}
+	
 	
 }

@@ -14,6 +14,9 @@
 a {
 	text-decoration: none;
 }
+legend{
+	font-size: 30px;
+}
 </style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -39,58 +42,50 @@ a {
 <body>
 	<%@include file="../header.jsp"%>
 	<div class="row">
-		<section>
-			<div class="col-sm-3">
-				<article>
-					<fieldset>
-						<ul>
-							<li><a href="event_Main.jsp">포인트 사용안내</a></li>
-							<li><a href="event_Exchange.jsp">상품 교환</a></li>
-							<li><a href="event_Mypoint.jsp?idx=2">내 포인트 조회</a></li>
-							<li>내가 보유한 상품</li>
-						</ul>
-					</fieldset>
-				</article>
-			</div>
-			<div class="col-sm-8">
-				<article>
-					<fieldset>
-						<legend>내가 보유한 상품</legend>
-						<table>
-							<thead>
-								<tr>
-									<th>상품명</th>
-									<th>사용여부</th>
-									<th>사용</th>
-								</tr>
-							</thead>
+		<div class="col-sm-3"
+			style="border: 1px solid #cccccc; margin: 10px; padding: 10px;">
+			<ul>
+				<li><a href="event_Main.jsp">포인트 사용안내</a></li>
+				<li><a href="event_Exchange.jsp">상품 교환</a></li>
+				<li><a href="event_Mypoint.jsp?idx=2">내 포인트 조회</a></li>
+				<li>내가 보유한 상품</li>
+			</ul>
+		</div>
+		<div class="col-sm-7"
+			style="border: 1px solid #cccccc; margin: 10px; padding: 10px;">
+			<legend><span class="glyphicon glyphicon-ok"></span>내가 보유한 상품</legend>
+			<table>
+				<thead>
+					<tr>
+						<th>상품명</th>
+						<th>사용여부</th>
+						<th>&nbsp;</th>
+					</tr>
+				</thead>
 
-							<tbody>
-								<%
-									for (int i = 0; i < arr.size(); i++) {
-										if (arr == null || arr.equals("")) {
-								%>
-								<tr>
-									<td colspan="3">현재 보유한 상품이 없습니다.</td>
-								</tr>
-								<%
-									} else {
-								%>
-								<tr>
-									<td><%=arr.get(i).getUser_prize()%></td>
-									<td>x</td>
-									<td></td>
-								</tr>
-								<%
-									}
-								}
-								%>
-							</tbody>
-						</table>
-					</fieldset>
-				</article>
-			</div>
-		</section>
+				<tbody>
+					<%
+						for (int i = 0; i < arr.size(); i++) {
+							if (arr == null || arr.equals("")) {
+					%>
+					<tr>
+						<td colspan="3">현재 보유한 상품이 없습니다.</td>
+					</tr>
+					<%
+						} else {
+					%>
+					<tr>
+						<td><%=arr.get(i).getUser_prize()%></td>
+						<td>x</td>
+						<td><input type="submit" value="수령" name="ex<%=i+1%>"></td>
+					</tr>
+					<%
+						}
+					}
+					%>
+				</tbody>
+			</table>
+		</div>
 	</div>
 	<%@include file="../footer.jsp"%>
 </body>

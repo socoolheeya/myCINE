@@ -17,6 +17,13 @@ public class RequestBoardDTO {
 	public RequestBoardDTO() {
 	}
 
+	public RequestBoardDTO(String writer, String movieName, Date writeDate) {
+		super();
+		this.writer = writer;
+		this.movieName = movieName;
+		this.writeDate = writeDate;
+	}
+	
 	public RequestBoardDTO(int idx, String writer, String movieName,
 			int recommend, int ref, int lev, int sunbun, int requestCheck,
 			Date writeDate) {

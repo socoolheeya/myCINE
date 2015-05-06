@@ -17,13 +17,28 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="/myCINE/js/bootstrap.min.js"></script>
 </head>
+<%
+String login = null;
+if(session.getAttribute("id") == null || session.getAttribute("id").equals("")) {
+	
+} else {
+	login = (String)session.getAttribute("id");
+}
+
+%>
 <body>
 	<header>
 		<%@include file="header.jsp"%>
 	</header>
 	<div class="row">
 		<%@ include file="center.jsp"%>
-		<%@ include file="timeLine.jsp"%>
+		<%
+		if(login != null) {
+			%>
+			<%@ include file="timeLine.jsp"%>
+			<%
+		}
+		%>
 	</div>
 	<footer>
 		<%@ include file="footer.jsp"%>
