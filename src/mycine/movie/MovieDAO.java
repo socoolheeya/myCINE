@@ -24,11 +24,8 @@ public class MovieDAO {
 	public MovieDTO search(String requestSearchWord){
 		try{
 			conn = mycine.db.DBInfo.getConn();
-			String sql = "select * from mycine_movie where subject=? or director=? or actor=?";
+			String sql = "select * from mycine_movie where subject like '%"+requestSearchWord+"%' or director like '%"+requestSearchWord+"%' or actor like '%"+requestSearchWord+"%'";
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, requestSearchWord);
-			ps.setString(2, requestSearchWord);
-			ps.setString(3, requestSearchWord);
 			rs = ps.executeQuery();
 			MovieDTO mdto = null;
 			while(rs.next()) {

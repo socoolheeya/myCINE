@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.*"%>
+<%@page import="mycine.event.*"%>
+<jsp:useBean id="eDAO" class="mycine.event.EventDAO" scope="session" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,11 +13,28 @@
 <style>
 a {
 	text-decoration: none;
-}	
+}
 </style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="/myCINE/js/bootstrap.min.js"></script>
+<%
+	String id_s = (String)session.getAttribute("id");
+	if (id_s == null || id_s.equals("")) {
+		id_s = "0";
+	}
+	EventDTO dto1 = eDAO.eventMypoint(id_s);
+	if (dto1 == null) {
+%>
+<script>
+	window.alert("로그인 하고 이용해주세요!")
+	location.href = "event_Main.jsp";
+</script>
+<%
+	return;
+	}
+	ArrayList<EventDTO> arr = eDAO.prizeList(id_s);
+%>
 </head>
 <body>
 	<%@include file="../header.jsp"%>
@@ -37,14 +57,35 @@ a {
 					<fieldset>
 						<legend>내가 보유한 상품</legend>
 						<table>
-							<tr>
-								<th>번호</th>
-								<th>상품명</th>
-								<th>갯수</th>
-							</tr>
-							<tr>
-								<td colspan="3">현재 보유한 상품이 없습니다.</td>
-							</tr>
+							<thead>
+								<tr>
+									<th>상품명</th>
+									<th>사용여부</th>
+									<th>사용</th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<%
+									for (int i = 0; i < arr.size(); i++) {
+										if (arr == null || arr.equals("")) {
+								%>
+								<tr>
+									<td colspan="3">현재 보유한 상품이 없습니다.</td>
+								</tr>
+								<%
+									} else {
+								%>
+								<tr>
+									<td><%=arr.get(i).getUser_prize()%></td>
+									<td>x</td>
+									<td></td>
+								</tr>
+								<%
+									}
+								}
+								%>
+							</tbody>
 						</table>
 					</fieldset>
 				</article>

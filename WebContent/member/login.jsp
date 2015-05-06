@@ -29,12 +29,11 @@
 	}
 %>
 <body>
-	<section style="margin: 10px auto; padding-left: 50px; padding-right: 50px; padding: 20px;">
+	<section
+		style="margin: 10px auto; padding-left: 50px; padding-right: 50px; padding: 20px;">
 		<article>
 			<fieldset>
-				<legend>
-					<h2>로그인</h2>
-				</legend>
+				<legend> 로그인 </legend>
 				<form role="form" action="login_ok.jsp">
 					<div class="row">
 						<div class="col-sm-4"></div>
@@ -49,10 +48,10 @@
 									class="form-control" id="pwd" name="pwd"
 									placeholder="Password 입력">
 							</div>
-							<span class="checkbox">
-								<label><input type="checkbox" name="rememberId"
-									value="on" <%=rememberId.equals("") ? "" : "checked"%>>
-									Remember me</label>
+							<span class="checkbox"> <label><input
+									type="checkbox" name="rememberId" value="on"
+									<%=rememberId.equals("") ? "" : "checked"%>> Remember
+									me</label>
 							</span>
 							<button type="submit" class="btn btn-primary">로그인</button>
 						</div>

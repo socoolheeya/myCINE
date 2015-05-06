@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>리뷰 리스트</title>
 <script type="text/javascript">
 	function main() {
 		location.href = "/myCINE/index.jsp";
@@ -95,7 +95,7 @@ tbody td {
 						</tr>
 						<%
 							}
-							}
+						 }
 						%>
 					</tbody>
 				</table>

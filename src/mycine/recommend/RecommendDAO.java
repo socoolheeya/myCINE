@@ -39,13 +39,18 @@ public class RecommendDAO {
 			}
 		}
 	}
-	
-	public int recommendUpdate(int idx){
+	/**
+	 * 추천 버튼 누른 후 추천한 아이디 넣기
+	 * @param idx
+	 * @return
+	 */
+	public int recommendUpdate(int idx, String id){
 		try {
 			conn = mycine.db.DBInfo.getConn();
-			String sql = "update mycine_recommend set checked = 0 where idx =?";
+			String sql = "insert into mycine_recommend values(?, 0, ?)";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, idx);
+			ps.setString(2, id);
 			int count = ps.executeUpdate();
 			
 			return count;
@@ -66,21 +71,21 @@ public class RecommendDAO {
 	 * @param idx
 	 * @return
 	 */
-	public int selectRecommendIdx(int idx){
+	public String getRecommendID(int idx){
 		try {
 			conn = mycine.db.DBInfo.getConn();
-			String sql ="select checked from mycine_recommend where idx=?";
+			String sql ="select id from mycine_recommend where idx=?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, idx);
 			rs = ps.executeQuery();
-			int checked = -1;
+			String id = null;
 			while (rs.next()) {
-				checked = rs.getInt("checked");
+				id  = rs.getString("id");
 			}
-			return checked;
+			return id;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return -2;
+			return null;
 		} finally {
 			try {
 				if(rs!=null) rs.close();

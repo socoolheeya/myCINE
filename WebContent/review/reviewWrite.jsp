@@ -22,7 +22,7 @@ thead td{
 <body>
 <section>
 	<article>
-		<form name="reviewwrite" action="reviewWrite_ok.jsp">
+		<form name="reviewwrite" action="reviewWrite_ok.jsp" method="post">
 		<table>
 		<thead>
 			<tr>

@@ -11,17 +11,18 @@
 <%
 	request.setCharacterEncoding("utf-8");
 	int idx = Integer.parseInt(request.getParameter("idx"));
-	int checked = reDAO.selectRecommendIdx(idx);
-	if(checked == 0){
+	String sessionID = (String)session.getAttribute("id");
+	String dbID = reDAO.getRecommendID(idx);
+	if(dbID != null && dbID.equals(sessionID)){
 		%>
 		<script>
 		window.alert("이미 추천 하셨습니다.");
 		location.href="requestList.jsp";
 		</script>
 		<%
-	} else if(checked == -1) {
+	} else if(dbID == null || dbID.equals(sessionID) == false) {
 		rDAO.recommend(idx);
-		int recommend = reDAO.recommendUpdate(idx);
+		int recommend = reDAO.recommendUpdate(idx, sessionID);
 		if(recommend > 0) {
 			%>
 			<script>
@@ -29,6 +30,5 @@
 			</script>
 			<%
 		}
-	}
-	
+	}	
 %>

@@ -99,7 +99,7 @@
 							} else {
 								for (int i = 0; i < arr.size(); i++) {
 						%>
-						<tr class="info">
+						<tr>
 							<td><%=arr.get(i).getIdx()%></td>
 							<%
 								for (int z = 1; z <= arr.get(i).getLev(); z++) {

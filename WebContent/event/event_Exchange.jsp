@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.*"%>
+<%@page import="mycine.event.*"%>
+<jsp:useBean id="eDAO" class="mycine.event.EventDAO" scope="session" />	
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,10 +34,27 @@ tfoot tr {
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="/myCINE/js/bootstrap.min.js"></script>
+<%	
+	String id_s = (String)session.getAttribute("id");
+	if (id_s == null || id_s.equals("")) {
+		id_s = "0";
+	}
+	EventDTO dto = eDAO.eventMypoint(id_s);
+	if (dto == null) {
+%>
+<script>
+	window.alert("로그인 하고 이용해주세요!")
+	location.href = "event_Main.jsp";
+</script>
+<%
+	return;
+	}
+%>
 </head>
 <body>
 	<%@include file="../header.jsp"%>
 	<div class="row">
+	<form name="exchange" action="event_Exchange_ok.jsp">
 		<section>
 			<div class="col-sm-3">
 				<article>
@@ -52,7 +72,6 @@ tfoot tr {
 				<article>
 					<fieldset>
 						<legend>상품 교환</legend>
-						<form name="eventForm" action="event_Exchange_ok.jsp">
 						<table>
 							<tfoot>
 								<tr>
@@ -81,17 +100,15 @@ tfoot tr {
 										<button type="submit" class="btn btn-warning" name="c1" value="700">교환</button>
 									</td>
 									<td>point: 800 p
-										<button type="submit" class="btn btn-warning">교환</button>
+										<button type="submit" class="btn btn-warning" name="c1" value="800">교환</button>
 									</td>
 									<td>point: 900 p
-										<button type="submit" class="btn btn-warning" name="c" value="300">교환</button>
+										<button type="submit" class="btn btn-warning" name="c1" value="900">교환</button>
 									</td>
 								</tr>
 
 								<tr>
-									<td>&nbsp;</td>
-									<td>&nbsp;</td>
-									<td>&nbsp;</td>
+									<td colspan="3">&nbsp;</td>
 								</tr>
 
 								<tr>
@@ -109,22 +126,22 @@ tfoot tr {
 								</tr>
 								<tr>
 									<td>Point: 1000 p
-										<button type="button" class="btn btn-warning">교환</button>
+										<button type="submit" class="btn btn-warning" name="c1" value="1000">교환</button>
 									</td>
 									<td>Point: 1100 p
-										<button type="button" class="btn btn-warning">교환</button>
+										<button type="submit" class="btn btn-warning" name="c1" value="1100">교환</button>
 									</td>
 									<td>Point: 2000 p
-										<button type="button" class="btn btn-warning">교환</button>
+										<button type="submit" class="btn btn-warning" name="c1" value="2000">교환</button>
 									</td>
 								</tr>
 							</tbody>
 						</table>
-						</form>
 					</fieldset>
 				</article>
 			</div>
 		</section>
+		</form>
 	</div>
 	<footer>
 		<hr>

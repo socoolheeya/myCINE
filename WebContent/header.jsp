@@ -27,7 +27,7 @@
 							<form action="/myCINE/search/search.jsp">
 								<table>
 									<tr>
-										<td><input type="text" name="search" class="form-control"
+										<td><input type="text" name="searchKeyword" class="form-control"
 											placeholder="search"></td>
 										<td><button type="submit" class="btn btn-info">
 										<span class="glyphicon glyphicon-search" data-toggle="tooltip" title="검색"></span>검색
@@ -62,7 +62,7 @@
 					<li><a href="/myCINE/member/memberInfo.jsp" id="logining"><%=id %>님 로그인중</a></li>
 					<li><a href="/myCINE/member/logout.jsp"><span
 							class="glyphicon glyphicon-off" data-toggle="tooltip"
-							title="로그이웃"></span></a></li>
+							title="로그아웃"></span></a></li>
 				</ul>
 			</div>
 			<%
