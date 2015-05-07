@@ -27,6 +27,7 @@ reDAO.getReadnum(idx);
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/myCINE/css/rating-star.css">
 <style>
 table {
 	margin: 0px auto;
@@ -93,6 +94,9 @@ function reviewDel(){
 				<td>
 				이 영화의<br>
 				평점은&nbsp;&nbsp;<%= redto.getGrade() %>&nbsp;&nbsp;점
+				</td>
+				<td>
+				
 				</td>
 			</tr>
 			<tr>

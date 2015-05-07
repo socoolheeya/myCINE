@@ -79,7 +79,7 @@ public class EventDAO {
 	public int insertPrize(String id, String userprize) {
 		try {
 			conn = mycine.db.DBInfo.getConn();
-			String sql = "insert into mycine_prize values(?,?)";
+			String sql = "insert into mycine_prize values(mycine_prize_idx.nextval,?,'unused',?)";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, id);
 			ps.setString(2, userprize);
@@ -138,4 +138,5 @@ public class EventDAO {
 			}
 		}
 	}
+
 }

@@ -3,6 +3,27 @@
 <%@ page import="java.util.*"%>
 <%@ page import="mycine.review.*"%>
 <jsp:useBean id="reDAO" class="mycine.review.ReviewDAO" scope="session" />
+<%
+	int totalCnt=reDAO.getTotalCnt();//총 게시물 수
+int listSize=15;//보여줄 리스트 수
+int pageSize=10;//보여줄 페이지 수
+
+String cp_s=request.getParameter("cp");
+if(cp_s==null||cp_s.equals("")){
+	cp_s="1";
+}
+
+int cp=Integer.parseInt(cp_s);
+
+int pageCnt=(totalCnt/listSize)+1;//게시물 그룹의 갯수
+if(totalCnt%listSize==0)pageCnt--;
+
+int groupNumber=cp/pageSize;//게시물 그룹의 그룹의 갯수
+if(cp%pageSize==0)groupNumber--;
+
+String fkey=request.getParameter("fkey");
+String fvalue=request.getParameter("fvalue");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,25 +67,36 @@
 							</thead>
 							<tfoot>
 								<tr>
-									<td colspan="3" align="center">페이징</td>
+									<td colspan="3" align="center">
+										<%
+											if (groupNumber != 0) {
+										%><a
+										href="searchReviewList.jsp?&cp=<%=(groupNumber - 1) * pageSize + pageSize%>">&lt;&lt;</a>
+										<%
+											}
+											for (int i = ((groupNumber * pageSize) + 1); i <= ((groupNumber * pageSize) + pageSize); i++) {
+										%> <a href="searchReviewList.jsp?cp=<%=i%>"><%=i%></a>&nbsp;&nbsp;&nbsp;
+										<%
+											if (i == pageCnt)
+													break;
+											}
+											if (groupNumber != ((pageCnt / pageSize) - (pageCnt % pageSize == 0 ? 1
+													: 0))) {
+										%> <a
+										href="reviewList.jsp?cp=<%=(groupNumber + 1) * pageSize + 1%>">&gt;&gt;</a>
+										<%
+											}
+										%>
+									</td>
 									<td colspan="3" align="right"><button
 											class="btn btn-primary" type="button" onclick="">내글보기</button>
 										<button class="btn btn-success" type="button" onclick="main()">메인화면</button></td>
-								</tr>
-								<tr style="margin: 40px;">
-									<td colspan="6" align="right"><select name="searchlist">
-											<option value="name">작성자</option>
-											<option value="subject">제목</option>
-											<option value="content">내용</option>
-									</select> <input type="text" name="search">
-										<button class="btn btn-warning" type="button" name="search"
-											onclick="">검색</button></td>
 								</tr>
 							</tfoot>
 							<tbody>
 								<%
 									String requestSubject = request.getParameter("searchKeyword");
-									ArrayList<ReviewDTO> arr = reDAO.reviewList();
+									ArrayList<ReviewDTO> arr = reDAO.reviewList(cp, listSize);
 									if (arr == null || arr.size() == 0) {
 								%>
 								<tr>
@@ -87,8 +119,8 @@
 								</tr>
 								<%
 									}
-								}
-							}
+										}
+									}
 								%>
 							</tbody>
 						</table>

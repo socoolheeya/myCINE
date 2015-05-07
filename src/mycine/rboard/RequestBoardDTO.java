@@ -110,5 +110,4 @@ public class RequestBoardDTO {
 	public void setRequestCheck(int requestCheck) {
 		this.requestCheck = requestCheck;
 	}
-
 }

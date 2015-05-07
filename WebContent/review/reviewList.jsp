@@ -36,6 +36,11 @@ String fvalue=request.getParameter("fvalue");
 		location.href = "reviewFind.jsp";
 	}
 </script>
+<link rel="stylesheet" type="text/css" href="yozm_common.css" />
+<!-- reset, common요소 -->
+<link rel="stylesheet" type="text/css" href="yozm_top.css" />
+<!-- 콘텐츠관련 -->
+<link rel="stylesheet" href="/myCINE/css/daum.css">
 </head>
 <body>
 	<%
@@ -97,9 +102,11 @@ String fvalue=request.getParameter("fvalue");
 									}
 								%>
 							</td>
-							<td colspan="4" align="right"><input type="button"
-								value="내글보기" onclick=""> <input type="submit"
-								value="글쓰기"></td>
+
+							<td colspan="4" align="right">
+								<button class="btn btn-warning" type="button" onclick="">내글보기</button>
+								<button class="btn btn-success" type="submit">글쓰기</button>
+							</td>
 						</tr>
 						<%-- 
 				<tr>
@@ -131,10 +138,10 @@ String fvalue=request.getParameter("fvalue");
 							<td><a href="reviewContent.jsp?idx=<%=arr.get(i).getIdx()%>">
 									<%=arr.get(i).getSubject()%>
 							</a></td>
-								<%
+							<%
 								for (int z = 1; z <= arr.get(i).getLev(); z++) {
-											out.println("&nbsp;&nbsp;");
-								}
+												out.println("&nbsp;&nbsp;");
+											}
 							%>
 							<td><%=arr.get(i).getWriter()%></td>
 							<td><%=arr.get(i).getWritedate()%></td>

@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/myCINE/css/rating-star.css">
 <style>
 table {
 	margin: 0px auto;
@@ -35,7 +36,14 @@ thead td{
 		</thead>
 		<tfoot>
 			<tr>
-				<td colspan="4" align="right">제 평점은요&nbsp;&nbsp;<input type="text" name="grade"></td>
+				<td>평점:</td>
+				<td class="rating" colspan="2" align="right">
+    				<input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="슈퍼울트라캡짱!">5 stars</label>
+   					<input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="좀 괜찮은데?!">4 stars</label>
+  					<input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="보통이에요!">3 stars</label>
+    				<input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="그럭저럭!">2 stars</label>
+    				<input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="최악이야!">1 star</label>
+				</td>
 			</tr>
 			<tr>
 				<td colspan="4" align="right">

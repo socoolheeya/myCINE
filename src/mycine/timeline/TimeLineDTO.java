@@ -1,6 +1,7 @@
 package mycine.timeline;
 
-import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.sql.Date;
 
 public class TimeLineDTO {
 	
@@ -52,4 +53,5 @@ public class TimeLineDTO {
 	public void setDateTime(Date dateTime) {
 		this.dateTime = dateTime;
 	}
+	SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 }
