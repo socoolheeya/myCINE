@@ -9,6 +9,8 @@
 	String id = (String) session.getAttribute("id");
 	String num_s = request.getParameter("c1");
 	int num = Integer.parseInt(num_s);
+	EventDTO dto = eDAO.eventMypoint(id);
+
 	int usepoint = 0;
 	String prize = null;
 	switch (num) {
@@ -37,24 +39,36 @@
 			prize = "영화관람권 2매";
 			break;
 	}
-	int count1 = eDAO.updatePoint(id, usepoint);
-	int count2 = eDAO.insertPrize(id, prize);
-
-	if (count1 > 0 && count2 > 0) {
+	int point = dto.getPoint();
+	if ((point - usepoint) < 0) {
 %>
 <script>
-	window.alert(
-<%=usepoint%>
-	+ "p가 차감되었습니다.");
-	location.href = "event_Myprize.jsp";
+	window.alert("포인트가 부족합니다.")
+	location.href = "event_Mypoint.jsp";
+</script>
+<%
+	} else {
+		int count1 = eDAO.updatePoint(id, usepoint);
+		int count2 = eDAO.insertPrize(id, prize);
+
+		if (count1 > 0 && count2 > 0) {
+%>
+<script>
+   var ok=window.confirm(<%=usepoint%>+"p를 사용하여 <%=prize%>(으)로 교환되었습니다.\n보관함으로 이동하시겠습니까?");
+	if (ok) {
+		location.href = "event_Myprize.jsp";
+	} else {
+		location.href = "event_Exchange.jsp";
+	}
 </script>
 <%
 	} else {
 %>
 <script>
-	window.alert("결제가 실패되었습니다.");
+	window.alert("결제를 실패하였습니다.");
 	location.href = "event_Myprize.jsp";
 </script>
 <%
 	}
+}
 %>

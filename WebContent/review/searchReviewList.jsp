@@ -51,82 +51,57 @@ String fvalue=request.getParameter("fvalue");
 	<div class="row">
 		<div class="col-sm-2"></div>
 		<div class="col-sm-8">
-			<section>
-				<article>
-					<form name="searchReviewlist">
-						<table class="table table-hover">
-							<thead>
-								<tr>
-									<th>번호</th>
-									<th id="subject">제목</th>
-									<th>작성자</th>
-									<th>등록일</th>
-									<th>조회</th>
-									<th>추천</th>
-								</tr>
-							</thead>
-							<tfoot>
-								<tr>
-									<td colspan="3" align="center">
-										<%
-											if (groupNumber != 0) {
-										%><a
-										href="searchReviewList.jsp?&cp=<%=(groupNumber - 1) * pageSize + pageSize%>">&lt;&lt;</a>
-										<%
-											}
-											for (int i = ((groupNumber * pageSize) + 1); i <= ((groupNumber * pageSize) + pageSize); i++) {
-										%> <a href="searchReviewList.jsp?cp=<%=i%>"><%=i%></a>&nbsp;&nbsp;&nbsp;
-										<%
-											if (i == pageCnt)
-													break;
-											}
-											if (groupNumber != ((pageCnt / pageSize) - (pageCnt % pageSize == 0 ? 1
-													: 0))) {
-										%> <a
-										href="reviewList.jsp?cp=<%=(groupNumber + 1) * pageSize + 1%>">&gt;&gt;</a>
-										<%
-											}
-										%>
-									</td>
-									<td colspan="3" align="right"><button
-											class="btn btn-primary" type="button" onclick="">내글보기</button>
-										<button class="btn btn-success" type="button" onclick="main()">메인화면</button></td>
-								</tr>
-							</tfoot>
-							<tbody>
-								<%
-									String requestSubject = request.getParameter("searchKeyword");
-									ArrayList<ReviewDTO> arr = reDAO.reviewList(cp, listSize);
-									if (arr == null || arr.size() == 0) {
-								%>
-								<tr>
-									<td colspan="6">글이 없습니다.</td>
-								</tr>
-								<%
-									} else {
-										for (int i = 0; i < arr.size(); i++) {
-											if (arr.get(i).getSubject().contains(requestSubject)) {
-								%>
-								<tr>
-									<td><%=arr.get(i).getIdx()%></td>
-									<td><a
-										href="reviewContent.jsp?idx=<%=arr.get(i).getIdx()%>"> <%=arr.get(i).getSubject()%>
-									</a></td>
-									<td><%=arr.get(i).getWriter()%></td>
-									<td><%=arr.get(i).getWritedate()%></td>
-									<td><%=arr.get(i).getReadnum()%></td>
-									<td><%=arr.get(i).getRecommend()%></td>
-								</tr>
-								<%
-									}
-										}
-									}
-								%>
-							</tbody>
-						</table>
-					</form>
-				</article>
-			</section>
+			<form name="searchReviewlist">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>번호</th>
+							<th id="subject">제목</th>
+							<th>작성자</th>
+							<th>등록일</th>
+							<th>조회</th>
+							<th>추천</th>
+						</tr>
+					</thead>
+					<tfoot>
+						<tr>
+							<td colspan="6" align="right" style="text-align: right;"><button
+									class="btn btn-primary" type="button" onclick="">내글보기</button>
+								<button class="btn btn-success" type="button" onclick="main()">메인화면</button></td>
+						</tr>
+					</tfoot>
+					<tbody>
+						<%
+							String requestSubject = request.getParameter("searchKeyword");
+							ArrayList<ReviewDTO> arr = reDAO.reviewList(cp, listSize);
+							if (arr == null || arr.size() == 0) {
+						%>
+						<tr>
+							<td colspan="6">글이 없습니다.</td>
+						</tr>
+						<%
+							} else {
+								for (int i = 0; i < arr.size(); i++) {
+									if (arr.get(i).getSubject().contains(requestSubject)) {
+						%>
+						<tr>
+							<td><%=arr.get(i).getIdx()%></td>
+							<td><a href="reviewContent.jsp?idx=<%=arr.get(i).getIdx()%>">
+									<%=arr.get(i).getSubject()%>
+							</a></td>
+							<td><%=arr.get(i).getWriter()%></td>
+							<td><%=arr.get(i).getWritedate()%></td>
+							<td><%=arr.get(i).getReadnum()%></td>
+							<td><%=arr.get(i).getRecommend()%></td>
+						</tr>
+						<%
+							}
+								}
+							}
+						%>
+					</tbody>
+				</table>
+			</form>
 		</div>
 		<div class="col-sm-2"></div>
 	</div>

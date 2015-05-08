@@ -21,6 +21,26 @@ legend{
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="/myCINE/js/bootstrap.min.js"></script>
+
+<script>
+					function exshow(idx,use){
+						var ex=window.confirm("교환권을 사용하시겠습니까?");
+						if(ex){
+							location.href="event_Exprize.jsp?idx="+idx+"&use="+use;
+						}else{
+							window.alert("취소되었습니다.");
+						}
+					}
+					function deshow(idx,use){
+						var de=window.confirm("교환권을 삭제하시겠습니까?");
+						if(de){
+							location.href="event_Deprize.jsp?idx="+idx+"&use="+use;
+						}else{
+							window.alert("취소되었습니다.");
+						}
+					}
+					</script>
+
 <%
 	String id_s = (String)session.getAttribute("id");
 	if (id_s == null || id_s.equals("")) {
@@ -47,18 +67,19 @@ legend{
 			<ul>
 				<li><a href="event_Main.jsp">포인트 사용안내</a></li>
 				<li><a href="event_Exchange.jsp">상품 교환</a></li>
-				<li><a href="event_Mypoint.jsp?idx=2">내 포인트 조회</a></li>
+				<li><a href="event_Mypoint.jsp">내 포인트 조회</a></li>
 				<li>내가 보유한 상품</li>
 			</ul>
 		</div>
 		<div class="col-sm-7"
 			style="border: 1px solid #cccccc; margin: 10px; padding: 10px;">
 			<legend><span class="glyphicon glyphicon-ok"></span>내가 보유한 상품</legend>
-			<table>
+			<table class="table">
 				<thead>
 					<tr>
-						<th>상품명</th>
-						<th>사용여부</th>
+						<th style="text-align: center;">번호</th>
+						<th style="text-align: center;">상품명</th>
+						<th style="text-align: center;">사용여부</th>
 						<th>&nbsp;</th>
 					</tr>
 				</thead>
@@ -69,15 +90,30 @@ legend{
 							if (arr == null || arr.equals("")) {
 					%>
 					<tr>
-						<td colspan="3">현재 보유한 상품이 없습니다.</td>
+						<td colspan="3" style="text-align: center;">현재 보유한 상품이 없습니다.</td>
 					</tr>
+					
 					<%
 						} else {
+							String str = null;
+								switch(i%3){
+								case 0:
+									str = "success";
+									break;
+								case 1:
+									str = "danger";
+									break;
+								case 2:
+									str = "info";
+									break;
+								}							
 					%>
-					<tr>
-						<td><%=arr.get(i).getUser_prize()%></td>
-						<td>x</td>
-						<td><input type="submit" value="수령" name="ex<%=i+1%>"></td>
+					<tr class="<%=str%>">
+ 						<td style="margin: 10px; padding: 6px; text-align: center;"><%=i+1%></td>
+						<td style="text-align: center;"><%=arr.get(i).getUser_prize()%></td>
+						<td style="text-align: center;"><%=arr.get(i).getUse()%></td>
+						<td><button class="btn btn-warning" type="button" name="ex<%=i+1 %>" onclick="exshow('<%=arr.get(i).getIdx() %>','<%=arr.get(i).getUse()%>')">수령</button>
+						<button class="btn btn-danger" type="button" name="de<%=i+1 %>" onclick="deshow('<%=arr.get(i).getIdx() %>','<%=arr.get(i).getUse()%>')">삭제</button></td>
 					</tr>
 					<%
 						}

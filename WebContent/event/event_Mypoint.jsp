@@ -14,11 +14,12 @@
 a {
 	text-decoration: none;
 }
-legend{
+
+legend {
 	font-size: 30px;
 }
 </style>
-<%	
+<%
 	String id_s = (String)session.getAttribute("id");
 	if (id_s == null || id_s.equals("")) {
 		id_s = "0";
@@ -33,6 +34,8 @@ legend{
 <%
 	return;
 	}
+
+	ArrayList<EventDTO> arr = eDAO.eventPrize(id_s);
 %>
 </head>
 <script
@@ -41,7 +44,8 @@ legend{
 <body>
 	<%@include file="../header.jsp"%>
 	<div class="row">
-		<div class="col-sm-3" style="border: 1px solid #cccccc; margin: 10px; padding: 10px;">
+		<div class="col-sm-3"
+			style="border: 1px solid #cccccc; margin: 10px; padding: 10px;">
 			<ul>
 				<li><a href="event_Main.jsp">포인트 사용안내</a></li>
 				<li><a href="event_Exchange.jsp">상품 교환</a></li>
@@ -49,15 +53,33 @@ legend{
 				<li><a href="event_Myprize.jsp">내가 보유한 상품</a></li>
 			</ul>
 		</div>
-		<div class="col-sm-7" style="border: 1px solid #cccccc; margin: 10px; padding: 10px;">
+		<div class="col-sm-7"
+			style="border: 1px solid #cccccc; margin: 10px; padding: 10px;">
 
-			<legend><span class="glyphicon glyphicon-ok"></span>내 포인트 조회</legend>
+			<legend>
+				<span class="glyphicon glyphicon-ok"></span>내 포인트 조회
+			</legend>
 			<h2>
 				현재
 				<%=session.getAttribute("id")%>고객님의 포인트는
 				<%=dto.getPoint()%>p 입니다.
 			</h2>
-			<p>교환 가능하신 상품은 어쩌구,저쩌구 입니다.</p>s
+			<p>교환 가능하신 상품 리스트</p>
+			<%
+				if (arr == null || arr.size() == 0) {
+			%>
+			<p>현재 교환 가능한 상품이 없습니다.</p>
+			<%
+				} else {
+					for (int i = 0; i < arr.size(); i++) {
+			%>
+			<ul>
+				<li><%=arr.get(i).getE_prize()%></li>
+			</ul>
+			<%
+				}
+				}
+			%>
 		</div>
 	</div>
 	<%@include file="../footer.jsp"%>

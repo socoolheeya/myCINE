@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<div class="col-sm-8" style="background-color: lavenderblush;">
-	<p>가장 Hot한 영화리뷰 베스트5</p>
+<div class="col-sm-8" style="background-color: white;">
+	<p style="color: black;">가장 Hot한 영화리뷰 베스트5</p>
 	<br>
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
 		<!-- Indicators -->
@@ -20,7 +20,7 @@
 			</div>
 			<div class="item">
 				<a
-					href="http://localhost:9090/myCINE/review/reviewContent.jsp?idx=44"><img
+					href="http://localhost:9090/myCINE/review/reviewContent.jsp?idx=4"><img
 					src="/myCINE/image/차이나타운.jpg" alt="차이나타운" width="460" height="345"></a>
 			</div>
 			<div class="item">

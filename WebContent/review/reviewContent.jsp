@@ -1,26 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import="mycine.review.*" %>
-<jsp:useBean id="reDAO" class="mycine.review.ReviewDAO"/>
+	pageEncoding="UTF-8"%>
+<%@ page import="mycine.review.*"%>
+<jsp:useBean id="reDAO" class="mycine.review.ReviewDAO" />
 <%
-String idx_s=request.getParameter("idx");
-//첫번째 유효성 검사
-if(idx_s==null||idx_s.equals("")){
-	idx_s="0";
-}
-int idx=Integer.parseInt(idx_s);
-ReviewDTO redto=reDAO.reviewContent(idx);
-//두번째 유효성 검사
-if(redto==null){
-	%>
-	<script>
+	String idx_s = request.getParameter("idx");
+	//첫번째 유효성 검사
+	if (idx_s == null || idx_s.equals("")) {
+		idx_s = "0";
+	}
+	int idx = Integer.parseInt(idx_s);
+	ReviewDTO redto = reDAO.reviewContent(idx);
+	//두번째 유효성 검사
+	if (redto == null) {
+%>
+<script>
 	window.alert("잘못된 접근입니다.");
 	location.href="reviewList.jsp";
 	</script>
-	<%
+<%
 	return;
-}
-reDAO.getReadnum(idx);
+	}
+	reDAO.getReadnum(idx);
 %>
 <!DOCTYPE html>
 <html>
@@ -28,88 +28,82 @@ reDAO.getReadnum(idx);
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/myCINE/css/rating-star.css">
-<style>
-table {
-	margin: 0px auto;
-	width: 900px;
-	border-top: 3px double;
-	border-spacing: 0px;
-	text-align: center;
-}
-thead{
-	
-}
-thead th{
-	width: 100px;
-	height: 50px;
-	border-bottom: 2px double;
-}
-#subject{
-	height: 200px;
-}
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/myCINE/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="/myCINE/js/bootstrap.min.js"></script>
 <script>
 function reviewDel(){
-	window.open("reviewDel.jsp?idx=<%=idx%>","reviewDel","width=350,height=200;");
-}
+	window.open("reviewDel.jsp?idx=<%=idx%>", "reviewDel", "width=350,height=200;");
+	}
 </script>
 </head>
 <body>
-<section>
-	<article>
-	<table>
-		<thead>
-			<tr>
-				<th>작성자</th>
-				<th><%= redto.getWriter() %></th>
-				<th><%= redto.getWritedate() %></th>
-				<th>조회:<%= redto.getReadnum() %></th>
-				<th>추천:<%= redto.getRecommend() %></th>
-			</tr>
-		</thead>
-		<tfoot>
-			<tr>
-				<td colspan="5" align="right">
-				|&nbsp;&nbsp;
-				<a href="reviewList.jsp">목록으로</a>
-				&nbsp;&nbsp;|&nbsp;&nbsp;
-				<a href="reviewUpdateWrite.jsp?idx=<%=redto.getIdx()%>&writer=<%=redto.getWriter()%>
-				&pwd=<%=redto.getWritedate()%>&subject=<%=redto.getSubject()%>
-				&content=<%=redto.getContent()%>&grade=<%=redto.getGrade()%>">수정하기</a>
-				&nbsp;&nbsp;|&nbsp;&nbsp;
-				<a href="javascript:reviewDel()">삭제하기</a>
-				&nbsp;&nbsp;|&nbsp;&nbsp;
-				<a href=#>추천하기</a>
-				&nbsp;&nbsp;|
-				</td>
-			</tr>
-			
-		</tfoot>
-		<tbody>
-			<tr>
-				<td></td>
-				<td colspan="3" align="left" id="subject">
-				<%= redto.getSubject() %>
-				</td>
-				<td>
-				이 영화의<br>
-				평점은&nbsp;&nbsp;<%= redto.getGrade() %>&nbsp;&nbsp;점
-				</td>
-				<td>
-				
-				</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td colspan="3" align="left">
-				<%= redto.getContent().replace("\n", "<br>") %>
-				</td>
-				<td></td>
-			</tr>
-		</tbody>
-	</table>
-	</article>
-</section>
-<%@include file="reviewComment.jsp"  %>
+	<header>
+		<%@include file="../header.jsp"%>
+	</header>
+	<div class="row">
+		<div class="col-sm-2"></div>
+		<div class="col-sm-8">
+			<div class="container">
+				<h2>글 보기</h2>
+			</div>
+		</div>
+		<div class="col-sm-2"></div>
+	</div>
+	<hr>
+	<div class="row">
+		<div class="col-sm-2"></div>
+		<div class="col-sm-8">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th style="background-color: #ffff66;">작성자</th>
+						<td style="color: #0033ff;"><%=redto.getWriter()%></td>
+						<th style="background-color: #ffff66;">작성날짜</th>
+						<td><%=redto.getWritedate()%></td>
+						<th style="background-color: #ffff66;">조회</th>
+						<td><%=redto.getReadnum()%></td>
+						<th style="background-color: #ffff66;">추천</th>
+						<td><%=redto.getRecommend()%></td>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<td colspan="8" align="right">|&nbsp;&nbsp; 
+							<a href="reviewList.jsp">목록으로<span class="glyphicon glyphicon-th-list"></span></a> &nbsp;&nbsp;|&nbsp;&nbsp; 
+							<a href="reviewUpdateWrite.jsp?idx=<%=redto.getIdx()%>&writer=<%=redto.getWriter()%>&pwd=<%=redto.getWritedate()%>&subject=<%=redto.getSubject()%>
+				&content=<%=redto.getContent()%>&grade=<%=redto.getGrade()%>">수정하기<span class="glyphicon glyphicon-pencil"></span></a>
+							&nbsp;&nbsp;|&nbsp;&nbsp; <a href="javascript:reviewDel()">삭제하기<span class="glyphicon glyphicon-remove"></span></a>
+							&nbsp;&nbsp;|&nbsp;&nbsp; <a href="reviewRecommend.jsp?">추천하기<span class="glyphicon glyphicon-thumbs-up"></span></a> &nbsp;&nbsp;|
+						</td>
+					</tr>
+				</tfoot>
+				<tbody>
+					<tr>
+						<td style="background-color: #ffff66;">제목</td>
+						<td colspan="5" align="left" id="subject"><%=redto.getSubject()%>
+						</td>
+						<td colspan="2">이 영화의 평점은&nbsp;&nbsp;<%=redto.getGrade()%>&nbsp;&nbsp;점
+						</td>
+					</tr>
+					<tr>
+						<td colspan="8" style="background-color: #ffff66;">내용</td>
+					</tr>
+					<tr>
+						<td colspan="8" style="overflow: scroll; height: 300px; width: 100%;"><%=redto.getContent().replace("\n", "<br>")%></td>			
+					</tr>
+				<tbody>
+			</table>
+		</div>
+		<div class="col-sm-2"></div>
+	</div>
+
+
+	<%@include file="reviewComment.jsp"%>
+	<footer>
+		<%@include file="../footer.jsp"%>
+	</footer>
 </body>
 </html>

@@ -68,8 +68,7 @@
 		<div class="col-sm-8">
 			<div class="container">
 				<h2>요청 게시판</h2>
-				<p>
-					여기는 영화를 요청하는 게시판입니다<a href="javascript:request()"
+				<p style="font-size: 15px; color: gray;">여기는 영화를 요청하는 게시판입니다<a href="javascript:request()"
 						class="btn btn-success">요청하기<span class="glyphicon glyphicon-heart"></span></a>
 				</p>	
 			</div>

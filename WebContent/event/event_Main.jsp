@@ -26,7 +26,7 @@ legend{
 			<ul>
 				<li>포인트 사용안내</li>
 				<li><a href="event_Exchange.jsp">상품 교환</a></li>
-				<li><a href="event_Mypoint.jsp?idx=2">내 포인트 조회</a></li>
+				<li><a href="event_Mypoint.jsp">내 포인트 조회</a></li>
 				<li><a href="event_Myprize.jsp">내가 보유한 상품</a></li>
 			</ul>
 		</div>

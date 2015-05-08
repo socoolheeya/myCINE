@@ -9,10 +9,9 @@ public class EventDAO {
 	private ResultSet rs;
 
 	public EventDAO() {
-		System.out.println("EventDAO 호출!");
 	}
 
-	// 내 포인트 조회
+	// 내 포인트 조회 (포인트 조회)
 	public EventDTO eventMypoint(String id) {
 
 		try {
@@ -31,6 +30,38 @@ public class EventDAO {
 
 			}
 			return dto;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+		}
+	}
+
+	// 포인트 조회(교환 가능한 상품)
+	public ArrayList<EventDTO> eventPrize(String id) {
+		try {
+			conn = mycine.db.DBInfo.getConn();
+			String sql = "select e_prize from MYCINE_EVENT where E_POINT <=(select point from MYCINE_MEMBER where id='test5')";
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			ArrayList<EventDTO> arr = new ArrayList<EventDTO>();
+			while (rs.next()) {
+				String e_prize = rs.getString("e_prize");
+
+				EventDTO dto = new EventDTO(id, e_prize);
+				arr.add(dto);
+			}
+			return arr;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -105,7 +136,7 @@ public class EventDAO {
 		try {
 
 			conn = mycine.db.DBInfo.getConn();
-			String sql = "select user_prize from MYCINE_PRIZE where id=?";
+			String sql = "select * from MYCINE_PRIZE where id=? order by idx desc";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, id);
 			rs = ps.executeQuery();
@@ -114,9 +145,11 @@ public class EventDAO {
 
 			while (rs.next()) {
 
+				int idx = rs.getInt("idx");
 				String user_prize = rs.getString("user_prize");
+				String use = rs.getString("use");
 
-				EventDTO dto = new EventDTO(id, user_prize);
+				EventDTO dto = new EventDTO(id, idx, user_prize, use);
 				arr.add(dto);
 
 			}
@@ -139,4 +172,50 @@ public class EventDAO {
 		}
 	}
 
+	// 상품리스트에서수령
+	public int exPrize(int idx) {
+		try {
+			conn = mycine.db.DBInfo.getConn();
+			String sql = "update mycine_prize set use='used' where idx=?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, idx);
+
+			int count = ps.executeUpdate();
+
+			return count;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -1;
+		} finally {
+			try {
+
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+		}
+
+	}
+
+	// 상품리스트에서삭제
+	public int dePrize(int idx) {
+		try {
+			conn = mycine.db.DBInfo.getConn();
+			String sql = "delete from mycine_prize where idx=?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, idx);
+
+			int count = ps.executeUpdate();
+
+			return count;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -1;
+		} finally {
+			try {
+
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+		}
+	}
 }

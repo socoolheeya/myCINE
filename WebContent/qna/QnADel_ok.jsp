@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <jsp:useBean id="qDTO" class="mycine.qna.QnaDTO" scope="page" />
-<jsp:setProperty property="*" name="mDTO" />
+<jsp:setProperty property="*" name="qDTO" />
 <jsp:useBean id="qDAO" class="mycine.qna.QnaDAO" scope="session" />
 <%
 	int result = qDAO.QnADel(qDTO);
@@ -16,8 +16,7 @@
 %>
 <script>
 	window.alert("비밀번호가 틀렸습니다! 다시입력해주세요");
-	location.href="QnADel.jsp?q_idx=<%=q_idx%>
-	";
+	location.href="QnADel.jsp?q_idx=<%=q_idx%>";
 </script>
 <%
 	}

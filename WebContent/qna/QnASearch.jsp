@@ -1,15 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@page import="java.util.*"%>
+    pageEncoding="UTF-8"%>
+    <%@page import="java.util.*"%>
 <%@page import="mycine.qna.*"%>
 <%@page import="mycine.qna.QnaDTO"%>
-<%@page import="mycine.member.*"%>
-<%@page import="mycine.member.MemberDTO"%>
-<jsp:useBean id="qDAO" class="mycine.qna.QnaDAO" scope="session" />
-<jsp:useBean id="mDAO" class="mycine.member.MemberDAO" scope="session" />
 
+<jsp:useBean id="qDAO" class="mycine.qna.QnaDAO" scope="session" />
+<% 
+	request.setCharacterEncoding("utf-8");
+	%>
 <%
-	int totalCnt=qDAO.getTotalCnt();
+String fkey_s=request.getParameter("fkey");
+String fvalue_s=request.getParameter("fvalue");
+
+int totalCnt=qDAO.getTotalCnt1(fkey_s, fvalue_s);
 int listSize=10;
 int pageSize=5;
 
@@ -25,10 +28,10 @@ if(totalCnt%listSize==0)pageCnt--;
 int groupNumber=cp/pageSize;
 if(cp%pageSize==0)groupNumber--;
 %>
-
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset=UTF-8">
 <title>Insert title here</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,11 +39,15 @@ if(cp%pageSize==0)groupNumber--;
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="/myCINE/js/bootstrap.min.js"></script>
-
-
+<script>
+	function show() {
+		window.open("QnAWrite.jsp", "QnAWrite", "width=600, height=500");
+	}
+</script>
 </head>
 <body>
-	<%@include file="../header.jsp"%>
+
+<%@include file="../header.jsp"%>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-2"></div>
@@ -55,7 +62,6 @@ if(cp%pageSize==0)groupNumber--;
 							value="검색" class="btn btn-info btn-sm">
 					</p>
 				</form>
-	
 				<table class="table">
 					<thead>
 						<tr style="background-color: #ffcc00;">
@@ -72,11 +78,11 @@ if(cp%pageSize==0)groupNumber--;
 								<%
 									if (groupNumber != 0) {
 								%> <a
-								href="QnAList.jsp?cp=<%=(groupNumber - 1) * pageSize + pageSize%>"
+								href="QnASearch.jsp?cp=<%=(groupNumber - 1) * pageSize + pageSize%>"
 								class="btn btn-warning">&lt;&lt;</a> <%
  	}
  	for (int i = ((groupNumber * pageSize) + 1); i <= ((groupNumber * pageSize) + pageSize); i++) {
- %> <a href="QnAList.jsp?cp=<%=i%>" class="btn btn-warning"><%=i%></a>&nbsp;&nbsp;&nbsp;
+ %> <a href="QnASearch.jsp?cp=<%=i%>" class="btn btn-warning"><%=i%></a>&nbsp;&nbsp;&nbsp;
 								<%
 									if (i == pageCnt)
 											break;
@@ -84,27 +90,25 @@ if(cp%pageSize==0)groupNumber--;
 									if (groupNumber != ((pageCnt / pageSize) - (pageCnt % pageSize == 0 ? 1
 											: 0))) {
 								%> <a
-								href="QnAList.jsp?cp=<%=(groupNumber + 1) * pageSize + 1%>"
+								href="QnASearch.jsp?cp=<%=(groupNumber + 1) * pageSize + 1%>"
 								class="btn btn-warning">&gt;&gt;</a> <%
  	}
  %>
- 
 							</td>
-							<td align="center"><a href="QnAWrite.jsp" class="btn btn-warning">질문하기</a></td>
+							
+							<td align="center"><input type="button" value="질문하기"
+								onclick="show()" class="btn btn-warning"></td>
 						</tr>
 					</tfoot>
 					<tbody>
 						<%
-							/**String get=request.getParameter("get");
-							String set=request.getParameter("set");
-							
-							ArrayList<MemberDTO> arr1 = mDAO.MemberQnA(get,set); */
-							
-							ArrayList<QnaDTO> arr = qDAO.QnAList(cp, listSize);
+						String fkey=request.getParameter("fkey");
+						  String fvalue=request.getParameter("fvalue");
+						  ArrayList<QnaDTO> arr=qDAO.QnASearch(fkey, fvalue);
 							if (arr == null || arr.size() == 0) {
 						%>
 						<tr>
-							<td colspan="4" align="center">등록된질문이 없습니다</td>
+							<td colspan="4" align="center">검색된질문이 없습니다</td>
 						</tr>
 						<%
 							} else {

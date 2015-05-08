@@ -10,7 +10,6 @@ public class ReviewDAO {
 	private ResultSet rs;
 	
 	public ReviewDAO(){
-		System.out.println("dao생성자 호출됨");
 	}
 	
 	/**조회수 증가*/

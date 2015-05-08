@@ -17,7 +17,7 @@
 	</header>
 	<div class="row">
 		<div class="col-sm-12">
-			<p align="center" style="margin: 10px; padding: 10px;">검색할 영화 제목을 입력해주세요!</p>
+			<p align="center" style="margin: 10px; padding: 10px;">요청할 영화 제목을 입력해주세요!</p>
 		</div>
 	</div>
 	<div class="row">
@@ -30,7 +30,10 @@
 						<td><input type="text" name="searchword"></td>
 					</tr>
 					<tr>
-						<td colspan="2" align="right"><button class="btn btn-primary" type="submit">확인</button></td>
+						<td colspan="2" align="right"><button class="btn btn-success" type="reset" onclick="history.back()">취소</button>
+						<button class="btn btn-primary" type="submit">확인</button>
+						</td>
+						
 					</tr>
 				</table>
 			</form>

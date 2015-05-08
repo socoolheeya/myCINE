@@ -34,13 +34,13 @@ public class QnaDAO {
 	}
 	
 	/**질문하기 관련*/
-	public int QnAwriter(QnaDTO dto){
+	public int QnAwriter(QnaDTO dto,String writer){
 		try{
 			conn= mycine.db.DBInfo.getConn();
 			int q_ref=getMaxRef();
 			String sql="insert into mycine_qna values(myCINE_QnA_Q_idx.nextval,?,?,?,?,sysdate,0,?,0,0)";
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, dto.getQ_writer());
+			ps.setString(1, writer);
 			ps.setString(2, dto.getQ_pwd());
 			ps.setString(3, dto.getQ_subject());
 			ps.setString(4, dto.getQ_content());
@@ -77,18 +77,19 @@ public class QnaDAO {
 		}
 	}
 	/**답변쓰기 관련 메소드*/
-	public int QnAReWrite(QnaDTO dto){
+	public int QnAReWrite(QnaDTO dto,String writer){
 		try{
 			conn= mycine.db.DBInfo.getConn();
 			updateSun(dto.getQ_ref(), dto.getQ_sunbun());
 			String sql="insert into mycine_qna values(myCINE_QnA_Q_idx.nextval,?,?,?,?,sysdate,0,?,?,?)";
 			ps=conn.prepareStatement(sql);
-			ps.setString(1, dto.getQ_writer());
+			ps.setString(1, writer);
 			ps.setString(2, dto.getQ_pwd());
 			ps.setString(3, dto.getQ_subject());
 			ps.setString(4, dto.getQ_content());
 			ps.setInt(5, dto.getQ_ref());
-			ps.setInt(6, dto.getQ_lev()+1);
+			ps.setInt(6, dto.getQ_lev()+1)
+			;
 			ps.setInt(7, dto.getQ_sunbun()+1);
 			int count=ps.executeUpdate();
 			return count;
@@ -112,6 +113,7 @@ public class QnaDAO {
 		try{
 			conn= mycine.db.DBInfo.getConn();
 			String sql="select * from "+
+			
 					"(select rownum as rnum,a.* from "+
 					"(select * from mycine_qna order by q_ref desc,q_sunbun asc)a)b "+
 					"where rnum>=("+cp+"-1)*"+ls+"+1 and rnum<="+cp+"*"+ls;
@@ -207,26 +209,86 @@ public class QnaDAO {
 		}
 	}
 
-	/**삭제관련*/
+	/**삭제관련 메소드*/
 	public int QnADel(QnaDTO dto){
 		try{
 			conn= mycine.db.DBInfo.getConn();
-			String sql="delete from mycine_qna where q_pwd=?";
-
-			//String sql="delete from mycine_qna where q_idx=? and q_pwd=?";
-			ps=conn.prepareStatement(sql);
-			//ps.setInt(1, dto.getQ_idx());
-			ps.setString(1, dto.getQ_pwd());
-			int count =ps.executeUpdate();
+			String sql="delete from mycine_qna where q_idx=? and q_pwd=?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, dto.getQ_idx());
+			ps.setString(2, dto.getQ_pwd());
+			int count = ps.executeUpdate();
 			return count;
 		}catch(Exception e){
 			e.printStackTrace();
 			return -1;
 		}finally{
+			try {
+				if(rs!=null)rs.close();
+				if(conn!=null)conn.close();
+				if(ps!=null)ps.close();
+			} catch (Exception e2) {}
+		}
+	}
+	/**검색했을시에 발생하는 ref최고값*/
+	public int getTotalCnt1(String fkey, String fvalue){
+		try{
+			conn= mycine.db.DBInfo.getConn();
+			String sql="select count(*) from mycine_qna where " + fkey + " like "+"'%"+fvalue+"%'";
+			ps=conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			rs.next();
+			int count=rs.getInt(1);
+			return count==0?1:count;
+		}catch(Exception e){
+			e.printStackTrace();
+			return 1;
+		}finally{
 			try{
+				if(rs!=null)rs.close();
 				if(ps!=null)ps.close();
 				if(conn!=null)conn.close();
 			}catch(Exception e){}
+		}
+	}
+	/**검색관련 메서드*/
+	public ArrayList<QnaDTO> QnASearch(String fkey, String fvalue) {
+		try {
+			conn= mycine.db.DBInfo.getConn();
+			String sql = "select * from mycine_qna where " + fkey + " like "+"'%"+fvalue+"%'";
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			ArrayList<QnaDTO> arr = new ArrayList<QnaDTO>();
+			while (rs.next()) {
+				int q_idx=rs.getInt("q_idx");
+				String q_writer=rs.getString("q_writer");
+				String q_pwd=rs.getString("q_pwd");
+				String q_subject=rs.getString("q_subject");
+				String q_content=rs.getString("q_content");
+				java.sql.Date q_writedate=rs.getDate("q_writedate");	
+				int q_readnum=rs.getInt("q_readnum");
+				int q_ref=rs.getInt("q_ref");
+				int q_lev=rs.getInt("q_lev");
+				int q_sunbun=rs.getInt("q_sunbun");
+				QnaDTO dto = new QnaDTO(q_idx, q_writer, q_pwd, q_subject, q_content, 
+						q_writedate, q_readnum, q_ref, q_lev, q_sunbun);
+				arr.add(dto);
+			}
+			return arr;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e2) {
+			}
 		}
 	}
 }
