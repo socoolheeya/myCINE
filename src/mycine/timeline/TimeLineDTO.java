@@ -1,7 +1,7 @@
 package mycine.timeline;
 
 import java.text.SimpleDateFormat;
-import java.sql.Date;
+import java.util.Date;
 
 public class TimeLineDTO {
 	

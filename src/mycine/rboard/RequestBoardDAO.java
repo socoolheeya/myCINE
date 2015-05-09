@@ -237,7 +237,7 @@ public class RequestBoardDAO {
 	public ArrayList<RequestBoardDTO> getRequestEvent(String id) {
 		try {
 			conn = mycine.db.DBInfo.getConn();
-			String sql = "select * from mycine_request where writer = ?";
+			String sql = "select * from mycine_request where writer = ? order by writedate desc";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, id);
 			rs = ps.executeQuery();

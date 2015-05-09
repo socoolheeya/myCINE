@@ -1,11 +1,12 @@
 package mycine.timeline;
 
 import java.sql.Connection;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
-import mycine.member.*;
+import mycine.member.MemberDTO;
 
 public class TimeLineDAO {
 	
@@ -63,6 +64,32 @@ public class TimeLineDAO {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public ArrayList<Date> getSortedDate(){
+		try{
+			conn = mycine.db.DBInfo.getConn();
+			String sql = "select writedate from mycine_request order by writedate desc";
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			ArrayList<Date> dateArr = new ArrayList<Date>(); 
+			while(rs.next()) {
+				Date writeDate = rs.getDate("writedate");
+				dateArr.add(writeDate);
+			}
+			return dateArr;
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			try {
+				
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
 	}
 
 }

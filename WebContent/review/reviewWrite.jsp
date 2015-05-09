@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,62 +11,74 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="/myCINE/js/bootstrap.min.js"></script>
-<style>
-table {
-	margin: 0px auto;
-	width: 900px;
-	border-top: 3px double;
-	border-spacing: 0px;
-	text-align: center;
-}
-thead td{
-	height: 50px;
-	border-bottom: 1px double;
-}
-</style>
 </head>
+
+
 <body>
-<section>
-	<article>
-		<form name="reviewwrite" action="reviewWrite_ok.jsp">
-		<table>
-		<thead>
-			<tr>
-				<td colspan="2">
-				작성자&nbsp;&nbsp;<input type="text" name="writer">
-				</td>
-				<td colspan="2">
-				제목&nbsp;&nbsp;<input type="text" name="subject">
-				</td>
-		</thead>
-		<tfoot>
-			<tr>
-				<td>평점:</td>
-				<td class="rating" colspan="2" align="right">
-    				<input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="슈퍼울트라캡짱!">5 stars</label>
-   					<input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="좀 괜찮은데?!">4 stars</label>
-  					<input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="보통이에요!">3 stars</label>
-    				<input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="그럭저럭!">2 stars</label>
-    				<input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="최악이야!">1 star</label>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="4" align="right">
-				<input type="reset" value="다시쓰기">
-				<input type="submit" value="작성완료">
-				</td>
-			</tr>
-		</tfoot>
-		<tbody>
-			<tr>
-				<td colspan="4">
-				<textarea name="content" rows="20" cols="130"></textarea>
-				</td>
-			</tr>
-		</tbody>
-		</table>
-		</form>
-	</article>
-</section>
+	<header>
+		<%@include file="../header.jsp"%>
+	</header>
+	<div class="row">
+		<div class="col-sm-2"></div>
+		<div class="col-sm-8">
+		<p style="font-size: 30px;">글쓰기</p>
+		</div>
+		<div class="col-sm-2"></div>
+	</div>
+	<hr>
+	<div class="row">
+		<div class="col-sm-2"></div>
+		<div class="col-sm-8">
+			<form name="reviewwrite" action="reviewWrite_ok.jsp">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th style="background-color: #ffcc00;">작성자</th>
+							<td>
+								<input type="text" name="writer">
+							</td>
+							<td colspan="2"></td>
+						</tr>
+						<tr>
+							<th style="background-color: #ffcc00;">제목</th>
+							<td colspan="3">
+								<input type="text" name="subject" style="width: 680px;">
+							</td>
+						</tr>
+					</thead>
+					<tfoot>
+						<tr>
+							<th colspan="3" style="text-align: right;">평점</th>
+							<td colspan="1" class="rating" align="right">
+								<input type="radio" id="star5" name="grade" value="5" /><label for="star5" title="슈퍼울트라캡짱!">5 stars</label> 
+								<input type="radio" id="star4" name="grade" value="4" /><label for="star4" title="좀 괜찮은데?!">4 stars</label> 
+								<input type="radio" id="star3" name="grade" value="3" /><label for="star3" title="보통이에요!">stars</label> 
+								<input type="radio" id="star2" name="grade" value="2" /><label	for="star2" title="그럭저럭!">2 stars</label> 
+								<input type="radio" id="star1" name="grade" value="1" /><label for="star1" title="최악이야!">1 star</label>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="4" align="right">
+								<button class="btn btn-warning" type="reset">다시쓰기</button> 
+								<button class="btn btn-success" type="submit">작성완료</button>
+							</td>
+						</tr>
+					</tfoot>
+					<tbody>
+						<tr>
+							<td colspan="4" align="center">
+								<textarea name="content" rows="10" cols="72"></textarea>
+						 	</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+		</div>
+		<div class="col-sm-2"></div>
+	</div>
+
+	<footer>
+		<%@include file="../footer.jsp"%>
+	</footer>
 </body>
 </html>

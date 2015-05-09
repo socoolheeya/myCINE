@@ -35,6 +35,24 @@
 			document.join.email3.value = document.join.email2.options[document.join.email2.selectedIndex].value;
 		}
 	}
+	function ok(){
+		if(document.join.id.value == "") {
+			alert("아이디를 입력하셔야 합니다.");
+			document.join.id.focus();
+		} else if(document.join.pwd.value == ""){
+			alert("패스워드를 입력하셔야 합니다.");
+			document.join.pwd.focus();
+		} else if(document.join.agree.checked != true) {
+			alert("이용 약관에 동의하셔야 합니다.");
+			document.join.agree.focus();
+		} else if(document.join.agree1.checked != true){
+			alert("개인정보 수집에 동의하셔야 합니다.");
+			document.join.agree1.focus();
+		} else {
+			document.join.submit();
+			return;
+		}
+	}
 	function cancel() {
 		location.href = "/myCINE/index.jsp";
 	}
@@ -82,13 +100,13 @@
 									</tr>
 
 									<tr>
-										<td style="font-size: 19px; font-weight: bold;">Email</td>
-										<td><span class="col-xs-4"> <input type="text"
+										<td style="font-size: 19px; font-weight: bold;">이메일</td>
+										<td><span class="col-xs-4" style="margin-right: -20px;"> <input type="text"
 												class="form-control" name="email1" onfocus="this.value='';" placeholder="예)example">
-										</span> <span class="col-xs-1">@</span> <span class="col-xs-3">
+										</span> <span class="col-xs-1">@</span> <span class="col-xs-3" style="margin-left: -25px;">
 												<input type="text" class="form-control" name="email3"
 												disabled="disabled" placeholder="naver.com">
-										</span> <span class="col-xs-3"> <select class="form-control"
+										</span> <span class="col-xs-3" style="margin-left: -25px;"> <select class="form-control"
 												name="email2" onchange="email_change()">
 													<option value="0">선택하세요</option>
 													<option value="9">직접입력</option>
@@ -161,7 +179,7 @@
 													value="" readonly="readonly" size="40">
 											</div>
 											<button type="button" class="btn btn-primary"
-												onclick="searchAddr()">검색</button></td>
+												onclick="searchAddr()"><span class="glyphicon glyphicon-search"></span>검색</button></td>
 									</tr>
 									<tr>
 										<td><div class="col-xs-7">
@@ -436,13 +454,72 @@
 부칙
 1. 이 약관은 2013년 8월 30일부터 시행합니다.
 부칙
-1. 이 약관은 2015년 1월 2일부터 시행합니다.</textarea></td>
+1. 이 약관은 2015년 1월 2일부터 시행합니다.</textarea><br>
+<div class="checkbox" style="text-align: right; margin-right: 60px;"><input type="checkbox" id="agree" name="agree">이용 약관에 동의합니다.</div>
+<textarea rows="10" cols="100" readonly="readonly">
+ [ 수집하는 개인 정보의 항목 ]
+
+myCINE에서 수집하는 개인정보는 회원의 형태나 여러분이 이용하는 서비스에 따라 항목과 수집방법이 다를 수 있으며, 이는 다음과 같습니다.
+
+① 비회원의 경우
+  가.myCINE 소식지를 구독하는 회원의  경우
+  - 수집항목 : e-mail
+  - 수집방법 : 웹사이트 구독하기 페이지
+
+  나.이벤트 참가자의 경우
+  -수집항목 : e-mail 또는 전화번호 등
+  -수집방법 : 이벤트 페이지를 통한 정보주체가 직접 입력
+
+② 정회원의 경우
+  가.수집항목
+  (회원가입 시)
+  *입력정보_필수: 성명, 생년월일, 연락처(휴대전화번호 or 전화번호), e-mail, 비밀번호,
+  *입력정보_선택: 성별
+  *생성정보: IP, 쿠키정보, 방문일시, 서비스이용기록, 불량이용기록, (모바일 서비스 이용시) 고유기기식별값 (IMEI 등), OS버전, 단말기 기기명
+
+
+  (상품구매 및 결제 시)
+  • 인적정보
+  *필수: 성명, 연락처(휴대전화번호or전화번호), 배송지주소, 본인확인정보(CI, DI),
+  *선택: 비상연락처 및 실제 탑승자 이름 (여행상품 또는 항공권의 경우)
+
+  • 결제정보
+  결제업체(PG회사) 및 결제유형에 따라 다음과 같은 정보의 입력이 추가로 요구 될 수 있습니다.
+  1. 신용카드 결제 시 : 카드사명, 카드번호
+  2. 휴대전화 결제 시 : 휴대전화번호, 통신사명
+  3. 계좌이체 결제 시 : 은행명, 계좌번호
+  4. 무통장 입금 시 : 은행명, 입금자명
+
+  (1:1상담 요청시) 성명, e-mail, 연락처(휴대전화번호 or 전화번호)
+
+  나.수집방법 : 홈페이지 회원가입, 구매정보입력, 이벤트참여 및 고객센터를 통한 전화,온라인 상담
+  
+
+
+  
+ [ 개인정보의 수집 이용목적 ] 
+  
+myCINE가 수집하는 개인정보는 아래에 분류된 것과 같이 서비스를 이용하시는 여러분의 권리를 보호하고 좀 더 나은 편의를 제공해 드릴 목적으로 처리되고 있습니다. 이외에 처리목적이 변경되거나 추가될 시에는 사전에 동의를 구할 것을 약속합니다.
+
+가. 홈페이지 회원가입 및 관리 관련
+“회원 가입의사 확인, 회원제 서비스 제공에 따른 본인 식별•인증, 회원자격 유지•관리, 서비스 부정이용 방지, 각종 고지•통지, 고충처리, 분쟁 조정을 위한 기록 보존 등”을 목적으로 개인정보를 처리합니다.
+
+나. 상품 또는 서비스 제공 관련
+“상품 및 경품 배송, 서비스 제공 및 요금결제•정산, 콘텐츠 및 회원 맞춤 서비스 제공, 본인인증, 채권추심 등”을 목적으로 개인정보를 처리합니다.
+
+다. 마케팅 및 상품정보 전달 관련(선택시)
+신규 서비스(상품) 안내 및 맞춤 서비스 제공, 이벤트 및 참여기회 제공, 서비스의 유효성 확인, 접속빈도 파악 또는 회원의 서비스 이용에 대한 통계 등을 목적으로 개인정보를 처리합니다.
+</textarea><br>
+<div class="checkbox" style="text-align: right; margin-right: 60px;"><input type="checkbox" id="agree1" name="agree1">개인정보 수집 및 이용 안내에 동의합니다.</div>
+
+
+</td>
 									</tr>
 									<tr>
 										<td colspan="2" align="right">
-											<button class="btn btn-success" type="submit">가입</button>
-											<button class="btn btn-warning" type="reset">재작성</button>
 											<button class="btn btn-info" type="button" onclick="cancel()">취소</button>
+											<button class="btn btn-warning" type="reset">재작성</button>
+											<button class="btn btn-success" type="button" onclick="ok()">가입</button>
 										</td>
 									</tr>
 								</table>

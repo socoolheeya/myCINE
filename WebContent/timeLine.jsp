@@ -30,25 +30,15 @@ if(session.getAttribute("id") == null || session.getAttribute("id").equals("")) 
 				</thead>
 				<tbody style="overflow: scroll; height: 500px; width: 100%; position: absolute;">
 				<%	
-					Date temp1, temp2, temp3;
 					for(int i = 0; i < arr.size(); i++) {
-						for(int j = 0; j < i; j++) {
-							if(arr.get(i).getWriteDate().compareTo(arr.get(j).getWriteDate()) > 0){
-								temp2 = arr.get(i).getWriteDate();
-								temp3 = arr.get(j).getWriteDate();
-								temp1 = temp2;
-								temp2 = temp3;
-								temp3 = temp1;
-								
-								
+			
 							%>
 							<tr>
-								<td><%=logined%>님께서 <%=arr.get(i).getMovieName() %> 영화를 요청하였습니다. <span style="font-size: 10px; color: gray;"><%=arr.get(i).getWriteDate()%></span></td>
+								<td><%=logined%>님께서 <%=arr.get(i).getMovieName() %> 영화를 요청하였습니다. 
+								<span style="font-size: 10px; color: gray;"><%=arr.get(i).getWriteDate() %></span></td>	
 							</tr>
 							<%
-							}
-						}
-					}
+					}			
 				%>
 				</tbody>
 			</table>

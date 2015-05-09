@@ -1,13 +1,13 @@
 package mycine.event;
 
 public class EventDTO {
-	
 	String id;
 	int idx;
 	int point;
 	String user_prize;
 	String use;
 	String e_prize;
+	int rnum;
 	
 	public EventDTO() {
 		super();
@@ -41,7 +41,24 @@ public class EventDTO {
 		this.id = id;
 		this.e_prize = e_prize;
 	}
+	
 
+	public EventDTO(int idx, String user_prize, String use) {
+		super();
+		this.idx = idx;
+		this.user_prize = user_prize;
+		this.use = use;
+	}
+	
+
+	public EventDTO(String id, int idx, String user_prize, String use, int rnum) {
+		super();
+		this.id = id;
+		this.idx = idx;
+		this.user_prize = user_prize;
+		this.use = use;
+		this.rnum = rnum;
+	}
 
 	public String getId() {
 		return id;
@@ -90,4 +107,12 @@ public class EventDTO {
 	public void setE_prize(String e_prize) {
 		this.e_prize = e_prize;
 	}
+
+	public int getRnum() {
+		return rnum;
+	}
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}	
 }

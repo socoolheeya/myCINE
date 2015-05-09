@@ -9,6 +9,7 @@
 <title>리뷰 수정하기</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/myCINE/css/bootstrap.min.css">
+<link rel="stylesheet" href="/myCINE/css/rating-star.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="/myCINE/js/bootstrap.min.js"></script>
@@ -42,31 +43,30 @@
 				<table class="table table-bordered">
 					<thead>
 						<tr>
-							<th style="width: 30px;">작성자</th>
+							<th>작성자</th>
 							<td><%=writer%></td>
+							<th style="width: 150px;">평점</th>
+							<td><input type="text" name="grade" value="<%=grade_s %>" size="1">점</td>
 						</tr>
 						<tr>
 							<th>제목</th>
-							<td><input class="form-control" type="text" name="subject"
+							<td colspan="3"><input class="form-control" type="text" name="subject"
 								value="<%=subject%>" style="width: 500px;"></td>
 						</tr>
 					</thead>
 					<tfoot>
 						<tr>
-						<td>평점<input type="text" name="grade"
-								value="<%=grade_s%>"></td>
 							<td colspan="4" align="right">
 								<button class="btn btn-warning" type="reset" onclick="history.back()">취소</button>
 								<button class="btn btn-success" type="reset">원래대로</button> 
-								<button class="btn btn-primary" type="submit">수정완료</button>
+								<button class="btn btn-primary" type="submit">수정완료</button>		
 							</td>
-							
 						</tr>
 					</tfoot>
 					<tbody>
 						<tr>
-							<td colspan="4"><textarea name="content" rows="10"
-									cols="63"><%=content.replace("\n", "<br>")%></textarea></td>
+							<td colspan="4" align="center"><textarea name="content" rows="10"
+									cols="70"><%=content.replace("\n", "<br>")%></textarea></td>
 						</tr>
 					</tbody>
 				</table>

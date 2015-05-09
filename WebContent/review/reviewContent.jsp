@@ -35,10 +35,12 @@
 <script src="/myCINE/js/bootstrap.min.js"></script>
 <script>
 function reviewDel(){
-	window.open("reviewDel.jsp?idx=<%=idx%>", "reviewDel", "width=350,height=200;");
+	window.open("reviewDel.jsp?idx=<%=idx%>", "reviewDel",
+				"width=350,height=200;");
 	}
 </script>
 </head>
+
 <body>
 	<header>
 		<%@include file="../header.jsp"%>
@@ -71,36 +73,41 @@ function reviewDel(){
 				</thead>
 				<tfoot>
 					<tr>
-						<td colspan="8" align="right">|&nbsp;&nbsp; 
-							<a href="reviewList.jsp">목록으로<span class="glyphicon glyphicon-th-list"></span></a> &nbsp;&nbsp;|&nbsp;&nbsp; 
-							<a href="reviewUpdateWrite.jsp?idx=<%=redto.getIdx()%>&writer=<%=redto.getWriter()%>&pwd=<%=redto.getWritedate()%>&subject=<%=redto.getSubject()%>
-				&content=<%=redto.getContent()%>&grade=<%=redto.getGrade()%>">수정하기<span class="glyphicon glyphicon-pencil"></span></a>
-							&nbsp;&nbsp;|&nbsp;&nbsp; <a href="javascript:reviewDel()">삭제하기<span class="glyphicon glyphicon-remove"></span></a>
-							&nbsp;&nbsp;|&nbsp;&nbsp; <a href="reviewRecommend.jsp?">추천하기<span class="glyphicon glyphicon-thumbs-up"></span></a> &nbsp;&nbsp;|
+						<td colspan="8" align="right">|&nbsp;&nbsp; <a
+							href="reviewList.jsp">목록으로<span
+								class="glyphicon glyphicon-th-list"></span></a>
+							&nbsp;&nbsp;|&nbsp;&nbsp; <a
+							href="reviewUpdateWrite.jsp?idx=<%=redto.getIdx()%>&writer=<%=redto.getWriter()%>&pwd=<%=redto.getWritedate()%>&subject=<%=redto.getSubject()%>
+				&content=<%=redto.getContent()%>&grade=<%=redto.getGrade()%>">수정하기<span
+								class="glyphicon glyphicon-pencil"></span></a>
+							&nbsp;&nbsp;|&nbsp;&nbsp; <a href="javascript:reviewDel()">삭제하기<span
+								class="glyphicon glyphicon-remove"></span></a>
+							&nbsp;&nbsp;|&nbsp;&nbsp; <a href="reviewRecommend.jsp?">추천하기<span
+								class="glyphicon glyphicon-thumbs-up"></span></a> &nbsp;&nbsp;|
 						</td>
 					</tr>
 				</tfoot>
 				<tbody>
 					<tr>
-						<td style="background-color: #ffff66;">제목</td>
+						<th style="background-color: #ffff66;">제목</th>
 						<td colspan="5" align="left" id="subject"><%=redto.getSubject()%>
 						</td>
-						<td colspan="2">이 영화의 평점은&nbsp;&nbsp;<%=redto.getGrade()%>&nbsp;&nbsp;점
-						</td>
+						<th style="background-color: #ffff66;">평점</th>
+						<td><%=redto.getGrade()%>점</td>
 					</tr>
 					<tr>
-						<td colspan="8" style="background-color: #ffff66;">내용</td>
+						<th colspan="8" style="background-color: #ffff66;">내용</th>
 					</tr>
 					<tr>
-						<td colspan="8" style="overflow: scroll; height: 300px; width: 100%;"><%=redto.getContent().replace("\n", "<br>")%></td>			
+						<td colspan="8"
+							style="overflow: scroll; height: 300px; width: 100%;"><%=redto.getContent().replace("\n", "<br>")%></td>
 					</tr>
 				<tbody>
 			</table>
+
 		</div>
 		<div class="col-sm-2"></div>
 	</div>
-
-
 	<%@include file="reviewComment.jsp"%>
 	<footer>
 		<%@include file="../footer.jsp"%>

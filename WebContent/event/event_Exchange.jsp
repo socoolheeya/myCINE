@@ -19,11 +19,6 @@ a {
 legend {
    font-size: 30px;
 }
-
-table tr {
-   text-align: center;
-}
-
 table img {
    width: 200px;
 }
@@ -53,19 +48,6 @@ tfoot tr {
    }
 %>
 
-<script>
-function show(){
-	var showok=window.confirm("교환 하시겠습니까?");
-	if(showok){
-		var aa = document.menuForm.c1.value;
-		location.href="event_Exchange_ok.jsp?id=<%=id_s%>&c1="+aa;
-		
-	}else{
-		window.alert("취소되었습니다.");
-	}
-}
-</script>
-
 </head>
 <body>
    <%@include file="../header.jsp"%>
@@ -83,21 +65,21 @@ function show(){
          </div>
          <div class="col-sm-7" style="border: 1px solid #cccccc; margin: 10px; padding: 10px;">
             <legend><span class="glyphicon glyphicon-ok"></span>상품 교환</legend>
-            <form name="menuForm">
-            <table>
+            <form action="event_Exchange_ok.jsp">
+            <table align="center">
                <tfoot>
                   <tr>
                      <td>&nbsp;</td>
                   </tr>
                   <tr>
-                     <td colspan="3" style="color: red; font-weight: bold;">※ 교환하신 상품은 환불이 불가합니다.</td>
+                     <td colspan="3" style="color: red; font-weight: bold;" align="center">※ 교환하신 상품은 환불이 불가합니다.</td>
                   </tr>
                </tfoot>
                <tbody>
                   <tr>
-                     <th>CGV SET</th>
-                     <th>쉐이크 SET</th>
-                     <th>에이드 SET</th>
+                     <th style="text-align: center;">CGV SET</th>
+                     <th style="text-align: center;">쉐이크 SET</th>
+                     <th style="text-align: center;">>에이드 SET</th>
                   </tr>
                   <tr>
                      <td><img src="/myCINE/image/cgv_700.jpg"
@@ -108,17 +90,17 @@ function show(){
                         title="팝콘(대)1 + 에이드(중)2"></td>
                   </tr>
                   <tr>
-                     <td>point: 700 p
-                        <button type="button" class="btn btn-warning" name="c1"
-                           value="700" onclick="show()">교환</button>
+                     <td>Point: 700 p
+                        <button type="submit" class="btn btn-warning" name="c1"
+                           value="700" onclick="return confirm('교환 하시겠습니까?')">교환</button>
                      </td>
-                     <td>point: 800 p
-                        <button type="button" class="btn btn-warning" name="c1"
-                           value="800" onclick="show()">교환</button>
+                     <td>Point: 800 p
+                        <button type="submit" class="btn btn-warning" name="c1"
+                           value="800" onclick="return confirm('교환 하시겠습니까?')">교환</button>
                      </td>
-                     <td>point: 900 p
-                        <button type="button" class="btn btn-warning" name="c1"
-                           value="900" onclick="show()">교환</button>
+                     <td>Point: 900 p
+                        <button type="submit" class="btn btn-warning" name="c1"
+                           value="900" onclick="return confirm('교환 하시겠습니까?')">교환</button>
                      </td>
                   </tr>
 
@@ -127,9 +109,9 @@ function show(){
                   </tr>
 
                   <tr>
-                     <th>오징어 SET</th>
-                     <th>즉석버터구이 SET</th>
-                     <th>영화관람권 2매</th>
+                     <th style="text-align: center;">오징어 SET</th>
+                     <th style="text-align: center;">즉석버터구이 SET</th>
+                     <th style="text-align: center;">영화관람권 2매</th>
                   </tr>
                   <tr>
                      <td><img src="/myCINE/image/squid_1000.jpg"
@@ -140,16 +122,16 @@ function show(){
                   </tr>
                   <tr>
                      <td>Point: 1000 p
-                        <button type="button" class="btn btn-warning" name="c1"
-                           value="1000" onclick="show()">교환</button>
+                        <button type="submit" class="btn btn-warning" name="c1"
+                           value="1000" onclick="return confirm('교환 하시겠습니까?')">교환</button>
                      </td>
                      <td>Point: 1100 p
-                        <button type="button" class="btn btn-warning" name="c1"
-                           value="1100" onclick="show()">교환</button>
+                        <button type="submit" class="btn btn-warning" name="c1"
+                           value="1100" onclick="return confirm('교환 하시겠습니까?')">교환</button>
                      </td>
                      <td>Point: 2000 p
-                        <button type="button" class="btn btn-warning" name="c1"
-                           value="2000" onclick="show()">교환</button>
+                        <button type="submit" class="btn btn-warning" name="c1"
+                           value="2000" onclick="return confirm('교환 하시겠습니까?')">교환</button>
                      </td>
                   </tr>
                </tbody>

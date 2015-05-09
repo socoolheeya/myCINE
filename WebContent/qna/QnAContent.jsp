@@ -27,23 +27,23 @@
 <head>
 <meta charset=UTF-8>
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="../css/mainLayout.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet" href="/myCINE/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script
-	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-
+<script src="/myCINE/js/bootstrap.min.js"></script>
 </head>
 <body>
+<header>
+<%@include file="../header.jsp"%>
+</header>
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-sm-4"></div>
-			<div class="col-sm-4">
+			<div class="col-sm-2"></div>
+			<div class="col-sm-8">
 				<h2>작성내용</h2>
-				<table border="1" class="table">
+				<hr>
+				<table border="1" class="table table-bordered">
 					<tr>
 						<th style="background-color: #ffcc00;">번호</th>
 						<td ><%=dto.getQ_idx()%></td>
@@ -64,13 +64,18 @@
 					</tr>
 
 					<tr>
-						<td colspan="4" align="center"><a href="QnAReWrite.jsp?q_subject=<%=dto.getQ_subject()%>&q_ref=<%=dto.getQ_ref()%>&q_lev=<%=dto.getQ_lev()%>&q_sunbun=<%=dto.getQ_sunbun()%>" class="btn btn-warning">답변쓰기</a>
-							<a href="QnADel.jsp?q_idx=<%=dto.getQ_idx()%>" class="btn btn-warning">삭제하기</a></td>
+						<td colspan="4" align="center">
+						<button class="btn btn-warning" type="reset" onclick="history.back()">뒤로가기</button>
+						<a href="QnAReWrite.jsp?q_subject=<%=dto.getQ_subject()%>&q_ref=<%=dto.getQ_ref()%>&q_lev=<%=dto.getQ_lev()%>&q_sunbun=<%=dto.getQ_sunbun()%>" class="btn btn-success">답변쓰기</a>
+							<a href="QnADel.jsp?q_idx=<%=dto.getQ_idx()%>" class="btn btn-danger">삭제하기</a></td>
 					</tr>
 				</table>
 			</div>
-			<div class="col-sm-4"></div>
+			<div class="col-sm-2"></div>
 		</div>
 	</div>
+	<footer>
+	<%@include file="../footer.jsp"%>
+	</footer>
 </body>
 </html>
