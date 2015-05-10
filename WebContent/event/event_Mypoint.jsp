@@ -23,7 +23,7 @@ legend{
 	if (id_s == null || id_s.equals("")) {
 		id_s = "0";
 	}
-	EventDTO dto = eDAO.eventMypoint(id_s);
+	EventDTO dto = eDAO.event_MyPoint(id_s);
 	if (dto == null) {
 %>
 <script>
@@ -34,7 +34,7 @@ legend{
 	return;
 	}
 
-	ArrayList<EventDTO> arr=eDAO.eventPrize(id_s);
+	ArrayList<EventDTO> arr=eDAO.event_PrizeList(id_s);
 %>
 </head>
 <script
@@ -56,8 +56,8 @@ legend{
 			<legend><span class="glyphicon glyphicon-ok"></span>내 포인트 조회</legend>
 			<h2>
 				현재
-				<font color="#050099"><%=session.getAttribute("id")%></font>님의 포인트는
-				<font color="red"><%=dto.getPoint()%>p</font> 입니다.
+				<font color="#0033ff"><%=session.getAttribute("id")%></font>님의 포인트는
+				<font color="red"><%=dto.getPoint()%>P</font> 입니다.
 			</h2>
 			<br>
 			<p>교환 가능하신 상품 리스트</p>

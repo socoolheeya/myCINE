@@ -78,7 +78,7 @@
 							<div class="form-group">
 								<table class="table table-bordered">
 									<tr>
-										<td width="130px" style="font-size: 19px; font-weight: bold;">아이디(ID)</td>
+										<td width="130px" style="font-size: 19px; font-weight: bold;"><span style="color: red;">*</span>아이디(ID)</td>
 										<td><div class="col-xs-3">
 												<input type="text" class="form-control" name="id" placeholder="아이디 입력"
 													readonly="readonly" required="required">
@@ -87,7 +87,7 @@
 												onclick="idCheck()">중복확인</button></td>
 									</tr>
 									<tr>
-										<td style="font-size: 19px; font-weight: bold;">비밀번호</td>
+										<td style="font-size: 19px; font-weight: bold;"><span style="color: red;">*</span>비밀번호</td>
 										<td><div class="col-xs-3">
 												<input type="password" class="form-control" name="pwd" placeholder="비밀번호 입력">
 											</div></td>

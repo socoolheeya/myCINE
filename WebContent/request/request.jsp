@@ -30,8 +30,9 @@
 						<td><input type="text" name="searchword"></td>
 					</tr>
 					<tr>
-						<td colspan="2" align="right"><button class="btn btn-success" type="reset" onclick="history.back()">취소</button>
-						<button class="btn btn-primary" type="submit">확인</button>
+						<td colspan="2" align="right">
+						<button class="btn btn-warning" type="reset" onclick="history.back()">취소</button>
+						<button class="btn btn-success" type="submit">확인</button>
 						</td>
 						
 					</tr>

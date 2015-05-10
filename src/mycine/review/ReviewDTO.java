@@ -1,6 +1,6 @@
 package mycine.review;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class ReviewDTO {
 	
@@ -124,6 +124,4 @@ public class ReviewDTO {
 	public void setSunbun(int sunbun) {
 		this.sunbun = sunbun;
 	}
-	
-	
 }

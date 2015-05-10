@@ -22,7 +22,7 @@
 <script type="text/javascript">
 	<script type="text/javascript">
 	function searchAddr() {
-		window.open("addrList2.jsp?dong=", "addrList", "width=1500 height=500");
+		window.open("addrList.jsp?dong=", "addrList", "width=1500 height=500");
 	}
 </script>
 </head>
@@ -62,7 +62,7 @@
 				<%
 					} else {
 				%>
-				<jsp:include page="addrList.jsp" />
+				<jsp:include page="addrList2.jsp" />
 				<%
 					}
 				%>

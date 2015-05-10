@@ -9,19 +9,8 @@
 		idx_s = "0";
 	}
 	int idx = Integer.parseInt(idx_s);
-	ReviewDTO redto = reDAO.reviewContent(idx);
-	//두번째 유효성 검사
-	if (redto == null) {
 %>
-<script>
-	window.alert("잘못된 접근입니다.");
-	location.href="reviewList.jsp";
-	</script>
-<%
-	return;
-	}
-	reDAO.getReadnum(idx);
-%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,13 +24,25 @@
 <script src="/myCINE/js/bootstrap.min.js"></script>
 <script>
 function reviewDel(){
-	window.open("reviewDel.jsp?idx=<%=idx%>", "reviewDel",
-				"width=350,height=200;");
+	window.open("reviewDel.jsp?idx=<%=idx%>", "reviewDel", "width=350,height=200,top=150,left=500;");
 	}
 </script>
 </head>
-
 <body>
+	<%
+		ReviewDTO redto = reDAO.reviewContent(idx);
+			//두번째 유효성 검사
+			if (redto == null) {
+	%>
+	<script>
+		window.alert("잘못된 접근입니다.");
+		location.href = "reviewList.jsp";
+	</script>
+	<%
+		return;
+		}
+		reDAO.getReadnum(idx);
+	%>
 	<header>
 		<%@include file="../header.jsp"%>
 	</header>
@@ -61,13 +62,13 @@ function reviewDel(){
 			<table class="table table-bordered">
 				<thead>
 					<tr>
-						<th style="background-color: #ffff66;">작성자</th>
+						<th style="background-color: #ffff99;">작성자</th>
 						<td style="color: #0033ff;"><%=redto.getWriter()%></td>
-						<th style="background-color: #ffff66;">작성날짜</th>
+						<th style="background-color: #ffff99;">작성날짜</th>
 						<td><%=redto.getWritedate()%></td>
-						<th style="background-color: #ffff66;">조회</th>
+						<th style="background-color: #ffff99;">조회</th>
 						<td><%=redto.getReadnum()%></td>
-						<th style="background-color: #ffff66;">추천</th>
+						<th style="background-color: #ffff99;">추천</th>
 						<td><%=redto.getRecommend()%></td>
 					</tr>
 				</thead>
@@ -82,21 +83,20 @@ function reviewDel(){
 								class="glyphicon glyphicon-pencil"></span></a>
 							&nbsp;&nbsp;|&nbsp;&nbsp; <a href="javascript:reviewDel()">삭제하기<span
 								class="glyphicon glyphicon-remove"></span></a>
-							&nbsp;&nbsp;|&nbsp;&nbsp; <a href="reviewRecommend.jsp?">추천하기<span
-								class="glyphicon glyphicon-thumbs-up"></span></a> &nbsp;&nbsp;|
+							&nbsp;&nbsp;
 						</td>
 					</tr>
 				</tfoot>
 				<tbody>
 					<tr>
-						<th style="background-color: #ffff66;">제목</th>
+						<th style="background-color: #ffff99;">제목</th>
 						<td colspan="5" align="left" id="subject"><%=redto.getSubject()%>
 						</td>
-						<th style="background-color: #ffff66;">평점</th>
+						<th style="background-color: #ffff99;">평점</th>
 						<td><%=redto.getGrade()%>점</td>
 					</tr>
 					<tr>
-						<th colspan="8" style="background-color: #ffff66;">내용</th>
+						<th colspan="8" style="background-color: #ffff99;">내용</th>
 					</tr>
 					<tr>
 						<td colspan="8"
@@ -109,6 +109,7 @@ function reviewDel(){
 		<div class="col-sm-2"></div>
 	</div>
 	<%@include file="reviewComment.jsp"%>
+	<%@include file="reviewCommentList.jsp"%>
 	<footer>
 		<%@include file="../footer.jsp"%>
 	</footer>

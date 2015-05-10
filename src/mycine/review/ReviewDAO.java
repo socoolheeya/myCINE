@@ -2,6 +2,7 @@ package mycine.review;
 
 import java.sql.*;
 import java.util.*;
+import java.util.Date;
 
 public class ReviewDAO {
 
@@ -155,7 +156,7 @@ public class ReviewDAO {
 				String writer = rs.getString("writer");
 				String subject = rs.getString("subject");
 				String content = rs.getString("content");
-				java.sql.Date writedate = rs.getDate("writedate");
+				Date writedate = rs.getDate("writedate");
 				int readnum = rs.getInt("readnum");
 				int recommend = rs.getInt("recommend");
 				int grade = rs.getInt("grade");
@@ -202,7 +203,7 @@ public class ReviewDAO {
 				String writer = rs.getString("writer");
 				String subject = rs.getString("subject");
 				String content = rs.getString("content");
-				java.sql.Date writedate = rs.getDate("writedate");
+				Date writedate = rs.getDate("writedate");
 				int readnum = rs.getInt("readnum");
 				int recommend = rs.getInt("recommend");
 				int grade = rs.getInt("grade");
@@ -243,7 +244,7 @@ public class ReviewDAO {
 				String writer = rs.getString("writer");
 				String subject = rs.getString("subject");
 				String content = rs.getString("content");
-				java.sql.Date writedate = rs.getDate("writedate");
+				Date writedate = rs.getDate("writedate");
 				int readnum = rs.getInt("readnum");
 				int recommend = rs.getInt("recommend");
 				int grade = rs.getInt("grade");
@@ -321,28 +322,70 @@ public class ReviewDAO {
 			}
 		}
 	}
+
 	/**
 	 * 추천하기 메서드
+	 * 
 	 * @param idx
 	 * @return
 	 */
-	public int recommend(int idx){
+	public int recommend(int idx) {
 		try {
 			conn = mycine.db.DBInfo.getConn();
 			String sql = "update mycine_board set recommend = recommend + 1 where idx = ?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, idx);
 			int count = ps.executeUpdate();
-			
+
 			return count;
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			return -1;
 		} finally {
-			try { 
+			try {
+				if (ps != null)
+					ps.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public ArrayList<ReviewDTO> showMyReviewContent(String writer) {
+		try {
+			conn = mycine.db.DBInfo.getConn();
+			String sql = "select * from mycine_board where writer = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, writer);
+			rs = ps.executeQuery();
+			ArrayList<ReviewDTO> arr = new ArrayList<ReviewDTO>();
+			while (rs.next()) {
+				int idx = rs.getInt("idx");
+				String subject = rs.getString("subject");
+				String content = rs.getString("content");
+				Date writedate = rs.getDate("writedate");
+				int readnum = rs.getInt("readnum");
+				int recommend = rs.getInt("recommend");
+				int grade = rs.getInt("grade");
+				int ref = rs.getInt("ref");
+				int lev = rs.getInt("lev");
+				int sunbun = rs.getInt("sunbun");
+				ReviewDTO rdto = new ReviewDTO(idx, writer, subject, content, writedate,
+						readnum, recommend, grade, ref, lev, sunbun);
+				arr.add(rdto);
+			}
+			return arr;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			try {
+				if(rs!=null) rs.close();
 				if(ps!=null) ps.close();
 				if(conn!=null) conn.close();
-			}catch(Exception e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}

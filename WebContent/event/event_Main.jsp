@@ -11,7 +11,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="/myCINE/js/bootstrap.min.js"></script>
 <style type="text/css">
-legend{
+legend {
 	font-size: 30px;
 }
 </style>
@@ -30,13 +30,21 @@ legend{
 				<li><a href="event_Myprize.jsp">내가 보유한 상품</a></li>
 			</ul>
 		</div>
-		<div class="col-sm-7" style="border: 1px solid #cccccc; margin: 10px; padding: 10px;">
-			<legend><span class="glyphicon glyphicon-ok"></span>포인트 사용안내</legend>
-			<h2><font color="red">POINT</font> 적립방법</h2>
+		<div class="col-sm-7"
+			style="border: 1px solid #cccccc; margin: 10px; padding: 10px;">
+			<legend>
+				<span class="glyphicon glyphicon-ok"></span>포인트 사용안내
+			</legend>
+			<h2>
+				<font color="red">POINT</font> 적립방법
+			</h2>
 			<ol>
-				<li>로그인 시 <font color="red">10 P</font> 적립</li>
-				<li>리뷰 작성시 <font color="red">10 P</font> 적립</li>
-				<li>댓글 작성시 <font color="red">5 P</font> 적립</li>
+				<li>로그인 시 <font color="red">10 P</font> 적립
+				</li>
+				<li>리뷰 작성시 <font color="red">10 P</font> 적립
+				</li>
+				<li>댓글 작성시 <font color="red">5 P</font> 적립
+				</li>
 			</ol>
 			<p>★ POINT 적립시 다양한 혜택을 드립니다.</p>
 
@@ -49,7 +57,10 @@ legend{
 				<li>1100 P -> 즉석버터구이 SET 교환권</li>
 				<li>2000 P -> 영화관람권2매</li>
 			</ul>
-			<p>★ 사용방법 : <font color="red">'상품 교환'</font>으로 이동 후 원하는 상품을 고르신 뒤 <font color="red">'교환'</font>클릭</p>
+			<p>
+				★ 사용방법 : <font color="red">'상품 교환'</font>으로 이동 후 원하는 상품을 고르신 뒤 <font
+					color="red">'교환'</font>클릭
+			</p>
 		</div>
 	</div>
 	<footer>

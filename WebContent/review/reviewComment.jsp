@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
+<%@ page import="java.util.Date"%>
 <%@ page import="mycine.review.*"%>
 <%@ page import="mycine.reviewComment.*" %>
 <jsp:useBean id="cmtDAO" class="mycine.review.ReviewDAO" scope="session"/>
@@ -32,13 +33,13 @@
 						%>
 
 						<td style="margin: 0px auto;"><input type="text"
-							name="commentID" style="width: 130px;"><input
-							type="hidden" name="idx" value="<%=contentIdx%>"></td>
+							name="commentID" style="width: 130px;"></td>
 						<%
 							} else {
 						%>
 						<th style="margin: 0px auto;"><%=loginedID%><input
-							type="hidden" name="writer_cmt" value="<%=loginedID%>"></th>
+							type="hidden" name="writer_cmt" value="<%=loginedID%>"><input
+							type="hidden" name="idx" value="<%=contentIdx%>"></th>
 						<%
 							}
 						%>
@@ -49,7 +50,7 @@
 				<tbody>		
 					<tr>
 						<td colspan="8" align="right">
-							<button class="btn btn-warning" type="reset">리셋</button>
+							<button class="btn btn-warning" type="reset">다시작성</button>
 							<button class="btn btn-success" type="submit">등록</button>
 						</td>
 					</tr>			

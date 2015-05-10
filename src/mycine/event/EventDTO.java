@@ -8,6 +8,7 @@ public class EventDTO {
 	String use;
 	String e_prize;
 	int rnum;
+	int e_point;
 	
 	public EventDTO() {
 		super();
@@ -58,6 +59,12 @@ public class EventDTO {
 		this.user_prize = user_prize;
 		this.use = use;
 		this.rnum = rnum;
+	}
+	
+
+	public EventDTO(int e_point) {
+		super();
+		this.e_point = e_point;
 	}
 
 	public String getId() {
@@ -114,5 +121,13 @@ public class EventDTO {
 
 	public void setRnum(int rnum) {
 		this.rnum = rnum;
+	}
+
+	public int getE_point() {
+		return e_point;
+	}
+
+	public void setE_point(int e_point) {
+		this.e_point = e_point;
 	}	
 }

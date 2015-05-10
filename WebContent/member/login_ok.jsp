@@ -10,7 +10,7 @@
 	int loginCount = 0; //로그인 횟수 체크 카운트
 
 	if(result==memberDAO.LOGIN_OK){
-		String dbName=memberDAO.getUserInfo(userid);
+		String dbName=memberDAO.getUserName(userid);
 		memberDAO.getLoginPoint(userid); //로그인하면 10포인트 주기
 		session.setAttribute("id",userid);
 		session.setAttribute("sname", dbName);

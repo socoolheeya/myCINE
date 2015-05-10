@@ -16,7 +16,9 @@
 		<!-- Wrapper for slides -->
 		<div class="carousel-inner" role="listbox">
 			<div class="item active">
-				<img src="/myCINE/image/킹스맨.jpg" alt="킹스맨" width="700" height="345">
+				<a
+					href="http://localhost:9090/myCINE/review/reviewContent.jsp?idx=386"><img
+					src="/myCINE/image/킹스맨.jpg" alt="킹스맨" width="700" height="345"></a>
 			</div>
 			<div class="item">
 				<a
@@ -24,8 +26,9 @@
 					src="/myCINE/image/차이나타운.jpg" alt="차이나타운" width="460" height="345"></a>
 			</div>
 			<div class="item">
-				<img src="/myCINE/image/위험한상견례.jpg" alt="위험한상견례" width="460"
-					height="345">
+				<a
+					href="http://localhost:9090/myCINE/review/reviewContent.jsp?idx=382"><img
+					src="/myCINE/image/테이큰.jpg" alt="테이큰" width="460" height="345"></a>
 			</div>
 			<div class="item">
 				<img src="/myCINE/image/티파니에서아침을.jpg" alt="티파니에서아침을" width="460"

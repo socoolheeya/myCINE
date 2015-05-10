@@ -4,15 +4,16 @@
 <jsp:useBean id="cDAO" class="mycine.reviewComment.ReviewCommentDAO"/>
 <jsp:setProperty property="*" name="cDTO"/>
 <%
-	int idx = Integer.parseInt(request.getParameter("idx")); 
-	String commentID = request.getParameter("commentID");
-	String comment = request.getParameter("comment");
+	String idx_s = request.getParameter("idx");
+	int idx = Integer.parseInt(idx_s);
+	String commentID = request.getParameter("writer_cmt");
+	String comment = request.getParameter("content_cmt");
 
 	int result = cDAO.insertComment(idx, commentID, comment);
 	if( result > 0) {
 		%>
 		<script>
-		location.href="reviewCommentList.jsp";
+		location.href="reviewContent.jsp?idx=<%=idx_s%>";
 		</script>
 		<%
 		

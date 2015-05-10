@@ -48,7 +48,7 @@ legend {
 	if (id_s == null || id_s.equals("")) {
 		id_s = "0";
 	}
-	EventDTO dto1 = eDAO.eventMypoint(id_s);
+	EventDTO dto1 = eDAO.event_MyPoint(id_s);
 	if (dto1 == null) {
 %>
 <script>
@@ -135,7 +135,7 @@ legend {
 				</tfoot>
 				<tbody>
 					<%
-						ArrayList<EventDTO> arr = eDAO.prizeList(id_s, cp, listSize);
+						ArrayList<EventDTO> arr = eDAO.event_MyPrizeList(id_s, cp, listSize);
 
 						if (arr == null || arr.size() == 0) {
 					%>
@@ -173,7 +173,7 @@ legend {
 					</tr>
 					<%
 						}
-						}
+					}
 					%>
 				</tbody>
 			</table>

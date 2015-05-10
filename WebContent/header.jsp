@@ -1,5 +1,9 @@
+<%@page import="mycine.member.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<jsp:useBean id="mmDTO" class="mycine.member.MemberDTO"/>
+<jsp:useBean id="mmDAO" class="mycine.member.MemberDAO"/>
+<jsp:setProperty property="*" name="mmDTO"/>
 <script>
 	function login() {
 		window.open("/myCINE/member/login.jsp", "login",
@@ -17,7 +21,12 @@
 				<li><a href="/myCINE/company/companyMain.jsp">회사소개</a></li>
 				<li><a href="/myCINE/review/reviewList.jsp">영화리뷰</a></li>
 				<li><a href="/myCINE/request/requestList.jsp">영화요청</a></li>
-				<li><a href="/myCINE/qna/QnAList.jsp">QnA</a></li>
+				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="/myCINE/qna/QnAList.jsp">QnA<span class="caret"></span></a>
+					 <ul class="dropdown-menu">
+					 <li><a href="/myCINE/qna/FAQ.jsp">자주하는 질문(FAQ)</a></li>
+					 <li><a href="/myCINE/qna/QnAList.jsp">질문하기</a></li>
+					 </ul>
+				</li>
 				<li><a href="/myCINE/event/event_Main.jsp">이벤트</a></li>
 			</ul>
 			</div>
@@ -42,7 +51,9 @@
 				</ul>
 			</div>
 			<%
+				
 				String id = (String) session.getAttribute("id");
+				MemberDTO mm = mmDAO.getUserInfo(id);	
 				if (id == null || id.equals("")) {
 			%>
 			<div class="pull-right">
@@ -61,7 +72,7 @@
 			%>
 			<div class="pull-right">
 				<ul class="nav navbar-nav">
-					<li><a href="/myCINE/member/memberInfo.jsp" id="logining"><%=id %>님 로그인중</a></li>
+					<li><a href="/myCINE/member/memberInfo.jsp" id="logining" data-toggle="tooltip" title="<%=mm.getPoint()%>P 보유중!"><%=id %>님 로그인중</a></li>
 					<li><a href="/myCINE/member/logout.jsp"><span
 							class="glyphicon glyphicon-off" data-toggle="tooltip"
 							title="로그아웃"></span></a></li>

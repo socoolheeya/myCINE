@@ -1,59 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.Date"%>
-<%@ page import="java.util.*"%>
-<%@ page import="mycine.review.*"%>
-<jsp:useBean id="reDAO" class="mycine.review.ReviewDAO" scope="session" />
+<%@page import="mycine.review.ReviewDTO"%>
+<%@page import="java.util.ArrayList"%>
+<jsp:useBean id="rDTO" class="mycine.review.ReviewDTO" />
+<jsp:useBean id="rDAO" class="mycine.review.ReviewDAO" />
+<jsp:setProperty property="*" name="rDTO" />
 <%
-	int totalCnt=reDAO.getTotalCnt();//총 게시물 수
-int listSize=15;//보여줄 리스트 수
-int pageSize=10;//보여줄 페이지 수
+	int totalCnt = rDAO.getTotalCnt();//총 게시물 수
+	int listSize = 15;//보여줄 리스트 수
+	int pageSize = 10;//보여줄 페이지 수
 
-String cp_s=request.getParameter("cp");
-if(cp_s==null||cp_s.equals("")){
-	cp_s="1";
-}
+	String cp_s = request.getParameter("cp");
+	if (cp_s == null || cp_s.equals("")) {
+		cp_s = "1";
+	}
 
-int cp=Integer.parseInt(cp_s);
+	int cp = Integer.parseInt(cp_s);
 
-int pageCnt=(totalCnt/listSize)+1;//게시물 그룹의 갯수
-if(totalCnt%listSize==0)pageCnt--;
+	int pageCnt = (totalCnt / listSize) + 1;//게시물 그룹의 갯수
+	if (totalCnt % listSize == 0)
+		pageCnt--;
 
-int groupNumber=cp/pageSize;//게시물 그룹의 그룹의 갯수
-if(cp%pageSize==0)groupNumber--;
+	int groupNumber = cp / pageSize;//게시물 그룹의 그룹의 갯수
+	if (cp % pageSize == 0)
+		groupNumber--;
 
-String fkey=request.getParameter("fkey");
-String fvalue=request.getParameter("fvalue");
+	String fkey = request.getParameter("fkey");
+	String fvalue = request.getParameter("fvalue");
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>리뷰 게시판</title>
+<title>내가 쓴 리뷰 목록</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/myCINE/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="yozm_common.css" />
-<link rel="stylesheet" type="text/css" href="yozm_top.css" />
-<link rel="stylesheet" href="/myCINE/css/daum.css">
-<script>
-	function reviewFind() {
-		document.reviewSearchForm.action = "reviewFind.jsp";
-		document.reviewSearchForm.submit();
-	}
-	function showMyContent() {
-		location.href="reviewFindMyContent.jsp";
-	}
-</script>
-<style type="text/css">
-#searchForm {
-	padding: 10px;
-	text-align: right;
-}
-</style>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="/myCINE/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<%
-		ArrayList<ReviewDTO> arr = reDAO.reviewList(cp, listSize);
+		String loginID = (String) session.getAttribute("id");
+		ArrayList<ReviewDTO> arr = rDAO.showMyReviewContent(loginID);
 	%>
 	<header>
 		<%@include file="../header.jsp"%>
@@ -62,8 +51,8 @@ String fvalue=request.getParameter("fvalue");
 		<div class="col-sm-2"></div>
 		<div class="col-sm-8">
 			<div class="container">
-				<h2>리뷰 게시판</h2>
-				<p style="font-size: 15px; color: gray;">여기는 영화를 요청하는 게시판입니다</p>
+				<h2>내글 목록</h2>
+				<p style="font-size: 15px; color: gray;">내가 쓴 리뷰 리스트입니다.</p>
 			</div>
 		</div>
 		<div class="col-sm-2"></div>
@@ -72,19 +61,10 @@ String fvalue=request.getParameter("fvalue");
 	<div class="row">
 		<div class="col-sm-2"></div>
 		<div class="col-sm-8">
-				<form name="reviewSearchForm" id="searchForm">
-					<select name="fkey">
-						<option value="writer">작성자</option>
-						<option value="subject">제목</option>
-						<option value="content">내용</option>
-					</select>
-					<input type="text" name="fvalue">
-					<button class="btn btn-info" type="submit" onclick="javascript:reviewFind()"><span class="glyphicon glyphicon-search"></span>검색</button>
-				</form>
 			<%
 				if (request.getMethod().equals("GET")) {
 			%>
-			<form name="reviewlist" action="reviewWrite.jsp">
+			<form name="myReviewListForm" action="reviewWrite.jsp">
 				<table class="table table-hover">
 					<thead>
 						<tr style="background-color: #ffcc00;">
@@ -122,8 +102,10 @@ String fvalue=request.getParameter("fvalue");
 							</td>
 
 							<td colspan="4" align="right">
-								<button class="btn btn-danger" type="button" onclick="history.back()">뒤로가기</button>
-								<button class="btn btn-warning" type="button" onclick="showMyContent()">내글보기</button>
+								<button class="btn btn-danger" type="button"
+									onclick="history.back()">뒤로가기</button>
+								<button class="btn btn-warning" type="button"
+									onclick="showMyContent()">내글보기</button>
 								<button class="btn btn-success" type="submit">글쓰기</button>
 							</td>
 						</tr>
@@ -161,24 +143,17 @@ String fvalue=request.getParameter("fvalue");
 						</tr>
 						<%
 							}
-								}
+						}
+					}
 						%>
 					</tbody>
 				</table>
 			</form>
-			<%
-				} else {
-			%>
-			<jsp:include page="reviewFind.jsp" />
-			<%
-				}
-			%>
-
 		</div>
 		<div class="col-sm-2"></div>
 	</div>
-	<header>
+	<footer>
 		<%@include file="../footer.jsp"%>
-	</header>
+	</footer>
 </body>
 </html>
