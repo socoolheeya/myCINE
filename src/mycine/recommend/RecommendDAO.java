@@ -3,6 +3,7 @@ package mycine.recommend;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class RecommendDAO {
 	
@@ -123,5 +124,36 @@ public class RecommendDAO {
 				e.printStackTrace();
 			}
 		}
+	}
+	/**
+	 * 추천 테이블의 모든 아이디 가져오는 메서드
+	 * @return
+	 */
+	public ArrayList<String> getRecommendGuestID(int idx) {
+		try {
+			conn = mycine.db.DBInfo.getConn();
+			String sql = "select id from mycine_recommend2 where idx=?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, idx);
+			rs = ps.executeQuery();
+			ArrayList<String> arr = new ArrayList<String>();
+			while(rs.next()) {
+				String id = rs.getString("id");
+				arr.add(id);
+				
+			}
+			return arr;
+		} catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				if(conn!=null) conn.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}	
 	}
 }

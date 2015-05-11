@@ -42,12 +42,6 @@
 		location.href = "request.jsp";
 	}
 </script>
-<style>
-.carousel-inner>.item>img, .carousel-inner>.item>a>img {
-	width: 70%;
-	margin: auto;
-}
-</style>
 </head>
 <body>
 	<%
@@ -117,7 +111,7 @@
 						</tr>
 						<%
 							}
-							}
+						}
 						%>
 						<tr>
 							<td  colspan="4" align="center">

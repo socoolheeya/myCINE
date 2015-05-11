@@ -53,7 +53,7 @@ public class ReviewDAO {
 				if (rs != null)
 					rs.close();
 				if (ps != null)
-					rs.close();
+					ps.close();
 			} catch (Exception e) {
 			}
 		}

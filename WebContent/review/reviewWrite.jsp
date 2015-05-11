@@ -12,9 +12,10 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="/myCINE/js/bootstrap.min.js"></script>
 </head>
-
-
 <body>
+<%
+	String loginID = (String)session.getAttribute("id");
+%>
 	<header>
 		<%@include file="../header.jsp"%>
 	</header>
@@ -35,32 +36,45 @@
 						<tr>
 							<th style="background-color: #ffcc00;">작성자</th>
 							<td>
-								<input type="text" name="writer">
+							<%
+								if(loginID == null || loginID.equals("")) {
+									%>
+									<input type="text" name="writer">
+									<%
+								} else {
+									%>
+									<%=loginID %>
+									<%
+								}
+							%>
 							</td>
-							<td colspan="2"></td>
+
 						</tr>
 						<tr>
 							<th style="background-color: #ffcc00;">제목</th>
-							<td colspan="3">
+							<td>
 								<input type="text" name="subject" style="width: 680px;">
 							</td>
 						</tr>
 					</thead>
 					<tfoot>
 						<tr>
-							<th colspan="3" style="text-align: right;">평점</th>
-							<td colspan="1" class="rating" align="right">
-								<input type="radio" id="star5" name="grade" value="5" /><label for="star5" title="슈퍼울트라캡짱!">5 stars</label> 
-								<input type="radio" id="star4" name="grade" value="4" /><label for="star4" title="좀 괜찮은데?!">4 stars</label> 
-								<input type="radio" id="star3" name="grade" value="3" /><label for="star3" title="보통이에요!">stars</label> 
-								<input type="radio" id="star2" name="grade" value="2" /><label	for="star2" title="그럭저럭!">2 stars</label> 
-								<input type="radio" id="star1" name="grade" value="1" /><label for="star1" title="최악이야!">1 star</label>
+							<th style="text-align: center;">평점</th>
+							<td>
+								<div class="rating" align="right">
+									<input type="radio" id="star5" name="grade" value="5" /><label for="star5" title="슈퍼울트라캡짱!">5 stars</label> 
+									<input type="radio" id="star4" name="grade" value="4" /><label for="star4" title="좀 괜찮은데?!">4 stars</label> 
+									<input type="radio" id="star3" name="grade" value="3" /><label for="star3" title="보통이에요!">stars</label> 
+									<input type="radio" id="star2" name="grade" value="2" /><label	for="star2" title="그럭저럭!">2 stars</label> 
+									<input type="radio" id="star1" name="grade" value="1" /><label for="star1" title="최악이야!">1 star</label>
+								</div>			
 							</td>
 						</tr>
 						<tr>
-							<td colspan="4" align="right">
-								<button class="btn btn-warning" type="reset">다시쓰기</button> 
-								<button class="btn btn-success" type="submit">작성완료</button>
+							<td colspan="2" align="right">
+								<button class="btn btn-warning" type="reset" onclick="history.back()">뒤로가기</button>
+								<button class="btn btn-success" type="reset">다시쓰기</button> 
+								<button class="btn btn-primary" type="submit">작성완료</button>
 							</td>
 						</tr>
 					</tfoot>

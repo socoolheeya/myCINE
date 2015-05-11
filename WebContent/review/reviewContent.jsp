@@ -30,9 +30,10 @@ function reviewDel(){
 </head>
 <body>
 	<%
-		ReviewDTO redto = reDAO.reviewContent(idx);
-			//두번째 유효성 검사
-			if (redto == null) {
+		String loginID = (String)session.getAttribute("id");
+			ReviewDTO redto = reDAO.reviewContent(idx);
+		//두번째 유효성 검사
+		if (redto == null) {
 	%>
 	<script>
 		window.alert("잘못된 접근입니다.");
@@ -75,15 +76,23 @@ function reviewDel(){
 				<tfoot>
 					<tr>
 						<td colspan="8" align="right">|&nbsp;&nbsp; <a
-							href="reviewList.jsp">목록으로<span
+							href="javascript:history.back()">뒤로가기<span
+								class="glyphicon glyphicon-chevron-left"></span></a>
+							&nbsp;&nbsp;|&nbsp;&nbsp; <a href="reviewList.jsp">목록으로<span
 								class="glyphicon glyphicon-th-list"></span></a>
-							&nbsp;&nbsp;|&nbsp;&nbsp; <a
-							href="reviewUpdateWrite.jsp?idx=<%=redto.getIdx()%>&writer=<%=redto.getWriter()%>&pwd=<%=redto.getWritedate()%>&subject=<%=redto.getSubject()%>
+							&nbsp;&nbsp;|&nbsp;&nbsp; 
+							<%
+ 							if (loginID != null && !loginID.equals("") && loginID.equals(redto.getWriter()) ) {
+ 							%> 
+ 							<a href="reviewUpdateWrite.jsp?idx=<%=redto.getIdx()%>&writer=<%=redto.getWriter()%>&pwd=<%=redto.getWritedate()%>&subject=<%=redto.getSubject()%>
 				&content=<%=redto.getContent()%>&grade=<%=redto.getGrade()%>">수정하기<span
 								class="glyphicon glyphicon-pencil"></span></a>
 							&nbsp;&nbsp;|&nbsp;&nbsp; <a href="javascript:reviewDel()">삭제하기<span
-								class="glyphicon glyphicon-remove"></span></a>
-							&nbsp;&nbsp;
+								class="glyphicon glyphicon-remove"></span></a> &nbsp;&nbsp; 
+							<%
+ 							}
+ 							%>
+
 						</td>
 					</tr>
 				</tfoot>

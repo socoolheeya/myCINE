@@ -309,12 +309,12 @@ public class EventDAO {
 			return -1;
 		} finally {
 			try {
-
+				if(ps!=null) ps.close();
+				if(conn!=null) conn.close();
 			} catch (Exception e2) {
-				// TODO: handle exception
+				e2.printStackTrace();
 			}
 		}
 
 	}
-
 }

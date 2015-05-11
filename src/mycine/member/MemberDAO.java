@@ -131,30 +131,6 @@ public class MemberDAO {
 		}
 	}
 
-	public int getjoinChange(MemberDTO memberDTO) {
-		try {
-			conn = mycine.db.DBInfo.getConn();
-			String sql = "select * from mycine_member where id=?";
-			ps = conn.prepareStatement(sql);
-			ps.setString(1, memberDTO.getId());
-
-			int count = ps.executeUpdate();
-			return count;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return -1;
-		} finally {
-			try {
-				if (ps != null)
-					ps.close();
-				if (conn != null)
-					conn.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
 	/**
 	 * 이름 가져오기 메서드
 	 * 
@@ -219,6 +195,14 @@ public class MemberDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				if(conn!=null) conn.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -251,6 +235,28 @@ public class MemberDAO {
 			}
 		}
 	}
+	
+	public int addReviewPoint(String id){
+		try {
+			conn = mycine.db.DBInfo.getConn();
+			String sql = "update mycine_member set point = point + 10 where id=?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, id);
+			int count = ps.executeUpdate();
+			
+			return count;
+		} catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		} finally {
+			try {
+				if(ps!=null) ps.close();
+				if(conn!=null) conn.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
 	/**
 	 * 회원정보 수정 메서드
@@ -276,6 +282,44 @@ public class MemberDAO {
 			ps.setInt(12, dto.getZipcode1());
 			ps.setInt(13, dto.getZipcode2());
 			ps.setString(14, id);
+			ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e2) {
+			}
+		}
+	}
+	
+	/**
+	 * 회원정보 수정 메서드
+	 * 
+	 * @param dto
+	 */
+	public void updateMember(MemberDTO dto) {
+		try {
+			conn = mycine.db.DBInfo.getConn();
+			String sql = "update mycine_member set pwd=?, addr1=?, addr2=?, email1=?, email2=?, tel1=?, tel2=?,tel3=?, birthday1=?, birthday2=?, birthday3=?, zipcode1=?, zipcode2=? where id=?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, dto.getPwd());
+			ps.setString(2, dto.getAddr1());
+			ps.setString(3, dto.getAddr2());
+			ps.setString(4, dto.getEmail1());
+			ps.setString(5, dto.getEmail2());
+			ps.setInt(6, dto.getTel1());
+			ps.setInt(7, dto.getTel2());
+			ps.setInt(8, dto.getTel3());
+			ps.setInt(9, dto.getBirthday1());
+			ps.setInt(10, dto.getBirthday2());
+			ps.setInt(11, dto.getBirthday3());
+			ps.setInt(12, dto.getZipcode1());
+			ps.setInt(13, dto.getZipcode2());
+			ps.setString(14, dto.getId());
 			ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

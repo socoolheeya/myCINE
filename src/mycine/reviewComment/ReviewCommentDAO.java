@@ -219,7 +219,11 @@ public class ReviewCommentDAO {
 			}
 		}
 	}
-
+	/**
+	 * 댓글 리스트 가져오기 메서드
+	 * @param idx
+	 * @return
+	 */
 	public ArrayList<ReviewCommentDTO> getComment(int idx) {
 		try {
 			conn = mycine.db.DBInfo.getConn();
@@ -253,6 +257,36 @@ public class ReviewCommentDAO {
 				if(ps!=null) ps.close();
 				if(conn!=null) conn.close();
 			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	/**
+	 * 댓글 숫자를 가져오는 메서드
+	 * @param idx
+	 * @return
+	 */
+	public int getCommentCount(int idx) {
+		try {
+			conn = mycine.db.DBInfo.getConn();
+			String sql = "select count(idxcmt) from mycine_board_comment where idx =?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, idx);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				return rs.getInt(1);
+			} else {
+				return 0;
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		} finally {
+			try { 
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				if(conn!=null) conn.close();
+			} catch(Exception e) {
 				e.printStackTrace();
 			}
 		}

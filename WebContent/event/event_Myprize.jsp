@@ -11,15 +11,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/myCINE/css/bootstrap.min.css">
 <title>내 이벤트 페이지</title>
-<style>
-a {
-	text-decoration: none;
-}
-
-legend {
-	font-size: 30px;
-}
-</style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="/myCINE/js/bootstrap.min.js"></script>
@@ -38,6 +29,14 @@ legend {
 		if (de) {
 			location.href = "event_Deprize.jsp?idx=" + idx + "&use=" + use;
 		} else {
+			window.alert("취소되었습니다.");
+		}
+	}
+	function reshow(idx,use,user_prize){
+		var ex=window.confirm("교환권 구매를 취소하시겠습니까?");
+		if(ex){
+			location.href="event_Reprize.jsp?idx="+idx+"&use="+use+"&user_prize="+user_prize;
+		}else{
 			window.alert("취소되었습니다.");
 		}
 	}
@@ -105,12 +104,11 @@ legend {
 						<th style="text-align: center;">상품명</th>
 						<th style="text-align: center;">사용여부</th>
 						<th>&nbsp;</th>
-						<th>&nbsp;</th>
 					</tr>
 				</thead>
 				<tfoot>
 					<tr align="center">
-						<td colspan="5">
+						<td colspan="4">
 							<%
 								if (groupNumber != 0) {
 							%> <a
@@ -162,11 +160,12 @@ legend {
 						<td align="center"><%=arr.get(i).getRnum()%></td>
 						<td><%=arr.get(i).getUser_prize()%></td>
 						<td align="center"><%=arr.get(i).getUse()%></td>
-						<td colspan="2" align="center">
-							<button type="button" class="btn btn-primary btn-sm"
-								onclick="exshow('<%=arr.get(i).getIdx()%>','<%=arr.get(i).getUse()%>')">증정</button>
-							<button type="button" class="btn btn-danger btn-sm"
-								onclick="deshow('<%=arr.get(i).getIdx()%>','<%=arr.get(i).getUse()%>')">삭제</button>
+						<td align="center">
+							<div class="btn-group">
+								<button type="button" class="btn btn-warning"  onclick="exshow('<%=arr.get(i).getIdx() %>','<%=arr.get(i).getUse()%>')">증정</button>
+								<button type="button" class="btn btn-success"  onclick="reshow('<%=arr.get(i).getIdx() %>','<%=arr.get(i).getUse()%>','<%=arr.get(i).getUser_prize()%>')">취소</button>
+								<button type="button" class="btn btn-primary"  onclick="deshow('<%=arr.get(i).getIdx() %>','<%=arr.get(i).getUse()%>')">삭제</button>
+							</div>
 						</td>
 
 

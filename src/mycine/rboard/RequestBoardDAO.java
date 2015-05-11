@@ -121,6 +121,13 @@ public class RequestBoardDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return -1;
+		} finally {
+			try {
+				if(ps!=null) ps.close();
+				if(conn!=null) conn.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

@@ -26,7 +26,7 @@
 			</div>
 			<div class="col-sm-8">
 			<br><br>
-	<img src="/myCINE/image/지원절차.jpg" alt="지원절차" width="806" height="766" >
+	<img src="/myCINE/image/지원절차2.jpg" alt="지원절차" width="806" height="766" >
 	<hr>
 
 		</div>

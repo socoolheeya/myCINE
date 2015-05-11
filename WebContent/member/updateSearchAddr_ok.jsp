@@ -18,9 +18,9 @@
 		String addr = request.getParameter("addr");
 	%>
 	<script>
-		opener.document.join.addr1.value = "<%=addr%>";
-		opener.document.join.zipcode1.value = "<%=zipcode1%>";
-		opener.document.join.zipcode2.value = "<%=zipcode2%>";
+		opener.document.memberInfo.addr1.value = "<%=addr%>";
+		opener.document.memberInfo.zipcode1.value = "<%=zipcode1%>";
+		opener.document.memberInfo.zipcode2.value = "<%=zipcode2%>";
 		self.close();
 	</script>
 </body>
