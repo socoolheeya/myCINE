@@ -58,9 +58,14 @@ String fvalue=request.getParameter("fvalue");
 	font-size: 12px;
 }
 #ab {
-	font-size: 15px;
+	font-size: 12px;
+	text-align: center;
 }
 #buttonG {
+}
+#title {
+	background-color: #ffcc00;
+	
 }
 </style>
 </head>
@@ -102,7 +107,7 @@ String fvalue=request.getParameter("fvalue");
 			<form name="reviewlist" action="reviewWrite.jsp">
 				<table class="table table-hover">
 					<thead>
-						<tr style="background-color: #ffcc00;">
+						<tr id="title">
 							<th id="ab">번호</th>
 							<th id="ab">제목</th>
 							<th id="ab">작성자</th>

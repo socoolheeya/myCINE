@@ -29,11 +29,12 @@
 				<thead>
 					<tr>
 						<%
-							if (loginedID == null) {
+							if (loginedID == null || loginedID.equals("")) {
 						%>
 
 						<td style="margin: 0px auto;"><input type="text"
-							name="commentID" style="width: 130px;"></td>
+							name="writer_cmt" style="width: 130px;"><input
+							type="hidden" name="idx" value="<%=contentIdx%>"></td>
 						<%
 							} else {
 						%>

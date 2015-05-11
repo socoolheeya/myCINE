@@ -330,6 +330,7 @@ public class MemberDAO {
 				if (conn != null)
 					conn.close();
 			} catch (Exception e2) {
+				e2.printStackTrace();
 			}
 		}
 	}

@@ -31,12 +31,14 @@
 					src="/myCINE/image/테이큰.jpg" alt="테이큰" width="460" height="345"></a>
 			</div>
 			<div class="item">
+			<a href="http://localhost:9090/myCINE/review/reviewContent.jsp?idx=400">
 				<img src="/myCINE/image/티파니에서아침을.jpg" alt="티파니에서아침을" width="460"
-					height="345">
+					height="345"></a>
 			</div>
 			<div class="item">
+			<a href="http://localhost:9090/myCINE/review/reviewContent.jsp?idx=379">
 				<img src="/myCINE/image/로마의휴일.jpg" alt="로마의휴일" width="460"
-					height="345">
+					height="345"></a>
 			</div>
 		</div>
 
