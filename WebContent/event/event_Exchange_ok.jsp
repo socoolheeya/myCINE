@@ -4,6 +4,7 @@
 <%@ page import="java.util.*"%>
 <%@page import="mycine.event.*"%>
 <jsp:useBean id="eDAO" class="mycine.event.EventDAO" scope="session" />
+<jsp:useBean id="tDAO" class="mycine.timeline.TimeLineDAO" scope="session" />
 
 <%
 	String id = (String) session.getAttribute("id");
@@ -52,6 +53,7 @@
 		int count2 = eDAO.event_AddMyPrize(id, prize);
 
 		if (count1 > 0 && count2 > 0) {
+			tDAO.addUsePointEvent(usepoint, prize, id);
 %>
 <script>
    var ok=window.confirm(<%=usepoint%>+"p를 사용하여 <%=prize%>(으)로 교환되었습니다.\n보관함으로 이동하시겠습니까?");

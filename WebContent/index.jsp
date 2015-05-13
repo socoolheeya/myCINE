@@ -51,7 +51,7 @@ if(cks != null || cks.length != 0) {
 	<div class="row">
 		<%@ include file="center.jsp"%>
 		<%
-		if(login != null) {
+		if(login != null && login.equals("") == false) {
 			%>
 			<%@ include file="timeLine.jsp"%>
 			<%

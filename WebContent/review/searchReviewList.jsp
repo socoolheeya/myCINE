@@ -66,15 +66,14 @@ String fvalue=request.getParameter("fvalue");
 					</thead>
 					<tfoot>
 						<tr>
-							<td colspan="6" align="right" style="text-align: right;"><button
-									class="btn btn-primary" type="button" onclick="">내글보기</button>
+							<td colspan="6" align="right" style="text-align: right;">
 								<button class="btn btn-success" type="button" onclick="main()">메인화면</button></td>
 						</tr>
 					</tfoot>
 					<tbody>
 						<%
 							String requestSubject = request.getParameter("searchKeyword");
-							ArrayList<ReviewDTO> arr = reDAO.reviewList(cp, listSize);
+							ArrayList<ReviewDTO> arr = reDAO.reviewList(cp, listSize);						
 							if (arr == null || arr.size() == 0) {
 						%>
 						<tr>

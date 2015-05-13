@@ -30,6 +30,7 @@ public class ReviewDAO {
 				if (conn != null)
 					conn.close();
 			} catch (Exception e2) {
+				e2.printStackTrace();
 			}
 		}
 	}
@@ -55,6 +56,7 @@ public class ReviewDAO {
 				if (ps != null)
 					ps.close();
 			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 	}
@@ -80,9 +82,9 @@ public class ReviewDAO {
 			try {
 				if (ps != null)
 					ps.close();
-				if (conn != null)
-					conn.close();
+				if(conn!=null) conn.close();
 			} catch (Exception e2) {
+				e2.printStackTrace();
 			}
 		}
 	}
@@ -109,6 +111,7 @@ public class ReviewDAO {
 				if (conn != null)
 					conn.close();
 			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 	}

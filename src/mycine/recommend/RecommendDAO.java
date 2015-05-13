@@ -46,18 +46,19 @@ public class RecommendDAO {
 	 * @param idx
 	 * @return
 	 */
-	public String getRecommendID(int idx){
+	public ArrayList<String> getRecommendID(int idx){
 		try {
 			conn = mycine.db.DBInfo.getConn();
 			String sql ="select id from mycine_recommend where idx=?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, idx);
 			rs = ps.executeQuery();
-			String id = null;
+			ArrayList<String> ids = new ArrayList<String>();
 			while (rs.next()) {
-				id  = rs.getString("id");
+				String id  = rs.getString("id");
+				ids.add(id);
 			}
-			return id;
+			return ids;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -99,19 +100,24 @@ public class RecommendDAO {
 			}
 		}
 	}
-	
-	public String getRecommendID2(int idx){
+	/**
+	 * 추천버튼을 누른 아이디의 목록 가져오기
+	 * @param idx
+	 * @return
+	 */
+	public ArrayList<String> getRecommendID2(int idx){
 		try {
 			conn = mycine.db.DBInfo.getConn();
 			String sql ="select id from mycine_recommend2 where idx=?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, idx);
 			rs = ps.executeQuery();
-			String id = null;
+			ArrayList<String> arr = new ArrayList<String>();
 			while (rs.next()) {
-				id  = rs.getString("id");
+				String id  = rs.getString("id");
+				arr.add(id);
 			}
-			return id;
+			return arr;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

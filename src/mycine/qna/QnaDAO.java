@@ -111,8 +111,6 @@ public class QnaDAO {
 			try {
 				if (ps != null)
 					ps.close();
-				if (rs != null)
-					rs.close();
 				if (conn != null)
 					conn.close();
 			} catch (Exception e) {

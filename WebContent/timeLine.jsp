@@ -1,6 +1,8 @@
+<%@page import="mycine.timeline.TimeLineDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
+<%@ page import="java.util.Date"%>
 <%@page import="mycine.rboard.RequestBoardDTO"%>
 <jsp:useBean id="tDTO" class="mycine.timeline.TimeLineDTO" />
 <jsp:useBean id="tDAO" class="mycine.timeline.TimeLineDAO" />
@@ -8,17 +10,7 @@
 <jsp:useBean id="rDAO" class="mycine.rboard.RequestBoardDAO" />
 <jsp:useBean id="rDTO" class="mycine.rboard.RequestBoardDTO" />
 <jsp:setProperty property="*" name="rDTO" />
-<%
-String logined = null;
-ArrayList<RequestBoardDTO> arr = null;
-if(session.getAttribute("id") == null || session.getAttribute("id").equals("")) {
-	
-} else {
-	logined = (String)session.getAttribute("id");	
-	arr = rDAO.getRequestEvent(logined);
-}
 
-%>
 <div class="col-sm-4">
 	<form name="timeLineForm">
 		<div class="responsive">
@@ -28,18 +20,30 @@ if(session.getAttribute("id") == null || session.getAttribute("id").equals("")) 
 						<th>여기는 타임라인</th>
 					</tr>
 				</thead>
-				<tbody style="overflow: scroll; height: 500px; width: 100%; position: absolute;">
-				<%	
-					for(int i = 0; i < arr.size(); i++) {
-			
-							%>
-							<tr>
-								<td><%=logined%>님께서 <%=arr.get(i).getMovieName() %> 영화를 요청하였습니다. 
-								<span style="font-size: 10px; color: gray;"><%=arr.get(i).getWriteDate() %></span></td>	
-							</tr>
-							<%
-					}			
-				%>
+				<tbody
+					style="overflow: scroll; height: 500px; width: 100%; position: absolute;">
+					<%
+						String logined = (String) session.getAttribute("id");
+						ArrayList<TimeLineDTO> timeArr = tDAO.getTimeLineEvent(logined);
+						ArrayList<RequestBoardDTO> arr = rDAO.getRequestEvent(logined);
+
+						for (int i = 0; i < arr.size(); i++) {
+					%>
+					<tr>
+						<td><%=logined%>님께서 <%=arr.get(i).getMovieName()%> 영화를
+							요청하였습니다. <span style="font-size: 10px; color: gray;"><%=arr.get(i).getWriteDate()%></span></td>
+					</tr>
+					<%
+						}
+						for(int i = 0; i < timeArr.size(); i++) {
+					%>
+					<tr>
+						<td><%=logined%><span><%=timeArr.get(i).getSubject()%></span>
+						<span style="font-size: 10px; color: gray;"><%=timeArr.get(i).getDateTime()%></span></td>
+					</tr>
+					<%
+						}
+					%>
 				</tbody>
 			</table>
 		</div>

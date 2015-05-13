@@ -39,7 +39,7 @@
 					<table>
 						<tr>
 							<td style="font-size: 20px; font-weight: bold; padding-right: 10px;">주소검색</td>
-							<td><span class="col-sm-3"><input
+							<td><span class="col-sm-13"><input
 									class="form-control" type="text" name="dong"
 									placeholder="동(dong)을 입력하세요 "></span></td>
 							<td>

@@ -84,7 +84,7 @@ public class ReviewCommentDAO {
 				if (rs != null)
 					rs.close();
 				if (ps != null)
-					rs.close();
+					ps.close();
 			} catch (Exception e) {
 			}
 		}

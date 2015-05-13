@@ -40,56 +40,96 @@ public class TimeLineDAO {
 			}
 		}
 	}
-	
-	public Date getJoinEvent(String id){
+	/**
+	 * 회원가입 축하 이벤트 가져오는 메서드
+	 * @param id
+	 * @return
+	 */
+	public TimeLineDTO getJoinEvent(String id){
 		try{
 			conn = mycine.db.DBInfo.getConn();
-			String sql = "select to_char(sysdate, 'yyyy-mm-dd-hh24:mi:ss')"
-					+ " from mycine_timeline where userid=?";
+			String sql = "select * from mycine_timeline where userid=?";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, id);
 			rs = ps.executeQuery();
-			Date dateTime = null;
+			TimeLineDTO tdto = null;
 			while(rs.next()) {
-				dateTime = rs.getDate("datetime");
+				int idx = rs.getInt("idx");
+				String userId = rs.getString("userid");
+				String subject = rs.getString("subject");
+				Date dateTime = rs.getDate("datetime");
+				tdto = new TimeLineDTO(idx, userId, subject, dateTime);
 			}
-			return dateTime;
+			return tdto;
 		} catch(Exception e) {
 			e.printStackTrace();
 			return null;
 		} finally {
 			try {
-				
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				if(conn!=null) conn.close();
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
 		}
 	}
-	
-	public ArrayList<Date> getSortedDate(){
-		try{
+	/**
+	 * 포인트를 사용했을 때 발생할 정보 디비 삽입
+	 * @param point
+	 * @param prize
+	 * @param id
+	 */
+	public void addUsePointEvent(int point, String prize, String id){
+		try {
 			conn = mycine.db.DBInfo.getConn();
-			String sql = "select writedate from mycine_request order by writedate desc";
+			String sql = "insert into mycine_timeline values(mycine_timeline_idx.nextval,?,'님"+point+"p를 사용하여 "+prize+"를 구입하였습니다.',sysdate)";
 			ps = conn.prepareStatement(sql);
-			rs = ps.executeQuery();
-			ArrayList<Date> dateArr = new ArrayList<Date>(); 
-			while(rs.next()) {
-				Date writeDate = rs.getDate("writedate");
-				dateArr.add(writeDate);
+			ps.setString(1, id);
+			ps.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null) ps.close();
+				if(conn!=null) conn.close();
+			} catch(Exception e) {
+				e.printStackTrace();
 			}
-			return dateArr;
-			
+		}
+	}
+	/**
+	 * 타임라인 이벤트 전체 가져오기
+	 * @param userId
+	 * @return
+	 */
+	public ArrayList<TimeLineDTO> getTimeLineEvent(String userId) {
+		try {
+			conn = mycine.db.DBInfo.getConn();
+			String sql = "select * from mycine_timeline where userid =? order by datetime desc";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, userId);
+			rs = ps.executeQuery();
+			ArrayList<TimeLineDTO> arr = new ArrayList<TimeLineDTO>();
+			while(rs.next()) {
+				int idx = rs.getInt("idx");
+				String subject = rs.getString("subject");
+				Date dateTime = rs.getDate("datetime");
+				TimeLineDTO tdto = new TimeLineDTO(idx, userId, subject, dateTime);
+				arr.add(tdto);
+			}
+			return arr;
 		} catch(Exception e) {
 			e.printStackTrace();
 			return null;
 		} finally {
 			try {
-				
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				if(conn!=null) conn.close();
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
 		}
-		
 	}
-
 }

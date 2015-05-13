@@ -8,7 +8,7 @@
 	String idx_s = request.getParameter("idx");
 	int idx = Integer.parseInt(idx_s);
 	String use = request.getParameter("use");
-	if (use.equals("used")) {
+	if (use.equals("O")) {
 %>
 <script>
 	window.alert("이미 사용되었습니다.");

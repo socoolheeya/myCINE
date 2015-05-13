@@ -20,6 +20,9 @@ function checkIt(){
 		return false;
 	}
 }
+function cancel() {
+	self.close();
+}
 </script>
 </head>
 <body onload="begin()">
@@ -34,9 +37,10 @@ function checkIt(){
 				<td width="110"><input type="password" name="pwd" size="15"></td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center"><input type="submit"
-					value="회원탈퇴"> <input type="button" value="취  소"
-					onclick="javascript:window.location="/myCINE/index.jsp"></td>
+				<td colspan="2" align="center">
+					<button class="btn btn-danger" type="submit" >회원탈퇴</button> 
+					<button class="btn btn-warning" type="button" onclick="javascript:cancel()">취소</button>
+				</td>
 			</tr>
 		</table>
 	</form>

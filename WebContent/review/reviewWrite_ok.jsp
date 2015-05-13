@@ -8,6 +8,7 @@
 <%
 	String loginID = (String) session.getAttribute("id");
 	int result = reDAO.reviewWrite(reDTO);
+	out.println(result);
 	if (result > 0) {
 		if(loginID == null || loginID.equals("")) {
 			%>

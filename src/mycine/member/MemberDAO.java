@@ -152,6 +152,13 @@ public class MemberDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

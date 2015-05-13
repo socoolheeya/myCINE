@@ -126,7 +126,7 @@
 											type="text" name="tel3" size="3" style="height: 30px;"></td>
 									</tr>
 									<tr>
-										<td style="font-size: 19px; font-weight: bold;">생년월일</td>
+										<td style="font-size: 19px; font-weight: bold;"><span style="color: red;">*</span>생년월일</td>
 										<td><select
 												name="birthday1" style="height: 30px;">
 													<option>년</option>

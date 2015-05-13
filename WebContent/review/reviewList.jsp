@@ -32,9 +32,6 @@ String fvalue=request.getParameter("fvalue");
 <title>리뷰 게시판</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/myCINE/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="yozm_common.css" />
-<link rel="stylesheet" type="text/css" href="yozm_top.css" />
-<link rel="stylesheet" href="/myCINE/css/daum.css">
 <script>
 	function reviewFind() {
 		document.reviewSearchForm.action = "reviewFind.jsp";

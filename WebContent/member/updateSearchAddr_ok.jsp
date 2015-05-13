@@ -16,12 +16,24 @@
 		String zipcode1 = zip[0];
 		String zipcode2 = zip[1];
 		String addr = request.getParameter("addr");
+		
+		if(addr == null || addr.equals("")) {
+			%>
+		<script>
+			opener.document.memberInfo.addr1.value = "검색 결과 없습니다.";
+			self.close();
+		</script>
+		<%
+		} else {
+			%>
+		<script>
+			opener.document.memberInfo.addr1.value = "<%=addr%>";
+			opener.document.memberInfo.zipcode1.value = "<%=zipcode1%>";
+			opener.document.memberInfo.zipcode2.value = "<%=zipcode2%>";
+			self.close();
+		</script>
+			<%
+		}
 	%>
-	<script>
-		opener.document.memberInfo.addr1.value = "<%=addr%>";
-		opener.document.memberInfo.zipcode1.value = "<%=zipcode1%>";
-		opener.document.memberInfo.zipcode2.value = "<%=zipcode2%>";
-		self.close();
-	</script>
 </body>
 </html>

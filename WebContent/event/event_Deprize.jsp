@@ -8,7 +8,7 @@
 	String idx_s = request.getParameter("idx");
 	int idx = Integer.parseInt(idx_s);
 	String use = request.getParameter("use");
-	if (use.equals("unused")) {
+	if (use.equals("X")) {
 %>
 <script>
 	window.alert("사용후에 삭제가 가능합니다.");

@@ -16,6 +16,7 @@
 		String zipcode1 = zip[0];
 		String zipcode2 = zip[1];
 		String addr = request.getParameter("addr");
+		
 	%>
 	<script>
 		opener.document.join.addr1.value = "<%=addr%>";
