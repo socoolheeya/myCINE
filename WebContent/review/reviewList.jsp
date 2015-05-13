@@ -69,6 +69,13 @@ String fvalue=request.getParameter("fvalue");
 <body>
 	<%
 		ArrayList<ReviewDTO> arr = reDAO.reviewList(cp, listSize);
+		String sessionID = (String)session.getAttribute("id");
+		String testId;
+		if(sessionID == null || sessionID.equals("")){
+	         testId = request.getRemoteAddr();
+	      }else{
+	         testId = sessionID;
+	      }
 	%>
 	<header>
 		<%@include file="../header.jsp"%>
@@ -176,7 +183,7 @@ String fvalue=request.getParameter("fvalue");
 							<td><%=arr.get(i).getGrade()%>
 							<td><%=arr.get(i).getReadnum()%></td>
 							<td style="text-align: center;"><a
-								href="reviewRecommend.jsp?idx=<%=arr.get(i).getIdx()%>"
+								href="reviewRecommend.jsp?idx=<%=arr.get(i).getIdx()%>&id=<%=testId %>"
 								class="btn btn-primary btn" id="recommendButton"><span
 									class="glyphicon glyphicon-thumbs-up" data-toggle="tooltip"
 									title="추천" id="recommend"></span><%=arr.get(i).getRecommend()%></a></td>

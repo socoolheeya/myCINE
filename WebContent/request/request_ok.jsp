@@ -4,6 +4,7 @@
 <jsp:useBean id="rDAO" class="mycine.rboard.RequestBoardDAO" />
 <jsp:useBean id="rDTO" class="mycine.rboard.RequestBoardDTO" />
 <jsp:setProperty property="*" name="rDTO" />
+<jsp:useBean id="tDAO" class="mycine.timeline.TimeLineDAO" />
 <%
 	request.setCharacterEncoding("utf-8");
 	String movieName = request.getParameter("searchword");
@@ -19,6 +20,7 @@
 	} else {
 		int count = rDAO.request(id, movieName);
 		if(count > 0) {
+			tDAO.addRequestMovieEvent(id, movieName);
 			%>
 			<script>		
 			alert("요청 성공!");

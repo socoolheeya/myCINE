@@ -5,6 +5,7 @@
 <jsp:setProperty property="*" name="reDTO" />
 <jsp:useBean id="mDAO" class="mycine.member.MemberDAO" />
 <jsp:useBean id="mDTO" class="mycine.member.MemberDTO" />
+<jsp:useBean id="tDAO" class="mycine.timeline.TimeLineDAO" />
 <%
 	String loginID = (String) session.getAttribute("id");
 	int result = reDAO.reviewWrite(reDTO);
@@ -20,6 +21,7 @@
 		} else {
 			int count = mDAO.addReviewPoint(loginID);
 			if(count > 0) {
+				tDAO.addReviewWriteEvent(loginID);
 				%>
 				<script>
 				window.alert("작성 성공!");

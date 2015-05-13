@@ -9,12 +9,17 @@ public class RecommendDTO {
 
 	public RecommendDTO(){
 		
+	}	
+	
+	public RecommendDTO(String id) {
+		super();
+		this.id = id;
 	}
 	
-	public RecommendDTO(int idx, int checked) {
+	public RecommendDTO(int idx, String id) {
 		super();
 		this.idx = idx;
-		this.checked = checked;
+		this.id = id;
 	}
 
 	public RecommendDTO(int idx, int checked, String id) {

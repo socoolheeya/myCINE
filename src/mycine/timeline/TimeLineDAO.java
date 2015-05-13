@@ -83,7 +83,52 @@ public class TimeLineDAO {
 	public void addUsePointEvent(int point, String prize, String id){
 		try {
 			conn = mycine.db.DBInfo.getConn();
-			String sql = "insert into mycine_timeline values(mycine_timeline_idx.nextval,?,'님"+point+"p를 사용하여 "+prize+"를 구입하였습니다.',sysdate)";
+			String sql = "insert into mycine_timeline values(mycine_timeline_idx.nextval,?,'님 "+point+"p를 사용하여 "+prize+"를 구입하였습니다.',sysdate)";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, id);
+			ps.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null) ps.close();
+				if(conn!=null) conn.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	/**
+	 * 영화 요청할 때 발생하는 타임라인 이벤트
+	 * @param id
+	 * @param movieName
+	 */
+	public void addRequestMovieEvent(String id, String movieName) {
+		try {
+			conn = mycine.db.DBInfo.getConn();
+			String sql = "insert into mycine_timeline values(mycine_timeline_idx.nextval,?,'님 "+movieName+"를(을) 요청하였습니다.',sysdate)";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, id);
+			ps.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	/**
+	 * 리뷰 게시판에 글을 작성할 때 발생하는 타임라인 이벤트
+	 * @param id
+	 */
+	public void addReviewWriteEvent(String id){
+		try {
+			conn = mycine.db.DBInfo.getConn();
+			String sql = "insert into mycine_timeline values(mycine_timeline_idx.nextval,?,'님 리뷰게시판에 게시물을 작성하였습니다.',sysdate)";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, id);
 			ps.executeUpdate();

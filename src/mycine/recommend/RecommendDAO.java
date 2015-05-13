@@ -42,23 +42,27 @@ public class RecommendDAO {
 		}
 	}
 	/**
-	 * 요청 게시판 check 값 가져오는 메서드
+	 * 요청게시판 추천 아이디 가져오는 메서드
 	 * @param idx
 	 * @return
 	 */
-	public ArrayList<String> getRecommendID(int idx){
+	public ArrayList<RecommendDTO> getRecommendID(int idx, String id){
 		try {
 			conn = mycine.db.DBInfo.getConn();
-			String sql ="select id from mycine_recommend where idx=?";
+			String sql ="select * from mycine_recommend where idx=? and id=?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, idx);
+			ps.setString(2, id);
 			rs = ps.executeQuery();
-			ArrayList<String> ids = new ArrayList<String>();
+			ArrayList<RecommendDTO> arr = new ArrayList<RecommendDTO>();
 			while (rs.next()) {
-				String id  = rs.getString("id");
-				ids.add(id);
+				idx = rs.getInt("idx");
+				id = rs.getString("id");
+				
+				RecommendDTO rdto = new RecommendDTO(idx, id);
+				arr.add(rdto);
 			}
-			return ids;
+			return arr;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -72,6 +76,38 @@ public class RecommendDAO {
 			}
 		}
 	}
+	/**
+	 * 추천 테이블의 모든 아이디 가져오는 메서드
+	 * @return
+	 */
+	public ArrayList<String> getRecommendAllId(int idx) {
+		try {
+			conn = mycine.db.DBInfo.getConn();
+			String sql = "select id from mycine_recommend where idx=?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, idx);
+			rs = ps.executeQuery();
+			ArrayList<String> arr = new ArrayList<String>();
+			while(rs.next()) {
+				String id = rs.getString("id");
+				arr.add(id);
+				
+			}
+			return arr;
+		} catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				if(conn!=null) conn.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}	
+	}
+	
 	
 	/**
 	 * 리뷰게시판 추천 버튼 누른 후 추천한 아이디 넣기
@@ -101,21 +137,26 @@ public class RecommendDAO {
 		}
 	}
 	/**
-	 * 추천버튼을 누른 아이디의 목록 가져오기
+	 * 리뷰게시판 추천버튼을 누른 아이디 가져오기
 	 * @param idx
 	 * @return
 	 */
-	public ArrayList<String> getRecommendID2(int idx){
+	public ArrayList<RecommendDTO> getRecommendID2(int idx, String id){
 		try {
 			conn = mycine.db.DBInfo.getConn();
-			String sql ="select id from mycine_recommend2 where idx=?";
+			String sql ="select * from mycine_recommend2 where idx=? and id=?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, idx);
+			ps.setString(2, id);
 			rs = ps.executeQuery();
-			ArrayList<String> arr = new ArrayList<String>();
+			ArrayList<RecommendDTO> arr = new ArrayList<RecommendDTO>();
 			while (rs.next()) {
-				String id  = rs.getString("id");
-				arr.add(id);
+				idx = rs.getInt("idx");
+				id = rs.getString("id");
+				
+				RecommendDTO rdto = new RecommendDTO(idx, id);
+				arr.add(rdto);
+				
 			}
 			return arr;
 		} catch (Exception e) {
@@ -131,35 +172,5 @@ public class RecommendDAO {
 			}
 		}
 	}
-	/**
-	 * 추천 테이블의 모든 아이디 가져오는 메서드
-	 * @return
-	 */
-	public ArrayList<String> getRecommendGuestID(int idx) {
-		try {
-			conn = mycine.db.DBInfo.getConn();
-			String sql = "select id from mycine_recommend2 where idx=?";
-			ps = conn.prepareStatement(sql);
-			ps.setInt(1, idx);
-			rs = ps.executeQuery();
-			ArrayList<String> arr = new ArrayList<String>();
-			while(rs.next()) {
-				String id = rs.getString("id");
-				arr.add(id);
-				
-			}
-			return arr;
-		} catch(Exception e) {
-			e.printStackTrace();
-			return null;
-		} finally {
-			try {
-				if(rs!=null) rs.close();
-				if(ps!=null) ps.close();
-				if(conn!=null) conn.close();
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
-		}	
-	}
+	
 }

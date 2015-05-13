@@ -46,6 +46,7 @@
 <body>
 	<%
 		String ids = (String)session.getAttribute("id");
+		String loginId = null;
 		if(ids == null || ids.equals("")) {
 	%>
 	<script>
@@ -53,6 +54,8 @@
 		location.href = "/myCINE/index.jsp";
 	</script>
 	<%
+		} else {
+			loginId = ids; 
 		}
 		ArrayList<RequestBoardDTO> arr = rDAO.requestList(cp, listSize);
 	%>
@@ -104,7 +107,7 @@
 							<td><%=arr.get(i).getWriter()%>님께서 <span id=requestMovieName><%=arr.get(i).getMovieName()%></span>
 								영화를 요청하셨습니다.</td>
 							<td style="text-align: center; font-size: 17px; color: gray;"><%=arr.get(i).getWriteDate() %></td>
-							<td style="text-align: center;"><a href="recommend.jsp?idx=<%=arr.get(i).getIdx()%>"
+							<td style="text-align: center;"><a href="recommend.jsp?idx=<%=arr.get(i).getIdx()%>&id=<%=loginId %>"
 								class="btn btn-primary btn" id="recommendButton"><span
 									class="glyphicon glyphicon-thumbs-up" data-toggle="tooltip"
 									title="추천" id="recommend"></span><%=arr.get(i).getRecommend()%></a></td>
