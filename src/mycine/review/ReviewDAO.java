@@ -53,8 +53,6 @@ public class ReviewDAO {
 			try {
 				if (rs != null)
 					rs.close();
-				if (ps != null)
-					ps.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -82,7 +80,8 @@ public class ReviewDAO {
 			try {
 				if (ps != null)
 					ps.close();
-				if(conn!=null) conn.close();
+				if (conn != null)
+					conn.close();
 			} catch (Exception e2) {
 				e2.printStackTrace();
 			}
@@ -375,8 +374,8 @@ public class ReviewDAO {
 				int ref = rs.getInt("ref");
 				int lev = rs.getInt("lev");
 				int sunbun = rs.getInt("sunbun");
-				ReviewDTO rdto = new ReviewDTO(idx, writer, subject, content, writedate,
-						readnum, recommend, grade, ref, lev, sunbun);
+				ReviewDTO rdto = new ReviewDTO(idx, writer, subject, content,
+						writedate, readnum, recommend, grade, ref, lev, sunbun);
 				arr.add(rdto);
 			}
 			return arr;
@@ -385,9 +384,12 @@ public class ReviewDAO {
 			return null;
 		} finally {
 			try {
-				if(rs!=null) rs.close();
-				if(ps!=null) ps.close();
-				if(conn!=null) conn.close();
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+				if (conn != null)
+					conn.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

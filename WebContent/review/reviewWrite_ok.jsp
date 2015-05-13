@@ -8,7 +8,6 @@
 <%
 	String loginID = (String) session.getAttribute("id");
 	int result = reDAO.reviewWrite(reDTO);
-	out.println(result);
 	if (result > 0) {
 		if(loginID == null || loginID.equals("")) {
 			%>
@@ -17,6 +16,7 @@
 			location.href = "reviewList.jsp";
 			</script>
 			<%	
+			return;
 		} else {
 			int count = mDAO.addReviewPoint(loginID);
 			if(count > 0) {
@@ -25,7 +25,8 @@
 				window.alert("작성 성공!");
 				location.href = "reviewList.jsp";
 				</script>
-				<%	
+				<%
+				return;
 			}
 		}
 	} else {

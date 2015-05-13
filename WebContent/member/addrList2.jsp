@@ -74,7 +74,7 @@ function autoInput(zipcode){
          %>
          <tr>
             <td width="125;" style="text-align: center; padding: 5px;"><%=zipcode %></td>
-            <td width="700" style="padding-left: 15px;"><a href="searchAddr_ok.jsp?zipcode=<%=zipcode %>&addr=<%=addr%>"><%=addr %></a></td>
+            <td width="700" style="padding-left: 15px;"><a href="updateSearchAddr_ok.jsp?zipcode=<%=zipcode %>&addr=<%=addr%>"><%=addr %></a></td>
          </tr>
          <%
                }

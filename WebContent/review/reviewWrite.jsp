@@ -43,7 +43,7 @@
 									<%
 								} else {
 									%>
-									<%=loginID %>
+									<%=loginID %><input type="hidden" name="writer" value="<%=loginID%>">
 									<%
 								}
 							%>

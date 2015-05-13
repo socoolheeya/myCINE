@@ -33,14 +33,12 @@ if(session.getAttribute("id") == null || session.getAttribute("id").equals("")) 
 
 String popupCheck = null;
 Cookie cks[] = request.getCookies();
-if(cks != null || cks.length != 0) {
+if(cks != null && cks.length != 0) {
 	for(int i = 0; i < cks.length; i++) {
 		if(cks[i].getName().equals("popupCheck")){
 			popupCheck = cks[i].getValue();
 		}
 	}
-} else {
-	out.println("값이 없습니다.");
 }
 
 %>

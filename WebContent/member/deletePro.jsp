@@ -50,23 +50,11 @@ function cancel() {
 </tr>
 <tr>
 	<td colspan="2" align="center">
-	<input class="btn btn-danger" type="submit" value="회원탈퇴">
-	<input class="btn btn-warning" type="button" value="취  소" onclick="javascript:cancel()">
+		<button class="btn btn-danger" type="submit">회원탈퇴</button>
+		<button class="btn btn-warning" type="button" onclick="javascript:cancel()">취소</button>
 	</td>
 </tr>
 </table>
 </form>
-	<!-- 		<tr>
-				<td>비밀번호</td>
-				<td><input type="password" name="passwd"></td>
-			</tr>
-			<tr>
-				<td>&nbsp;&nbsp;
-				<input type="button" value="취소" onclick="window.self.close()"></td>
-				<td><a href="/myCine/index.jsp"></a><input type="submit" value="회원탈퇴"></td>
-			</tr>
-		</table>
-		</form>
-	</fieldset> -->
 </body>
 </html>

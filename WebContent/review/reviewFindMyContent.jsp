@@ -79,29 +79,8 @@
 					</thead>
 					<tfoot>
 						<tr>
-							<td colspan="3" align="center">
-								<%
-									if (groupNumber != 0) {
-								%><a
-								href="reviewList.jsp?cp=<%=(groupNumber - 1) * pageSize + pageSize%>">&lt;&lt;</a>
-								<%
-									}
-										for (int i = ((groupNumber * pageSize) + 1); i <= ((groupNumber * pageSize) + pageSize); i++) {
-								%> <a href="reviewList.jsp?cp=<%=i%>"><%=i%></a>&nbsp;&nbsp;&nbsp;
-								<%
-									if (i == pageCnt)
-												break;
-										}
-										if (groupNumber != ((pageCnt / pageSize) - (pageCnt % pageSize == 0 ? 1
-												: 0))) {
-								%> <a
-								href="reviewList.jsp?cp=<%=(groupNumber + 1) * pageSize + 1%>">&gt;&gt;</a>
-								<%
-									}
-								%>
-							</td>
 
-							<td colspan="4" align="right">
+							<td colspan="7" align="right">
 								<button class="btn btn-danger" type="button"
 									onclick="history.back()">뒤로가기</button>
 								<button class="btn btn-warning" type="button"
