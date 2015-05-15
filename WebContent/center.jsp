@@ -17,26 +17,26 @@
 		<div class="carousel-inner" role="listbox">
 			<div class="item active">
 				<a
-					href="http://localhost:9090/myCINE/review/reviewContent.jsp?idx=386"><img
+					href="http://192.168.30.20:9090/myCINE/review/reviewContent.jsp?idx=457"><img
 					src="/myCINE/image/킹스맨.jpg" alt="킹스맨" width="700" height="345"></a>
 			</div>
 			<div class="item">
 				<a
-					href="http://localhost:9090/myCINE/review/reviewContent.jsp?idx=4"><img
+					href="http://192.168.30.20:9090/myCINE/review/reviewContent.jsp?idx=456"><img
 					src="/myCINE/image/차이나타운.jpg" alt="차이나타운" width="460" height="345"></a>
 			</div>
 			<div class="item">
 				<a
-					href="http://localhost:9090/myCINE/review/reviewContent.jsp?idx=382"><img
+					href="http://192.168.30.20:9090/myCINE/review/reviewContent.jsp?idx=459"><img
 					src="/myCINE/image/테이큰.jpg" alt="테이큰" width="460" height="345"></a>
 			</div>
 			<div class="item">
-			<a href="http://localhost:9090/myCINE/review/reviewContent.jsp?idx=400">
+			<a href="http://192.168.30.20:9090/myCINE/review/reviewContent.jsp?idx=460">
 				<img src="/myCINE/image/티파니에서아침을.jpg" alt="티파니에서아침을" width="460"
 					height="345"></a>
 			</div>
 			<div class="item">
-			<a href="http://localhost:9090/myCINE/review/reviewContent.jsp?idx=379">
+			<a href="http://192.168.30.20:9090/myCINE/review/reviewContent.jsp?idx=461">
 				<img src="/myCINE/image/로마의휴일.jpg" alt="로마의휴일" width="460"
 					height="345"></a>
 			</div>

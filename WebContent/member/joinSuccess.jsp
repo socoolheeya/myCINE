@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="5;URL=http://localhost:9090/myCINE/index.jsp">
+<meta http-equiv="refresh" content="5;URL=http://192.168.30.20:9090/myCINE/index.jsp">
 <title>회원가입 성공</title>
 <style type="text/css">
 #joinBody {

@@ -5,6 +5,7 @@
 <%@page import="java.util.ArrayList"%>
 <jsp:useBean id="rDAO" class="mycine.rboard.RequestBoardDAO" />
 <jsp:useBean id="reDAO" class="mycine.recommend.RecommendDAO" />
+<jsp:useBean id="tDAO" class="mycine.timeline.TimeLineDAO" />
 <%
 	request.setCharacterEncoding("utf-8");
 	int idx = Integer.parseInt(request.getParameter("idx"));
@@ -15,6 +16,7 @@
 		int count = reDAO.recommendUpdate(idx, id);
 		if(count > 0) {
 			rDAO.recommend(idx);
+			tDAO.addRequestRecommendEvent(idx, id);
 			%>
 			<script>
 			window.alert("추천되었습니다.");

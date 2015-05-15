@@ -40,6 +40,14 @@ String fvalue=request.getParameter("fvalue");
 	function showMyContent() {
 		location.href = "reviewFindMyContent.jsp";
 	}
+	function getUserInfo(){
+		
+	}
+</script>
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();   
+});
 </script>
 <style type="text/css">
 #searchForm {
@@ -51,18 +59,20 @@ String fvalue=request.getParameter("fvalue");
 	font-size: 11px;
 	padding-left: 10px;	
 }
-#writeDate {
-	font-size: 12px;
+#idx,#subject, #writer, #writeDate, #readnum, #grade {
+	font-size: 14px;
 }
-#ab {
+#subject, #writer {
+	color: black;
+}
+#ab{
 	font-size: 12px;
 	text-align: center;
 }
 #buttonG {
 }
 #title {
-	background-color: #ffcc00;
-	
+	background-color: #ffcc00;	
 }
 </style>
 </head>
@@ -166,11 +176,11 @@ String fvalue=request.getParameter("fvalue");
 									for (int i = 0; i < arr.size(); i++) {
 						%>
 						<tr>
-							<td><%=arr.get(i).getIdx()%></td>
+							<td id="idx"><%=arr.get(i).getIdx()%></td>
 							<%
 								int commentCount = rcDAO.getCommentCount(arr.get(i).getIdx());
 							%>
-							<td><a href="reviewContent.jsp?idx=<%=arr.get(i).getIdx()%>">
+							<td id="subject"><a href="reviewContent.jsp?idx=<%=arr.get(i).getIdx()%>">
 									<%=arr.get(i).getSubject()%><span id="commentCount">[<%=commentCount %>]</span>
 							</a></td>
 							<%
@@ -178,10 +188,10 @@ String fvalue=request.getParameter("fvalue");
 												out.println("&nbsp;&nbsp;");
 											}
 							%>
-							<td><%=arr.get(i).getWriter()%></td>
+							<td id="writer" onmouseover="getUserInfo()"><a href="#" data-toggle="popover" title="Popover Header" data-content="Some content inside the popover"><%=arr.get(i).getWriter()%></a></td>
 							<td id="writeDate"><%=arr.get(i).getWritedate()%></td>
-							<td><%=arr.get(i).getGrade()%>
-							<td><%=arr.get(i).getReadnum()%></td>
+							<td id="grade"><%=arr.get(i).getGrade()%>
+							<td id="readnum"><%=arr.get(i).getReadnum()%></td>
 							<td style="text-align: center;"><a
 								href="reviewRecommend.jsp?idx=<%=arr.get(i).getIdx()%>&id=<%=testId %>"
 								class="btn btn-primary btn" id="recommendButton"><span

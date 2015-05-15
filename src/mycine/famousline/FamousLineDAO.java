@@ -14,7 +14,6 @@ public class FamousLineDAO {
 	public int getRandomIdx(){
 		
 		int num = (int)(Math.random()*10) + 1;
-		System.out.println(num);
 		return num;
 	}
 	

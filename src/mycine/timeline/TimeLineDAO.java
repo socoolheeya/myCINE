@@ -98,15 +98,16 @@ public class TimeLineDAO {
 			}
 		}
 	}
+	
 	/**
-	 * 영화 요청할 때 발생하는 타임라인 이벤트
+	 * 리뷰 게시판 추천했을 때 발생하는 타임라인 이벤트
+	 * @param idx
 	 * @param id
-	 * @param movieName
 	 */
-	public void addRequestMovieEvent(String id, String movieName) {
+	public void addReviewRecommendEvent(int idx, String id){
 		try {
 			conn = mycine.db.DBInfo.getConn();
-			String sql = "insert into mycine_timeline values(mycine_timeline_idx.nextval,?,'님 "+movieName+"를(을) 요청하였습니다.',sysdate)";
+			String sql = "insert into mycine_timeline values(mycine_timeline_idx.nextval,?,'님 "+idx+"번 리뷰게시글을 추천하였습니다.',sysdate)";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, id);
 			ps.executeUpdate();
@@ -143,6 +144,53 @@ public class TimeLineDAO {
 			}
 		}
 	}
+	/**
+	 * 영화 요청할 때 발생하는 타임라인 이벤트
+	 * @param id
+	 * @param movieName
+	 */
+	public void addRequestMovieEvent(String id, String movieName) {
+		try {
+			conn = mycine.db.DBInfo.getConn();
+			String sql = "insert into mycine_timeline values(mycine_timeline_idx.nextval,?,'님 "+movieName+"를(을) 요청하였습니다.',sysdate)";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, id);
+			ps.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	/**
+	 * 요청게시판 추천했을 때 발생하는 이벤트
+	 * @param idx
+	 * @param id
+	 */
+	public void addRequestRecommendEvent(int idx, String id){
+		try {
+			conn = mycine.db.DBInfo.getConn();
+			String sql = "insert into mycine_timeline values(mycine_timeline_idx.nextval,?,'님 "+idx+"번 요청게시글을 추천하였습니다.',sysdate)";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, id);
+			ps.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	/**
 	 * 타임라인 이벤트 전체 가져오기
 	 * @param userId
