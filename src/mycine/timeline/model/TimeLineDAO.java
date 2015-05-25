@@ -1,4 +1,4 @@
-package mycine.timeline;
+package mycine.timeline.model;
 
 import java.sql.Connection;
 import java.util.Date;

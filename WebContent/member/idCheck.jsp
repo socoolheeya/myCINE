@@ -9,7 +9,7 @@
 <body>
 	<fieldset>
 		<legend>중복확인</legend>
-		<form name="f" action="idCheck_ok.jsp">
+		<form name="f" action="idCheck.do">
 			<table>
 				<tr>
 					<td>ID</td>

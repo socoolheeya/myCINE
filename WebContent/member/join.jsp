@@ -15,7 +15,7 @@
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	function idCheck() {
-		window.open("idCheck.do", "popup",
+		window.open("/myCINE/idCheckForm.do", "popup",
 				"width=300 height=200 left=500 top=300 location=no");
 	}
 	function searchAddr() {

@@ -1,11 +1,8 @@
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="mycine.post.*"%>
-<jsp:useBean id="pDAO" class="mycine.post.PostDAO" />
-<%
-	request.setCharacterEncoding("UTF-8");
-%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="arr" value="${requestScope.arr }"/>
+<c:set var="str" value="${requestScope.str }"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,10 +23,6 @@
 	}
 </script>
 </head>
-<%
-	String requestDong = request.getParameter("dong");
-	ArrayList<PostDTO> arr = pDAO.findAddr(requestDong);
-%>
 <body style="margin: 5px auto; padding: 30px;">
 	<section>
 		<article>
@@ -55,17 +48,7 @@
 		<article>
 			<fieldset>
 				<legend style="font-size: 40px; font-weight: bold;">주소검색결과</legend>
-				<%
-					if (request.getMethod().equals("GET")) {
-				%>
-				<h4>위 검색란에 검색어를 입력해주세요</h4>
-				<%
-					} else {
-				%>
-				<jsp:include page="addrList2.jsp" />
-				<%
-					}
-				%>
+				${str }
 			</fieldset>
 		</article>
 		<hr>

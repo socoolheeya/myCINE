@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +24,7 @@
 	<div class="row">
 		<div class="col-sm-4"></div>
 		<div class="col-sm-4">
-			<form name="requestForm" action="request_ok.jsp">
+			<form name="requestForm" action="request.do">
 				<table class="table table-default">
 					<tr>
 						<td style="font-weight: bold;">영화제목</td>
@@ -41,7 +42,6 @@
 		</div>
 		<div class="col-sm-4"></div>
 	</div>
-
 	<footer>
 		<%@include file="../footer.jsp"%>
 	</footer>

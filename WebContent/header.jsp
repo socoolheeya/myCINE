@@ -23,8 +23,8 @@
 			<div class="dropdown">
 			<ul class="nav navbar-nav">
 				<li><a href="/myCINE/company/companyMain.jsp">회사소개</a></li>
-				<li><a href="/myCINE/review/reviewList.jsp">영화리뷰</a></li>
-				<li><a href="/myCINE/request/requestList.jsp">영화요청</a></li>
+				<li><a href="/myCINE/reviewList.dp">영화리뷰</a></li>
+				<li><a href="/myCINE/requestList.do">영화요청</a></li>
 				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="/myCINE/qna/QnAList.jsp">QnA<span class="caret"></span></a>
 					 <ul class="dropdown-menu">
 					 <li><a href="/myCINE/qna/FAQ.jsp">자주하는 질문(FAQ)</a></li>
@@ -71,7 +71,7 @@
 			<c:if test="${not empty id }">
 			<div class="pull-right">
 				<ul class="nav navbar-nav">
-					<li><a href="#" id="logining" title="${dto.point }P 보유중!" data-toggle="popover"  data-placement="bottom" data-content="">${id }님</a></li>
+					<li><a href="/myCINE/memberInfoForm.do" id="logining" title="${dto.point }P 보유중!" data-toggle="popover"  data-placement="bottom" data-content="">${id }님</a></li>
 					<li><a href="/myCINE/logout.do"><span
 							class="glyphicon glyphicon-off" data-toggle="tooltip"
 							title="로그아웃"></span></a></li>

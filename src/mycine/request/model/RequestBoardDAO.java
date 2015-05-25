@@ -136,7 +136,7 @@ public class RequestBoardDAO {
 			conn = mycine.db.DBInfo.getConn();
 			String sql = "select * from ("
 					+ "select rownum as rnum, a.* from ("
-					+ "select * from mycine_request order by recommend desc, ref desc, writedate desc)a)b "
+					+ "select * from mycine_request order by recommend desc, ref desc)a)b "
 					+ "where rnum >= (" + cp + "-1) *" + listSize + " + 1 "
 					+ "and rnum <= " + cp + "*" + listSize;
 			ps = conn.prepareStatement(sql);

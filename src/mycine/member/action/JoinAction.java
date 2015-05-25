@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import mycine.main.CommandHandler;
 import mycine.member.model.MemberDAO;
 import mycine.member.model.MemberDTO;
-import mycine.timeline.TimeLineDAO;
+import mycine.timeline.model.TimeLineDAO;
 
 public class JoinAction implements CommandHandler {
 
