@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import mycine.member.MemberDTO;
+import mycine.member.model.MemberDTO;
 
 public class TimeLineDAO {
 	
@@ -18,13 +18,13 @@ public class TimeLineDAO {
 		
 	}
 	/**
-	 * À¯Àú°¡ È¸¿ø°¡ÀÔ ÇßÀ» ¶§ µé¾î°¥ Á¤º¸
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½î°¥ ï¿½ï¿½ï¿½ï¿½
 	 * @param mDTO
 	 */
 	public void addJoinEvent(MemberDTO mDTO){
 		try{
 			conn = mycine.db.DBInfo.getConn();
-			String sql = "insert into mycine_timeline values(?,?,'´Ô È¸¿ø°¡ÀÔÀ» ÃàÇÏÇÕ´Ï´Ù.',sysdate)";
+			String sql = "insert into mycine_timeline values(?,?,'ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.',sysdate)";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, mDTO.getIdx());
 			ps.setString(2, mDTO.getId());
@@ -41,7 +41,7 @@ public class TimeLineDAO {
 		}
 	}
 	/**
-	 * È¸¿ø°¡ÀÔ ÃàÇÏ ÀÌº¥Æ® °¡Á®¿À´Â ¸Þ¼­µå
+	 * È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	 * @param id
 	 * @return
 	 */
@@ -75,7 +75,7 @@ public class TimeLineDAO {
 		}
 	}
 	/**
-	 * Æ÷ÀÎÆ®¸¦ »ç¿ëÇßÀ» ¶§ ¹ß»ýÇÒ Á¤º¸ µðºñ »ðÀÔ
+	 * ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ß»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	 * @param point
 	 * @param prize
 	 * @param id
@@ -83,7 +83,7 @@ public class TimeLineDAO {
 	public void addUsePointEvent(int point, String prize, String id){
 		try {
 			conn = mycine.db.DBInfo.getConn();
-			String sql = "insert into mycine_timeline values(mycine_timeline_idx.nextval,?,'´Ô "+point+"p¸¦ »ç¿ëÇÏ¿© "+prize+"¸¦ ±¸ÀÔÇÏ¿´½À´Ï´Ù.',sysdate)";
+			String sql = "insert into mycine_timeline values(mycine_timeline_idx.nextval,?,'ï¿½ï¿½ "+point+"pï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ "+prize+"ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.',sysdate)";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, id);
 			ps.executeUpdate();
@@ -100,14 +100,14 @@ public class TimeLineDAO {
 	}
 	
 	/**
-	 * ¸®ºä °Ô½ÃÆÇ ÃßÃµÇßÀ» ¶§ ¹ß»ýÇÏ´Â Å¸ÀÓ¶óÀÎ ÀÌº¥Æ®
+	 * ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ß»ï¿½ï¿½Ï´ï¿½ Å¸ï¿½Ó¶ï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ®
 	 * @param idx
 	 * @param id
 	 */
 	public void addReviewRecommendEvent(int idx, String id){
 		try {
 			conn = mycine.db.DBInfo.getConn();
-			String sql = "insert into mycine_timeline values(mycine_timeline_idx.nextval,?,'´Ô "+idx+"¹ø ¸®ºä°Ô½Ã±ÛÀ» ÃßÃµÇÏ¿´½À´Ï´Ù.',sysdate)";
+			String sql = "insert into mycine_timeline values(mycine_timeline_idx.nextval,?,'ï¿½ï¿½ "+idx+"ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ô½Ã±ï¿½ï¿½ï¿½ ï¿½ï¿½Ãµï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.',sysdate)";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, id);
 			ps.executeUpdate();
@@ -123,13 +123,13 @@ public class TimeLineDAO {
 		}
 	}
 	/**
-	 * ¸®ºä °Ô½ÃÆÇ¿¡ ±ÛÀ» ÀÛ¼ºÇÒ ¶§ ¹ß»ýÇÏ´Â Å¸ÀÓ¶óÀÎ ÀÌº¥Æ®
+	 * ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½ï¿½ï¿½Ç¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ß»ï¿½ï¿½Ï´ï¿½ Å¸ï¿½Ó¶ï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ®
 	 * @param id
 	 */
 	public void addReviewWriteEvent(String id){
 		try {
 			conn = mycine.db.DBInfo.getConn();
-			String sql = "insert into mycine_timeline values(mycine_timeline_idx.nextval,?,'´Ô ¸®ºä°Ô½ÃÆÇ¿¡ °Ô½Ã¹°À» ÀÛ¼ºÇÏ¿´½À´Ï´Ù.',sysdate)";
+			String sql = "insert into mycine_timeline values(mycine_timeline_idx.nextval,?,'ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ô½ï¿½ï¿½Ç¿ï¿½ ï¿½Ô½Ã¹ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.',sysdate)";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, id);
 			ps.executeUpdate();
@@ -145,14 +145,14 @@ public class TimeLineDAO {
 		}
 	}
 	/**
-	 * ¿µÈ­ ¿äÃ»ÇÒ ¶§ ¹ß»ýÇÏ´Â Å¸ÀÓ¶óÀÎ ÀÌº¥Æ®
+	 * ï¿½ï¿½È­ ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ ï¿½ß»ï¿½ï¿½Ï´ï¿½ Å¸ï¿½Ó¶ï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ®
 	 * @param id
 	 * @param movieName
 	 */
 	public void addRequestMovieEvent(String id, String movieName) {
 		try {
 			conn = mycine.db.DBInfo.getConn();
-			String sql = "insert into mycine_timeline values(mycine_timeline_idx.nextval,?,'´Ô "+movieName+"¸¦(À») ¿äÃ»ÇÏ¿´½À´Ï´Ù.',sysdate)";
+			String sql = "insert into mycine_timeline values(mycine_timeline_idx.nextval,?,'ï¿½ï¿½ "+movieName+"ï¿½ï¿½(ï¿½ï¿½) ï¿½ï¿½Ã»ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.',sysdate)";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, id);
 			ps.executeUpdate();
@@ -168,14 +168,14 @@ public class TimeLineDAO {
 		}
 	}
 	/**
-	 * ¿äÃ»°Ô½ÃÆÇ ÃßÃµÇßÀ» ¶§ ¹ß»ýÇÏ´Â ÀÌº¥Æ®
+	 * ï¿½ï¿½Ã»ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ß»ï¿½ï¿½Ï´ï¿½ ï¿½Ìºï¿½Æ®
 	 * @param idx
 	 * @param id
 	 */
 	public void addRequestRecommendEvent(int idx, String id){
 		try {
 			conn = mycine.db.DBInfo.getConn();
-			String sql = "insert into mycine_timeline values(mycine_timeline_idx.nextval,?,'´Ô "+idx+"¹ø ¿äÃ»°Ô½Ã±ÛÀ» ÃßÃµÇÏ¿´½À´Ï´Ù.',sysdate)";
+			String sql = "insert into mycine_timeline values(mycine_timeline_idx.nextval,?,'ï¿½ï¿½ "+idx+"ï¿½ï¿½ ï¿½ï¿½Ã»ï¿½Ô½Ã±ï¿½ï¿½ï¿½ ï¿½ï¿½Ãµï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.',sysdate)";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, id);
 			ps.executeUpdate();
@@ -192,7 +192,7 @@ public class TimeLineDAO {
 	}
 	
 	/**
-	 * Å¸ÀÓ¶óÀÎ ÀÌº¥Æ® ÀüÃ¼ °¡Á®¿À±â
+	 * Å¸ï¿½Ó¶ï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ® ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param userId
 	 * @return
 	 */

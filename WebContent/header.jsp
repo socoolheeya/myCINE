@@ -1,19 +1,23 @@
-<%@page import="mycine.member.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:useBean id="mmDTO" class="mycine.member.MemberDTO"/>
-<jsp:useBean id="mmDAO" class="mycine.member.MemberDAO"/>
-<jsp:setProperty property="*" name="mmDTO"/>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<style>
+#profilePhoto{
+	width: 15px;
+	height: 15px;
+}
+</style>
 <script>
 	function login() {
-		window.open("/myCINE/member/login.jsp", "login",
+		window.open("loginForm.do", "login",
 						"width=400 height=400 left=500 top=100");
 	}
+
 </script>
 <nav class="navbar navbar-inverse">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<a href="/myCINE/index.jsp"><img src="/myCINE/image/logo.jpg" id="logo" /></a>
+			<a href="/myCINE/main.do"><img src="/myCINE/image/logo.jpg" id="logo" /></a>
 		</div>
 		<div>
 			<div class="dropdown">
@@ -50,38 +54,30 @@
 					</li>
 				</ul>
 			</div>
-			<%
-				
-				String id = (String) session.getAttribute("id");
-				MemberDTO mm = mmDAO.getUserInfo(id);	
-				if (id == null || id.equals("")) {
-			%>
+			<c:set var="id" value="${sessionScope.id }"/>
+			<c:if test="${empty id }">
 			<div class="pull-right">
 				<ul class="nav navbar-nav">
 					<li><a href="javascript:login()"> <span
 							class="glyphicon glyphicon-user" data-toggle="tooltip"
 							title="로그인"></span>
 					</a></li>
-					<li><a href="/myCINE/member/join.jsp"><span
+					<li><a href="/myCINE/joinForm.do"><span
 							class="glyphicon glyphicon-plus" data-toggle="tooltip"
 							title="회원가입"></span></a></li>
 				</ul>
 			</div>
-			<%
-				} else {
-			%>
+			</c:if>
+			<c:if test="${not empty id }">
 			<div class="pull-right">
 				<ul class="nav navbar-nav">
-					<li><a href="/myCINE/member/memberInfo.jsp" id="logining" data-toggle="tooltip" title="<%=mm.getPoint()%>P 보유중!"><%=id %>님 로그인중</a></li>
-					<li><a href="/myCINE/member/logout.jsp"><span
+					<li><a href="#" id="logining" title="${dto.point }P 보유중!" data-toggle="popover"  data-placement="bottom" data-content="">${id }님</a></li>
+					<li><a href="/myCINE/logout.do"><span
 							class="glyphicon glyphicon-off" data-toggle="tooltip"
 							title="로그아웃"></span></a></li>
 				</ul>
 			</div>
-			<%
-				}
-			%>
-
+			</c:if>
 		</div>
 	</div>
 </nav>

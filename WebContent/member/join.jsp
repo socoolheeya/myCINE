@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,11 +15,11 @@
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	function idCheck() {
-		window.open("idCheck.jsp", "popup",
+		window.open("idCheck.do", "popup",
 				"width=300 height=200 left=500 top=300 location=no");
 	}
 	function searchAddr() {
-		window.open("searchAddr.jsp", "searchAddr",
+		window.open("/myCINE/searchAddrForm.do", "searchAddr",
 				"width=800 height=500 left=200 top=100");
 	}
 	function email_change() {
@@ -64,7 +65,7 @@
 			<div class="row">
 				<span class="col-sm-2"></span> <span class="col-sm-8"
 					style="background-color: #ffcc00;"> <a
-					href="/myCINE/index.jsp"><img src="/myCINE/image/logo.jpg" /></a>
+					href="/myCINE/main.do"><img src="/myCINE/image/logo.jpg" /></a>
 				</span> <span class="col-sm-2"></span>
 			</div>
 		</header>
@@ -74,7 +75,7 @@
 				<section>
 					<article>
 						<h2 style="font-size: 40px; font-weight: bold;">회원가입</h2>
-						<form name="join" action="join_ok.jsp">
+						<form name="join" action="join.do">
 							<div class="form-group">
 								<table class="table table-bordered">
 									<tr>
@@ -130,41 +131,26 @@
 										<td><select
 												name="birthday1" style="height: 30px;">
 													<option>년</option>
-													<%
-														for (int i = 1950; i <= 2015; i++) {
-													%>
-													<option value="<%=i%>"><%=i%></option>
-													<%
-														}
-													%>
+													<c:forEach var="i" begin="1950" end="2015" step="1">
+														<option value="${i }">${i }</option>
+													</c:forEach>
 											</select> 년
 												<select name="birthday2" style="height: 30px;">
 													<option>월</option>
-													<%
-														for (int i = 1; i <= 12; i++) {
-													%>
-													<option value="<%=i%>"><%=i%></option>
-													<%
-														}
-													%>
+													<c:forEach var="i" begin="1" end="12" step="1">
+														<option value="${i }">${i }</option>
+													</c:forEach>
 											</select> 월
 												<select name="birthday3" style="height: 30px;">
 													<option>일</option>
-													<%
-														for (int i = 1; i <= 31; i++) {
-													%>
-													<option value="<%=i%>"><%=i%></option>
-													<%
-														}
-													%>
+													<c:forEach var="i" begin="1" end="31" step="1">
+														<option value="${i }">${i }</option>
+													</c:forEach>
 											</select>
 									 일</td>
 									</tr>
-									<%
-										String zipcode = request.getParameter("zipcode");
-
-										String addr = request.getParameter("addr");
-									%>
+									<c:set var="zipcode" value="${requestScope.zipcode }"/>
+									<c:set var="addr" value="${requestScope.addr }"/>
 									<tr>
 										<td style="font-size: 19px; font-weight: bold;">우편번호</td>
 										<td><input type="text" name="zipcode1" value=""

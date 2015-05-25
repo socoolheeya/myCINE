@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="mycine.movie.*"%>
-<jsp:useBean id="mDAO" class="mycine.movie.MovieDAO" />
-<jsp:useBean id="mDTO" class="mycine.movie.MovieDTO" />
+<jsp:useBean id="mDAO" class="mycine.movie.model.MovieDAO" />
+<jsp:useBean id="mDTO" class="mycine.movie.model.MovieDTO" />
 <jsp:setProperty property="*" name="mDTO" />
 <!DOCTYPE html>
 <html>

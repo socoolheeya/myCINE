@@ -1,11 +1,7 @@
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="mycine.post.*"%>
-<jsp:useBean id="pDAO" class="mycine.post.PostDAO" />
-<%
-	request.setCharacterEncoding("UTF-8");
-%>
+<%@ page import="java.util.ArrayList"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,14 +18,12 @@
 <script type="text/javascript">
 	<script type="text/javascript">
 	function searchAddr() {
-		window.open("addrList.jsp?dong=", "addrList", "width=1500 height=500");
+		window.open("addrList.do?dong=", "addrList", "width=1500 height=500");
 	}
 </script>
 </head>
-<%
-	String requestDong = request.getParameter("dong");
-	ArrayList<PostDTO> arr = pDAO.findAddr(requestDong);
-%>
+<c:set var="requestDong" value="${requestScope.dong }"/>
+<c:set var="arr" value="${requestScope.arr }"/>
 <body style="margin: 5px auto; padding: 30px;">
 	<section>
 		<article>
@@ -55,17 +49,7 @@
 		<article>
 			<fieldset>
 				<legend style="font-size: 40px; font-weight: bold;">주소검색결과</legend>
-				<%
-					if (request.getMethod().equals("GET")) {
-				%>
-				<h4>위 검색란에 검색어를 입력해주세요</h4>
-				<%
-					} else {
-				%>
-				<jsp:include page="addrList.jsp" />
-				<%
-					}
-				%>
+				${requestScope.searchAddrResult }
 			</fieldset>
 		</article>
 		<hr>
