@@ -1,9 +1,7 @@
-<%@page import="javax.swing.text.Document"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.*"%>
-<%@page import="mycine.event.*"%>
-<jsp:useBean id="eDAO" class="mycine.event.EventDAO" scope="session" />
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="dto" value="${requestScope.dto }"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,23 +30,12 @@ tfoot tr {
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="/myCINE/js/bootstrap.min.js"></script>
 
-<%   
-   String id_s = (String)session.getAttribute("id");
-   if (id_s == null || id_s.equals("")) {
-      id_s = "0";
-   }
-   EventDTO dto = eDAO.event_MyPoint(id_s);
-   if (dto == null) {
-%>
-<script>
-   window.alert("로그인 하고 이용해주세요!")
-   location.href = "event_Main.jsp";
-</script>
-<%
-   return;
-   }
-%>
-
+<c:if test="${empty dto }">
+	<script>
+   	window.alert("로그인 하고 이용해주세요!")
+   	location.href = "/myCINE/eventMain.do";
+	</script>
+</c:if>
 </head>
 <body>
 	<%@include file="../header.jsp"%>
@@ -70,7 +57,7 @@ tfoot tr {
 			<legend>
 				<span class="glyphicon glyphicon-ok"></span>상품 구매
 			</legend>
-			<form action="event_Exchange_ok.jsp">
+			<form action="/myCINE/eventExChange.do">
 				<table align="center">
 					<tbody>
 						<tr>

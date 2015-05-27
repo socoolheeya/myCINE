@@ -19,17 +19,13 @@ public class UpdateSearchAddrFormAction implements CommandHandler {
 		req.setCharacterEncoding("utf-8");
 		
 		String requestDong = req.getParameter("dong");
-		StringBuffer sb = new StringBuffer();
 		PostDAO dao = new PostDAO();
 		ArrayList<PostDTO> arr = dao.findAddr(requestDong);
-		if(req.getMethod().equals("GET")) {
-			sb.append("<h4>위 검색란에 검색어를 입력해주세요</h4>");
-		} else {
-			sb.append("	<jsp:include page='addrList2.jsp' />");
-		}
-		String str = sb.toString();
 		
-		req.setAttribute("str", str);
+	
+		String updateSearchAddrResult = mycine.member.logic.SearchAddr.searchAddr(req);
+		
+		req.setAttribute("updateSearchAddrResult", updateSearchAddrResult);
 		req.setAttribute("arr", arr);
 		
 		return "updateSearchAddr.jsp";

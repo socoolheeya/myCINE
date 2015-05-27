@@ -4,6 +4,7 @@ public class PageController {
 	
 	public static String pageLogic(String pageName, int totalCnt, int listSize,
 			int pageSize, int cp){
+		
 		int pageCnt = (totalCnt / listSize) + 1;
 		if (totalCnt % listSize == 0) {
 			pageCnt--;

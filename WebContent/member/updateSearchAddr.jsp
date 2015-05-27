@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="arr" value="${requestScope.arr }"/>
-<c:set var="str" value="${requestScope.str }"/>
+<c:set var="updateSearchAddrResult" value="${requestScope.updateSearchAddrResult }"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,7 +48,7 @@
 		<article>
 			<fieldset>
 				<legend style="font-size: 40px; font-weight: bold;">주소검색결과</legend>
-				${str }
+				${updateSearchAddrResult }
 			</fieldset>
 		</article>
 		<hr>

@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.*"%>
-<%@page import="mycine.event.*"%>
-<jsp:useBean id="eDAO" class="mycine.event.EventDAO" scope="session" />
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="dto" value="${requestScope.dto }"/>
+<c:set var="pageLogic" value="${requestScope.pageLogic }"/>
+<c:set var="arr" value="${requestScope.arr }"/>
+<c:set var="str" value="${requestScope.str }"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,43 +43,12 @@
 	}
 </script>
 
-<%
-	String id_s = (String)session.getAttribute("id");
-	if (id_s == null || id_s.equals("")) {
-		id_s = "0";
-	}
-	EventDTO dto1 = eDAO.event_MyPoint(id_s);
-	if (dto1 == null) {
-%>
+<c:if test=${empty dto }>
 <script>
 	window.alert("로그인 하고 이용해주세요!")
 	location.href = "event_Main.jsp";
 </script>
-<%
-	return;
-	}
-
-	int totalCnt = eDAO.getTotalCnt(id_s); //총 게시글 수
-	int listSize = 10; //보여줄 리스트의 수
-	int pageSize = 5; //보여줄 페이지의 수
-
-	String cp_s = request.getParameter("cp");
-	if (cp_s == null || cp_s.equals("")) {
-		cp_s = "1";
-	}
-
-	int cp = Integer.parseInt(cp_s); //현재 페이지
-
-	int pageCnt = (totalCnt / listSize) + 1;
-	if (totalCnt % listSize == 0) {
-		pageCnt--;
-	}
-
-	int groupNumber = cp / pageSize;
-	if (cp % pageSize == 0) {
-		groupNumber--;
-	}
-%>
+</c:if>
 </head>
 <body>
 	<%@include file="../header.jsp"%>
@@ -106,75 +76,37 @@
 						<th>&nbsp;</th>
 					</tr>
 				</thead>
+				<tbody>
+					<c:if test="${empty arr }">
+						<tr class="danger">
+							<td colspan="4" align="center">현재 보유한 상품이 없습니다.</td>
+						</tr>
+					</c:if>
+					<c:if test=${not empty arr }>
+						<tr class="${str }">
+						<c:forEach var="dto" items="${arr }">
+							<td align="center">${dto.rnum}</td>
+							<td>${dto.user_prize}</td>
+							<td align="center">${dto.use}</td>
+							<td align="center">
+								<div class="btn-group">
+									<button type="button" class="btn btn-warning"  onclick="exshow('${dto.idx}','${dto.use}')">증정</button>
+									<button type="button" class="btn btn-success"  onclick="reshow('${dto.idx}','${dto.use}','${dto.user_prize}')">취소</button>
+									<button type="button" class="btn btn-primary"  onclick="deshow('${dto.idx}','${dto.use}')">삭제</button>
+								</div>
+							</td>
+						</c:forEach>
+						</tr>
+					</c:if>
+				</tbody>
 				<tfoot>
 					<tr align="center">
 						<td colspan="4">
-							<%
-								if (groupNumber != 0) {
-							%> <a
-							href="event_Myprize.jsp?cp=<%=(groupNumber - 1) * pageSize + pageSize%>">&lt;&lt;</a>
-							<%
-								}
-								for (int i = ((groupNumber * pageSize) + 1); i <= ((groupNumber * pageSize) + pageSize); i++) {
-							%> <a href="event_Myprize.jsp?cp=<%=i%>"><%=i%></a>&nbsp;&nbsp;&nbsp;
-							<%
-								if (i == pageCnt)
-										break;
-								}
-								if (groupNumber != ((pageCnt / pageSize) - (pageCnt % pageSize == 0 ? 1
-										: 0))) {
-							%><a
-							href="event_Myprize.jsp?cp=<%=(groupNumber + 1) * pageSize + 1%>">&gt;&gt;</a>
-							<%
-								}
-							%>
+							${requestScope.pageLogic }
 						</td>
 					</tr>
 				</tfoot>
-				<tbody>
-					<%
-						ArrayList<EventDTO> arr = eDAO.event_MyPrizeList(id_s, cp, listSize);
-
-						if (arr == null || arr.size() == 0) {
-					%>
-					<tr class="danger">
-						<td colspan="4" align="center">현재 보유한 상품이 없습니다.</td>
-					</tr>
-					<%
-						} else {
-							for (int i = 0; i < arr.size(); i++) {
-								String str = null;
-								switch (i % 3) {
-								case 0:
-									str = "danger";
-									break;
-								case 1:
-									str = "info";
-									break;
-								case 2:
-									str = "success";
-									break;
-								}
-					%>
-					<tr class="<%=str%>">
-						<td align="center"><%=arr.get(i).getRnum()%></td>
-						<td><%=arr.get(i).getUser_prize()%></td>
-						<td align="center"><%=arr.get(i).getUse()%></td>
-						<td align="center">
-							<div class="btn-group">
-								<button type="button" class="btn btn-warning"  onclick="exshow('<%=arr.get(i).getIdx() %>','<%=arr.get(i).getUse()%>')">증정</button>
-								<button type="button" class="btn btn-success"  onclick="reshow('<%=arr.get(i).getIdx() %>','<%=arr.get(i).getUse()%>','<%=arr.get(i).getUser_prize()%>')">취소</button>
-								<button type="button" class="btn btn-primary"  onclick="deshow('<%=arr.get(i).getIdx() %>','<%=arr.get(i).getUse()%>')">삭제</button>
-							</div>
-						</td>
-
-
-					</tr>
-					<%
-						}
-					}
-					%>
-				</tbody>
+				
 			</table>
 		</div>
 	</div>

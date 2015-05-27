@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="requestDong" value="${requestScope.dong }"/>
+<c:set var="arr" value="${requestScope.arr }"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,8 +24,6 @@
 	}
 </script>
 </head>
-<c:set var="requestDong" value="${requestScope.dong }"/>
-<c:set var="arr" value="${requestScope.arr }"/>
 <body style="margin: 5px auto; padding: 30px;">
 	<section>
 		<article>
