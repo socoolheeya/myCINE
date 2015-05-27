@@ -58,13 +58,13 @@
 					<c:if test="${not empty arr }">
 						<c:forEach var="dto" items="${arr }">
 							<c:url var="contnetURL" value="QnAContent.do">
-								<c:param name="idx">${dto.idx }</c:param>
+								<c:param name="idx">${dto.Q_idx }</c:param>
 							</c:url>
 							<tr>
-								<td style="text-align: center;">${dto.idx }</td>
-								<td><a href="${contentURL }"></a>${dto.subject }</td>
-								<td style="text-align: center;">${dto.writer }</td>
-								<td align="center">${dto.writedate }</td>
+								<td style="text-align: center;">${dto.Q_idx }</td>
+								<td><a href="${contentURL }"></a>${dto.Q_subject }</td>
+								<td style="text-align: center;">${dto.Q_writer }</td>
+								<td align="center">${dto.Q_writedate }</td>
 							</tr>
 						</c:forEach>
 					</c:if>

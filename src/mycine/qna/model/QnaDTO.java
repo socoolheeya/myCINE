@@ -16,6 +16,12 @@ public class QnaDTO {
 	public QnaDTO() {
 		super();
 	}
+	
+	public QnaDTO(int q_idx) {
+		super();
+		Q_idx = q_idx;
+	}
+
 	public QnaDTO(int q_idx, String q_writer, String q_pwd, String q_subject,
 			String q_content, Date q_writedate, int q_readnum, int q_ref,
 			int q_lev, int q_sunbun) {
