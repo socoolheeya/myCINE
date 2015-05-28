@@ -8,7 +8,7 @@ public class PageController {
 		int pageCnt = (totalCnt / listSize) + 1;
 		if (totalCnt % listSize == 0) {
 			pageCnt--;
-		}
+		}	
 			
 		int groupNumber = cp / pageSize;
 		if (cp % pageSize == 0) {

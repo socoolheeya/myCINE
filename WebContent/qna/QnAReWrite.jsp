@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@page import="java.util.*" %>
-    <%@page import="mycine.qna.*" %> 
-	<jsp:useBean id="qDAO" class="mycine.qna.QnaDAO" scope="session"/>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="id" value="${sessionScope.id }"/>
+<c:set var="subject" value="${param.q_subject }"/>
+<c:set var="ref" value="${param.q_ref }"/>
+<c:set var="lev" value="${param.q_lev }"/>
+<c:set var="sunbun" value="${param.q_sunbun }"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,21 +18,12 @@
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </head>
 <body>
-<%
-		String ids = (String)session.getAttribute("id");
-		if(ids == null || ids.equals("")) {
-	%>
+<c:if test="${empty id }">
 	<script>
 		window.alert("로그인 후에 이용할 수 있습니다.");
-		location.href="/myCINE/qna/QnAList.jsp";
+		location.href="/myCINE/qnaList.do";
 	</script>
-	<%}%>
-	<%
-	String q_subject=request.getParameter("q_subject");
-	String q_ref=request.getParameter("q_ref");
-	String q_lev=request.getParameter("q_lev");
-	String q_sunbun=request.getParameter("q_sunbun");
-	%>
+</c:if>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-4"></div>
@@ -37,21 +31,21 @@
 	<section>
 		<article>
 			<h3>답글달기</h3>
-			<form name="QnAReWrite" action="QnAReWriter_ok.jsp">
-				<input type="hidden" name="q_ref" value="<%=q_ref %>">
-				<input type="hidden" name="q_lev" value="<%=q_lev %>">
-				<input type="hidden" name="q_sunbun" value="<%=q_sunbun %>">
+			<form name="QnAReWrite" action="/myCINE/qnaReWrite.do">
+				<input type="hidden" name="q_ref" value="${ref }">
+				<input type="hidden" name=	"q_lev" value="${lev }">
+				<input type="hidden" name="q_sunbun" value="${sunbun }">
 
 					<table border="1" class="table">
 						<tr>
 							<th style="background-color:#ffcc00;">글쓴이</th>
-							<td><%=ids %></td>
+							<td>${id }</td>
 							<th style="background-color:#ffcc00;">비밀번호</th>
 							<td><input type="password" name="q_pwd" class="form-control"><p style="font-size: 5px">*비번은 항상 기억해주세요^^<p></td>
 						</tr>
 						<tr>
 							<th style="background-color:#ffcc00;">제목</th>
-							<td colspan="3"><input type="text" name="q_subject" value="Re:)<%=q_subject%>" class="form-control"></td>
+							<td colspan="3"><input type="text" name="q_subject" value="Re:)${subject }" class="form-control"></td>
 						</tr>
 
 						<tr>
@@ -63,7 +57,6 @@
 								value="보내기"  class="btn btn-warning"> <input type="reset" value="다시작성"  class="btn btn-warning"></td>
 						</tr>
 					</table>
-
 			</form>
 		</article>
 	</section>
