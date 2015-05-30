@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.*"%>
-<%@ page import="java.util.Date"%>
-<%@ page import="mycine.review.*"%>
-<jsp:useBean id="reDAO" class="mycine.review.ReviewDAO" scope="session" />
-<%
-	request.setCharacterEncoding("utf-8");
-%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="fkey" value="${requestScope.fkey }"/>
+<c:set var="fvalue" value="${requestScope.fvalue }"/>
+<c:set var="cp" value="${requestScope.cp }"/>
+<c:set var="pageLogic" value="${requestScope.pageLogic }"/>
+<c:set var="arrfind" value="${requestScope.arrfind }"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,35 +13,12 @@
 <title>리뷰 검색</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/myCINE/css/bootstrap.min.css">
-<%
-	String fkey=request.getParameter("fkey");
-String fvalue=request.getParameter("fvalue");
-
-int totalCnt=reDAO.getFindTotalCnt(fkey, fvalue);//총 게시물 수
-int listSize=5;//보여줄 리스트 수
-int pageSize=10;//보여줄 페이지 수
-
-String cp_s=request.getParameter("cp");
-if(cp_s==null||cp_s.equals("")){
-	cp_s="1";
-}
-
-int cp=Integer.parseInt(cp_s);
-
-int pageCnt=(totalCnt/listSize)+1;//게시물 그룹의 갯수
-if(totalCnt%listSize==0)pageCnt--;
-
-int groupNumber=cp/pageSize;//게시물 그룹의 그룹의 갯수
-if(cp%pageSize==0)groupNumber--;
-
-ArrayList<ReviewDTO> arrfind=reDAO.reviewFind(cp, listSize, fkey, fvalue);
-%>
 <script>
 	function reviewWrite() {
-		location.href = "reviewWrite.jsp"
+		location.href = "/myCINE/reviewWriteForm.do"
 	}
 	function showMyContent() {
-		location.href="reviewFindMyContent.jsp";
+		location.href="/myCINE/reviewFindMyContent.do";
 	}
 </script>
 <style type="text/css">
@@ -69,7 +45,7 @@ ArrayList<ReviewDTO> arrfind=reDAO.reviewFind(cp, listSize, fkey, fvalue);
 		<div class="col-sm-2"></div>
 		<div class="col-sm-8">
 			<form name="reviewFind"
-				action="reviewFind.jsp?cp=<%=cp%>&fkey=<%=fkey%>&fvalue=<%=fvalue%>">
+				action="reviewFind.jsp?cp=${cp }&fkey=${fkey }&fvalue=${fvalue}">
 				<table class="table table-stripe">
 					<thead id="title">
 						<tr>
@@ -85,28 +61,7 @@ ArrayList<ReviewDTO> arrfind=reDAO.reviewFind(cp, listSize, fkey, fvalue);
 					<tfoot>
 						<tr>
 							<td colspan="3" align="center">
-								<%
-									if (groupNumber != 0) {
-								%><a
-								href="reviewFind.jsp?cp=<%=(groupNumber - 1) * pageSize + pageSize%>&fkey=<%=fkey%>&fvalue=<%=fvalue%>">&lt;&lt;</a>
-								<%
-									}
-
-									for (int i = ((groupNumber * pageSize) + 1); i <= ((groupNumber * pageSize) + pageSize); i++) {
-								%> <a
-								href="reviewFind.jsp?cp=<%=i%>&fkey=<%=fkey%>&fvalue=<%=fvalue%>"><%=i%></a>&nbsp;&nbsp;&nbsp;
-								<%
-									if (i == pageCnt)
-											break;
-									}
-
-									if (groupNumber != ((pageCnt / pageSize) - (pageCnt % pageSize == 0 ? 1
-											: 0))) {
-								%><a
-								href="reviewFind.jsp?cp=<%=(groupNumber + 1) * pageSize + 1%>&fkey=<%=fkey%>&fvalue=<%=fvalue%>">&gt;&gt;</a>
-								<%
-									}
-								%>
+								${pageLogic }
 							</td>
 							<td colspan="4" align="right">
 								<button class="btn btn-danger" type="button" onclick="history.back()">뒤로가기</button>
@@ -118,43 +73,37 @@ ArrayList<ReviewDTO> arrfind=reDAO.reviewFind(cp, listSize, fkey, fvalue);
 									<option value="writer">작성자</option>
 									<option value="subject">제목</option>
 									<option value="content">내용</option>
-							</select> <input type="text" name="fvalue" value="<%=fvalue%>"> <input
+							</select> <input type="text" name="fvalue" value="${fvalue }"> <input
 								type="submit" value="검색"></td>
 						</tr>
 					</tfoot>
 					<tbody>
-						<%
-							if (arrfind == null || arrfind.size() == 0) {
-						%>
-						<tr>
-							<td colspan="7">검색결과가 없습니다.</td>
-						</tr>
-						<%
-							} else {
-								for (int i = 0; i < arrfind.size(); i++) {
-						%>
-						<tr>
-							<td><%=arrfind.get(i).getIdx()%></td>
-							<td><a
-								href="reviewContent.jsp?idx=<%=arrfind.get(i).getIdx()%>"> <%=arrfind.get(i).getSubject()%>
-							</a></td>
-							<td><%=arrfind.get(i).getWriter()%></td>
-							<td><%=arrfind.get(i).getWritedate()%></td>
-							<td><%=arrfind.get(i).getGrade()%></td>
-							<td><%=arrfind.get(i).getReadnum()%></td>
-							<td><%=arrfind.get(i).getRecommend()%></td>
-						</tr>
-						<%
-							}
-							}
-						%>
+						<c:if test="${empty arrfind }">
+							<tr>
+								<td colspan="7">검색결과가 없습니다.</td>
+							</tr>
+						</c:if>
+						<c:if test="${not empty arrfind }">
+							<c:forEach var="dto" items="${arrfind }">
+								<tr>
+									<td>${dto.idx }</td>
+									<td>
+										<a href="reviewContent.jsp?idx=${dto.idx }">${dto.subject }</a>
+									</td>
+									<td>${dto.writer }</td>
+									<td>${dto.writedate }</td>
+									<td>${dto.grade }</td>
+									<td>${dto.readnum }</td>
+									<td>${dto.recommend }</td>
+								</tr>
+							</c:forEach>
+						</c:if>
 					</tbody>
 				</table>
 			</form>
 		</div>
 		<div class="col-sm-2"></div>
 	</div>
-
 	<header>
 		<%@include file="../footer.jsp"%>
 	</header>

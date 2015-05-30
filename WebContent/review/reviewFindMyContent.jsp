@@ -1,33 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page import="mycine.review.ReviewDTO"%>
-<%@page import="java.util.ArrayList"%>
-<jsp:useBean id="rDTO" class="mycine.review.ReviewDTO" />
-<jsp:useBean id="rDAO" class="mycine.review.ReviewDAO" />
-<jsp:setProperty property="*" name="rDTO" />
-<%
-	int totalCnt = rDAO.getTotalCnt();//총 게시물 수
-	int listSize = 15;//보여줄 리스트 수
-	int pageSize = 10;//보여줄 페이지 수
-
-	String cp_s = request.getParameter("cp");
-	if (cp_s == null || cp_s.equals("")) {
-		cp_s = "1";
-	}
-
-	int cp = Integer.parseInt(cp_s);
-
-	int pageCnt = (totalCnt / listSize) + 1;//게시물 그룹의 갯수
-	if (totalCnt % listSize == 0)
-		pageCnt--;
-
-	int groupNumber = cp / pageSize;//게시물 그룹의 그룹의 갯수
-	if (cp % pageSize == 0)
-		groupNumber--;
-
-	String fkey = request.getParameter("fkey");
-	String fvalue = request.getParameter("fvalue");
-%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="arr" value="${requestScope.arr }"/>
+<c:set var="pageLogic" value="${requestScope.pageLogic }"/>
+<c:set var="fkey" value="${requestScope.fkey }"/>
+<c:set var="fvalue" value="${requestScope.fvalue }"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,10 +17,6 @@
 <script src="/myCINE/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<%
-		String loginID = (String) session.getAttribute("id");
-		ArrayList<ReviewDTO> arr = rDAO.showMyReviewContent(loginID);
-	%>
 	<header>
 		<%@include file="../header.jsp"%>
 	</header>
@@ -61,10 +34,7 @@
 	<div class="row">
 		<div class="col-sm-2"></div>
 		<div class="col-sm-8">
-			<%
-				if (request.getMethod().equals("GET")) {
-			%>
-			<form name="myReviewListForm" action="reviewWrite.jsp">
+			<form name="myReviewListForm" action="/myCINE/reviewWriteForm.do">
 				<table class="table table-hover">
 					<thead>
 						<tr style="background-color: #ffcc00;">
@@ -79,7 +49,6 @@
 					</thead>
 					<tfoot>
 						<tr>
-
 							<td colspan="7" align="right">
 								<button class="btn btn-danger" type="button"
 									onclick="history.back()">뒤로가기</button>
@@ -90,41 +59,29 @@
 						</tr>
 					</tfoot>
 					<tbody>
-						<%
-							if (arr == null || arr.size() == 0) {
-						%>
-						<tr>
-							<td colspan="7">글이 없습니다.</td>
-						</tr>
-						<%
-							} else {
-									for (int i = 0; i < arr.size(); i++) {
-						%>
-						<tr>
-							<td><%=arr.get(i).getIdx()%></td>
-							<td><a href="reviewContent.jsp?idx=<%=arr.get(i).getIdx()%>">
-									<%=arr.get(i).getSubject()%>
-							</a></td>
-							<%
-								for (int z = 1; z <= arr.get(i).getLev(); z++) {
-												out.println("&nbsp;&nbsp;");
-											}
-							%>
-							<td><%=arr.get(i).getWriter()%></td>
-							<td><%=arr.get(i).getWritedate()%></td>
-							<td><%=arr.get(i).getGrade()%>
-							<td><%=arr.get(i).getReadnum()%></td>
-							<td style="text-align: center;"><a
-								href="reviewRecommend.jsp?idx=<%=arr.get(i).getIdx()%>"
-								class="btn btn-primary btn" id="recommendButton"><span
-									class="glyphicon glyphicon-thumbs-up" data-toggle="tooltip"
-									title="추천" id="recommend"></span><%=arr.get(i).getRecommend()%></a></td>
-						</tr>
-						<%
-							}
-						}
-					}
-						%>
+						<c:if test="${empty arr }">
+							<tr>
+								<td colspan="7">글이 없습니다.</td>
+							</tr>
+						</c:if>
+						<c:if test="${not empty arr }">
+							<c:forEach var="dto" items="${arr }">
+								<tr>
+									<td>${dto.idx }</td>
+									<td>
+										<a href="reviewContent.jsp?idx=${dto.idx }">${dto.subject }</a>
+									</td>
+									<td>${dto.writer }</td>
+									<td>${dto.writedate }</td>
+									<td>${dto.grade }</td>
+									<td>${dto.readnum }</td>
+									<td style="text-align: center;">
+										<a href="reviewRecommend.jsp?idx=${dto.idx }" class="btn btn-primary btn" id="recommendButton"><span
+										class="glyphicon glyphicon-thumbs-up" data-toggle="tooltip"
+										title="추천" id="recommend"></span>${dto.recommend }</a>
+									</td>
+							</c:forEach>
+						</c:if>
 					</tbody>
 				</table>
 			</form>
