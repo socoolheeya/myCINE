@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="dto" value="${requestScope.dto }"/>
-<c:set var="pageLogic" value="${requestScope.pageLogic }"/>
-<c:set var="arr" value="${requestScope.arr }"/>
-<c:set var="str" value="${requestScope.str }"/>
+<c:set var="dto" value="${requestScope.dto }" />
+<c:set var="pageLogic" value="${requestScope.pageLogic }" />
+<c:set var="arr" value="${requestScope.arr }" />
+<c:set var="str" value="${requestScope.str }" />
+<c:set var="id" value="${sessionScope.id }" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +16,6 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="/myCINE/js/bootstrap.min.js"></script>
-
 <script>
 	function exshow(idx, use) {
 		var ex = window.confirm("교환권을 사용하시겠습니까?");
@@ -33,21 +33,21 @@
 			window.alert("취소되었습니다.");
 		}
 	}
-	function reshow(idx,use,user_prize){
-		var ex=window.confirm("교환권 구매를 취소하시겠습니까?");
-		if(ex){
-			location.href="event_Reprize.jsp?idx="+idx+"&use="+use+"&user_prize="+user_prize;
-		}else{
+	function reshow(idx, use, user_prize) {
+		var ex = window.confirm("교환권 구매를 취소하시겠습니까?");
+		if (ex) {
+			location.href = "event_Reprize.jsp?idx=" + idx + "&use=" + use
+					+ "&user_prize=" + user_prize;
+		} else {
 			window.alert("취소되었습니다.");
 		}
 	}
 </script>
-
-<c:if test=${empty dto }>
-<script>
-	window.alert("로그인 하고 이용해주세요!")
-	location.href = "event_Main.jsp";
-</script>
+<c:if test=${empty id }>
+	<script>
+		alert("로그인 후 사용가능합니다.");
+		location.href="/myCINE/eventMain.do";
+	</script>
 </c:if>
 </head>
 <body>
@@ -56,9 +56,9 @@
 		<div class="col-sm-3"
 			style="border: 1px solid #cccccc; margin: 10px; padding: 10px;">
 			<ul>
-				<li><a href="event_Main.jsp">포인트 사용안내</a></li>
-				<li><a href="event_Exchange.jsp">상품 교환</a></li>
-				<li><a href="event_Mypoint.jsp">내 포인트 조회</a></li>
+				<li><a href="/myCINE/eventMain.do">포인트 사용안내</a></li>
+				<li><a href="/myCINE/eventExchange.do">상품 교환</a></li>
+				<li><a href="/myCINE/eventMyPoint.do">내 포인트 조회</a></li>
 				<li>내가 보유한 상품</li>
 			</ul>
 		</div>
@@ -83,30 +83,31 @@
 						</tr>
 					</c:if>
 					<c:if test=${not empty arr }>
-						<tr class="${str }">
 						<c:forEach var="dto" items="${arr }">
-							<td align="center">${dto.rnum}</td>
-							<td>${dto.user_prize}</td>
-							<td align="center">${dto.use}</td>
-							<td align="center">
-								<div class="btn-group">
-									<button type="button" class="btn btn-warning"  onclick="exshow('${dto.idx}','${dto.use}')">증정</button>
-									<button type="button" class="btn btn-success"  onclick="reshow('${dto.idx}','${dto.use}','${dto.user_prize}')">취소</button>
-									<button type="button" class="btn btn-primary"  onclick="deshow('${dto.idx}','${dto.use}')">삭제</button>
-								</div>
-							</td>
+							<tr class="${str }">
+								<td align="center">${dto.rnum}</td>
+								<td>${dto.user_prize}</td>
+								<td align="center">${dto.use}</td>
+								<td align="center">
+									<div class="btn-group">
+										<button type="button" class="btn btn-warning"
+											onclick="exshow('${dto.idx}','${dto.use}')">증정</button>
+										<button type="button" class="btn btn-success"
+											onclick="reshow('${dto.idx}','${dto.use}','${dto.user_prize}')">취소</button>
+										<button type="button" class="btn btn-primary"
+											onclick="deshow('${dto.idx}','${dto.use}')">삭제</button>
+									</div>
+								</td>
+							</tr>
 						</c:forEach>
-						</tr>
 					</c:if>
 				</tbody>
 				<tfoot>
 					<tr align="center">
-						<td colspan="4">
-							${requestScope.pageLogic }
-						</td>
+						<td colspan="4">${requestScope.pageLogic }</td>
 					</tr>
 				</tfoot>
-				
+
 			</table>
 		</div>
 	</div>

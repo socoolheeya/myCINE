@@ -1,9 +1,8 @@
-<%@page import="mycine.reviewComment.ReviewCommentDTO"%>
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:useBean id="rcDTO" class="mycine.reviewComment.ReviewCommentDTO" />
-<jsp:useBean id="rcDAO" class="mycine.reviewComment.ReviewCommentDAO" />
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="contentIdx" value="${requestScope.contentIdx }" />
+<c:set var="arr" value="${requestScope.arr }" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,18 +29,13 @@
 		<div class="col-sm-2"></div>
 		<div class="col-sm-8">
 			<table class="table table-bordered">
-				<%
-					ArrayList<ReviewCommentDTO> arr = rcDAO.getComment(contentidx);
-					for (int i = 0; i < arr.size(); i++) {
-				%>
-				<tr style="width: 700px;">
-					<td id="writer"><%=arr.get(i).getWriter_cmt()%></td>
-					<td><%=arr.get(i).getContent_cmt()%><span
-						style="font-size: 11px; color: #999999; padding-left: 5px;"><%=arr.get(i).getWritedate_cmt()%></span></td>
-				</tr>
-				<%
-					}
-				%>
+				<c:forEach var="dto" items="${arr }">
+					<tr style="width: 700px;">
+						<td id="writer">${dto.writer_cmt }</td>
+						<td>${dto.content_cmt }<span
+							style="font-size: 11px; color: #999999; padding-left: 5px;">${dto.writedate_cmt }</span></td>
+					</tr>
+				</c:forEach>
 			</table>
 		</div>
 		<div class="col-sm-2"></div>

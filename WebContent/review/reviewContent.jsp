@@ -1,16 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="mycine.review.*"%>
-<jsp:useBean id="reDAO" class="mycine.review.ReviewDAO" />
-<%
-	String idx_s = request.getParameter("idx");
-	//첫번째 유효성 검사
-	if (idx_s == null || idx_s.equals("")) {
-		idx_s = "0";
-	}
-	int idx = Integer.parseInt(idx_s);
-%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +14,7 @@
 <script src="/myCINE/js/bootstrap.min.js"></script>
 <script>
 function reviewDel(){
-	window.open("reviewDel.jsp?idx=<%=idx%>", "reviewDel", "width=350,height=200,top=150,left=500;");
+	window.open("/myCINE/reviewDelForm.do?idx=${idx}", "reviewDel", "width=350,height=200,top=150,left=500;");
 	}
 </script>
 </head>

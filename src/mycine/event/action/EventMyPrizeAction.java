@@ -18,8 +18,9 @@ public class EventMyPrizeAction implements CommandHandler {
 			throws ServletException, IOException {
 
 		String id = (String) req.getSession().getAttribute("id");
+		String msg = null;
 		if (id == null || id.equals("")) {
-			id = "0";
+			msg = "로그인 후 사용 가능합니다.";
 		}
 		EventDAO dao = new EventDAO();
 		EventDTO dto = dao.event_MyPoint(id);
@@ -54,11 +55,12 @@ public class EventMyPrizeAction implements CommandHandler {
 				}
 			}		
 		}
+		req.setAttribute("msg", msg);
 		req.setAttribute("dto", dto);
 		req.setAttribute("pageLogic", pageLogic);
 		req.setAttribute("arr", arr);
 		req.setAttribute("str", str);
 		
-		return "/event/event_MyPrize.jsp";
+		return "/event/event_Myprize.jsp";
 	}
 }

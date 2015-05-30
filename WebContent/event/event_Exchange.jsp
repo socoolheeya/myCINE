@@ -45,10 +45,10 @@ tfoot tr {
 			style="border: 1px solid #cccccc; margin: 10px; padding: 10px;">
 
 			<ul>
-				<li><a href="event_Main.jsp">포인트 사용안내</a></li>
+				<li><a href="/myCINE/eventMain.do">포인트 사용안내</a></li>
 				<li>상품 교환</li>
-				<li><a href="event_Mypoint.jsp">내 포인트 조회</a></li>
-				<li><a href="event_Myprize.jsp">내가 보유한 상품</a></li>
+				<li><a href="/myCINE/eventMyPoint.do">내 포인트 조회</a></li>
+				<li><a href="/myCINE/eventMyPrize.do">내가 보유한 상품</a></li>
 			</ul>
 
 		</div>

@@ -11,7 +11,11 @@ public class EventDAO {
 	public EventDAO() {
 	}
 
-	// �� ����Ʈ ��ȸ (����Ʈ ��ȸ)
+	/**
+	 * 해당 ID의 이벤트 정보 가져오기
+	 * @param id
+	 * @return
+	 */
 	public EventDTO event_MyPoint(String id) {
 		try {
 			EventDTO dto = null;

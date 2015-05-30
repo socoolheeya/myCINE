@@ -22,16 +22,16 @@
 		<div>
 			<div class="dropdown">
 			<ul class="nav navbar-nav">
-				<li><a href="/myCINE/company/companyMain.jsp">회사소개</a></li>
-				<li><a href="/myCINE/reviewList.dp">영화리뷰</a></li>
+				<li><a href="/myCINE/companyMain.do">회사소개</a></li>
+				<li><a href="/myCINE/reviewList.do">영화리뷰</a></li>
 				<li><a href="/myCINE/requestList.do">영화요청</a></li>
 				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="/myCINE/qna/QnAList.jsp">QnA<span class="caret"></span></a>
 					 <ul class="dropdown-menu">
-					 <li><a href="/myCINE/qna/FAQ.jsp">자주하는 질문(FAQ)</a></li>
-					 <li><a href="/myCINE/qna/QnAList.jsp">질문하기</a></li>
+					 <li><a href="/myCINE/FAQ.do">자주하는 질문(FAQ)</a></li>
+					 <li><a href="/myCINE/QnAList.do">질문하기</a></li>
 					 </ul>
 				</li>
-				<li><a href="/myCINE/event/event_Main.jsp">이벤트</a></li>
+				<li><a href="/myCINE/eventMain.do">이벤트</a></li>
 			</ul>
 			</div>
 			<div class="pull-right">

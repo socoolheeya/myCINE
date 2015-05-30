@@ -12,27 +12,27 @@
 </head>
 <body>
 	<%@include file="../header.jsp"%>
-<div class="container-fluid">
+	<div class="container-fluid">
 		<div class="row">
-			<div class="col-sm-2" style="border: 1px solid #cccccc; margin: 10px; padding: 10px;">
-			
-			<ul>
-			<li><a href="companyMain.jsp">회사소개</a></li>
-			<li><a href="Ethic.jsp">myCINE윤리</a></li>
-			<li><a href="dataProtection.jsp">정보보호인증</a></li>	
-			<li><a href="supportProcess.jsp">지원절차</a></li>
-			</ul>
-			
+			<div class="col-sm-2"
+				style="border: 1px solid #cccccc; margin: 10px; padding: 10px;">
+				<ul>
+					<li><a href="/myCINE/companyMain.do">회사소개</a></li>
+					<li><a href="/myCINE/ethic.do">myCINE윤리</a></li>
+					<li><a href="/myCINE/dataProtection.do">정보보호인증</a></li>
+					<li><a href="/myCINE/support.do">지원절차</a></li>
+				</ul>
 			</div>
 			<div class="col-sm-8">
-			<br><br>
-	<img src="/myCINE/image/지원절차2.jpg" alt="지원절차" width="806" height="766" >
-	<hr>
+				<br>
+				<br> <img src="/myCINE/image/지원절차2.jpg" alt="지원절차" width="806"
+					height="766">
+				<hr>
 
+			</div>
+			<div class="col-sm-2"></div>
 		</div>
-		<div class="col-sm-2"></div>
-		</div>
-		</div>
-		<%@include file="../footer.jsp"%>
+	</div>
+	<%@include file="../footer.jsp"%>
 </body>
 </html>

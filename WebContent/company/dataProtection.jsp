@@ -12,32 +12,35 @@
 </head>
 <body>
 	<%@include file="../header.jsp"%>
-<div class="container-fluid">
+	<div class="container-fluid">
 		<div class="row">
-			<div class="col-sm-2" style="border: 1px solid #cccccc; margin: 10px; padding: 10px;">
-			
-			<ul>
-			<li><a href="companyMain.jsp">회사소개</a></li>
-			<li><a href="Ethic.jsp">myCINE윤리</a></li>
-			<li><a href="dataProtection.jsp">정보보호인증</a></li>	
-			<li><a href="supportProcess.jsp">지원절차</a></li>
-			</ul>
-			
+			<div class="col-sm-2"
+				style="border: 1px solid #cccccc; margin: 10px; padding: 10px;">
+				<ul>
+					<li><a href="/myCINE/companyMain.do">회사소개</a></li>
+					<li><a href="/myCINE/ethic.do">myCINE윤리</a></li>
+					<li><a href="/myCINE/dataProtection.do">정보보호인증</a></li>
+					<li><a href="/myCINE/support.do">지원절차</a></li>
+				</ul>
 			</div>
 			<div class="col-sm-8">
-			<br><br>
-	<img src="/myCINE/image/정보보호 인증.jpg" alt="정보보호인증" width="890" height="153" >
-	<hr>
-	<img src="/myCINE/image/정보보호 인증2.jpg" alt="정보보호인증2" width="890" height="250" >
-	<hr>
-	<img src="/myCINE/image/정보보호 인증3.jpg" alt="정보보호인증3" width="890" height="253" >
-	<hr>
-	<img src="/myCINE/image/정보보호 인증4.jpg" alt="정보보호인증4" width="890" height="350" >
-		
+				<br>
+				<br> <img src="/myCINE/image/정보보호 인증.jpg" alt="정보보호인증"
+					width="890" height="153">
+				<hr>
+				<img src="/myCINE/image/정보보호 인증2.jpg" alt="정보보호인증2" width="890"
+					height="250">
+				<hr>
+				<img src="/myCINE/image/정보보호 인증3.jpg" alt="정보보호인증3" width="890"
+					height="253">
+				<hr>
+				<img src="/myCINE/image/정보보호 인증4.jpg" alt="정보보호인증4" width="890"
+					height="350">
+
+			</div>
+			<div class="col-sm-2"></div>
 		</div>
-		<div class="col-sm-2"></div>
-		</div>
-		</div>
-		<%@include file="../footer.jsp"%>
+	</div>
+	<%@include file="../footer.jsp"%>
 </body>
 </html>
