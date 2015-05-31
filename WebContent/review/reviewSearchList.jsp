@@ -3,27 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="arr" value="${requestScope.arr }"/>
 <c:set var="pageLogic" value="${requestScope.pageLogic }"/>
-<%
-	int totalCnt=reDAO.getTotalCnt();//총 게시물 수
-int listSize=15;//보여줄 리스트 수
-int pageSize=10;//보여줄 페이지 수
-
-String cp_s=request.getParameter("cp");
-if(cp_s==null||cp_s.equals("")){
-	cp_s="1";
-}
-
-int cp=Integer.parseInt(cp_s);
-
-int pageCnt=(totalCnt/listSize)+1;//게시물 그룹의 갯수
-if(totalCnt%listSize==0)pageCnt--;
-
-int groupNumber=cp/pageSize;//게시물 그룹의 그룹의 갯수
-if(cp%pageSize==0)groupNumber--;
-
-String fkey=request.getParameter("fkey");
-String fvalue=request.getParameter("fvalue");
-%>
+<c:set var="requestSubject" value="${requestScope.requestSubject }"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,12 +50,12 @@ String fvalue=request.getParameter("fvalue");
 						</tr>
 					</tfoot>
 					<tbody>
-					<c:if test=${empty arr } >
+					<c:if test="${empty arr }" >
 						<tr>
 							<td colspan="6">글이 없습니다.</td>
 						</tr>
 					</c:if>
-					<c:if test=${not empty arr } >
+					<c:if test="${not empty arr }" >
 						<c:forEach var="dto" items="${arr }">
 						
 						</c:forEach>
@@ -94,14 +74,14 @@ String fvalue=request.getParameter("fvalue");
 									if (arr.get(i).getSubject().contains(requestSubject)) {
 						%>
 						<tr>
-							<td><%=arr.get(i).getIdx()%></td>
-							<td><a href="reviewContent.jsp?idx=<%=arr.get(i).getIdx()%>">
-									<%=arr.get(i).getSubject()%>
+							<td>${dto.idx }</td>
+							<td><a href="reviewContent.jsp?idx=${dto.idx }">
+									${dto.subject }
 							</a></td>
-							<td><%=arr.get(i).getWriter()%></td>
-							<td><%=arr.get(i).getWritedate()%></td>
-							<td><%=arr.get(i).getReadnum()%></td>
-							<td><%=arr.get(i).getRecommend()%></td>
+							<td>${dto.writer }</td>
+							<td>${dto.writedate }</td>
+							<td>${dto.readnum }</td>
+							<td>${dto.recommend }</td>
 						</tr>
 						<%
 							}

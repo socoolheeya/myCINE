@@ -21,6 +21,7 @@ public class HeaderAction implements CommandHandler {
 		
 		MemberDAO dao = new MemberDAO();
 		MemberDTO dto = dao.getUserInfo(id);
+		
 		req.setAttribute("dto", dto);
 		
 		return "/header.jsp";

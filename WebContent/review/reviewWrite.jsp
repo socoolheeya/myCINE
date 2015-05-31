@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="id" value="${sessionScope.id }"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,9 +15,6 @@
 <script src="/myCINE/js/bootstrap.min.js"></script>
 </head>
 <body>
-<%
-	String loginID = (String)session.getAttribute("id");
-%>
 	<header>
 		<%@include file="../header.jsp"%>
 	</header>
@@ -30,23 +29,18 @@
 	<div class="row">
 		<div class="col-sm-2"></div>
 		<div class="col-sm-8">
-			<form name="reviewwrite" action="reviewWrite_ok.jsp">
+			<form name="reviewwrite" action="/myCINE/reviewWrite.do">
 				<table class="table table-bordered">
 					<thead>
 						<tr>
 							<th style="background-color: #ffcc00;">작성자</th>
 							<td>
-							<%
-								if(loginID == null || loginID.equals("")) {
-									%>
+								<c:if test="${empty id }">
 									<input type="text" name="writer">
-									<%
-								} else {
-									%>
-									<%=loginID %><input type="hidden" name="writer" value="<%=loginID%>">
-									<%
-								}
-							%>
+								</c:if>
+								<c:if test="${not empty id }">
+									${id }<input type="hidden" name="writer" value="${id }">
+								</c:if>
 							</td>
 
 						</tr>

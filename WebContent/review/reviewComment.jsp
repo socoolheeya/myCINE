@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="id" value=${sessionScope.id } />
+<c:set var="id" value="${sessionScope.id }" />
 <c:set var="contentIdx" value="${requestScope.contentIdx }" />
 <link rel="stylesheet" href="/myCINE/css/rating-star.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,12 +21,12 @@
 			<table class="table table-bordered">
 				<thead>
 					<tr>
-						<c:if test=${empty id }>
+						<c:if test="${empty id }">
 							<td style="margin: 0px auto;"><input type="text"
 								name="writer_cmt" style="width: 130px;"><input
 								type="hidden" name="idx" value="${contentIdx }"></td>
 						</c:if>
-						<c:if test=${not empty id }>
+						<c:if test="${not empty id }">
 							<th style="margin: 0px auto;">${id }<input type="hidden"
 								name="writer_cmt" value="${id }"><input type="hidden"
 								name="idx" value="${contentIdx }"></th>

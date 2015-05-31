@@ -25,10 +25,13 @@ public class ReviewContentAction implements CommandHandler {
 		String id = (String)req.getSession().getAttribute("id");
 		ReviewDAO dao = new ReviewDAO();
 		ReviewDTO dto = dao.reviewContent(idx);
+		String rcontent = dto.getContent().replace("\n", "<br>");
+		dao.getReadnum(idx);
 		
 		req.setAttribute("dto", dto);
+		req.setAttribute("rcontent", rcontent);
 		
-		return null;
+		return "/review/reviewContent.jsp";
 	}
 
 }

@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-	int idx_s = Integer.parseInt(request.getParameter("idx"));
-%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="idx" value="${requestScope.idx }"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,9 +21,9 @@
 <body>
 	<div class="container">
 		<h3 style="padding: 10px;">글을 삭제하시겠습니까?</h3>
-		<form name="reviewDel" action="reviewDel_ok.jsp">
+		<form name="reviewDel" action="/myCINE/reviewDel.do">
 			<div align="right" style="margin: 10px;">
-			<input type="hidden" name=idx value="<%=idx_s%>">
+			<input type="hidden" name=idx value="${idx }">
 			<button class="btn btn-warning" type="button" name="cancel"
 				onclick="javascript:window.self.close()">취소</button>
 			<button class="btn btn-danger" type="submit" name="reviewdel">삭제</button>

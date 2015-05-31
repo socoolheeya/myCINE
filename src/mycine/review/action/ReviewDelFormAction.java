@@ -13,8 +13,12 @@ public class ReviewDelFormAction implements CommandHandler {
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		int idx = Integer.parseInt(req.getParameter("idx"));
+		
+		req.setAttribute("idx", idx);		
+		
+		return "/review/reviewDel.jsp";
 	}
 
 }

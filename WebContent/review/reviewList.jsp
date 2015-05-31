@@ -1,30 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.Date"%>
-<%@ page import="java.util.*"%>
-<%@ page import="mycine.review.*"%>
-<jsp:useBean id="reDAO" class="mycine.review.ReviewDAO" scope="session" />
-<jsp:useBean id="rcDAO" class="mycine.reviewComment.ReviewCommentDAO" />
-<%
-	
-	int totalCnt=reDAO.getTotalCnt();//총 게시물 수
-	int listSize=15;//보여줄 리스트 수
-	int pageSize=10;//보여줄 페이지 수
-	String cp_s=request.getParameter("cp");
-	if(cp_s==null||cp_s.equals("")){
-		cp_s="1";
-	}
-int cp=Integer.parseInt(cp_s);
-
-int pageCnt=(totalCnt/listSize)+1;//게시물 그룹의 갯수
-if(totalCnt%listSize==0)pageCnt--;
-
-int groupNumber=cp/pageSize;//게시물 그룹의 그룹의 갯수
-if(cp%pageSize==0)groupNumber--;
-
-String fkey=request.getParameter("fkey");
-String fvalue=request.getParameter("fvalue");
-%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="pageLogic" value="${requestScope.pageLogic }" />
+<c:set var="arr" value="${requestScope.arr }" />
+<c:set var="testId" value="${requestScope.testId }" />
+<c:set var="commentCount" value="${requestScope.commentCount }" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,59 +14,56 @@ String fvalue=request.getParameter("fvalue");
 <link rel="stylesheet" href="/myCINE/css/bootstrap.min.css">
 <script>
 	function reviewFind() {
-		document.reviewSearchForm.action = "reviewFind.jsp";
+		document.reviewSearchForm.action = "/myCINE/reviewFind.do";
 		document.reviewSearchForm.submit();
 	}
 	function showMyContent() {
-		location.href = "reviewFindMyContent.jsp";
+		location.href = "/myCINE/reviewFindMyContent.do";
 	}
-	function getUserInfo(){
-		
+	function getUserInfo() {
+
 	}
 </script>
 <script>
-$(document).ready(function(){
-    $('[data-toggle="popover"]').popover();   
-});
+	$(document).ready(function() {
+		$('[data-toggle="popover"]').popover();
+	});
 </script>
 <style type="text/css">
 #searchForm {
 	padding: 10px;
 	text-align: right;
 }
+
 #commentCount {
 	color: #003366;
 	font-size: 11px;
-	padding-left: 10px;	
+	padding-left: 10px;
 }
-#idx,#subject, #writer, #writeDate, #readnum, #grade {
+
+#idx, #subject, #writer, #writeDate, #readnum, #grade {
 	font-size: 14px;
 }
+
 #subject, #writer {
 	color: black;
 }
-#ab{
+
+#ab {
 	font-size: 12px;
 	text-align: center;
 }
+
 #buttonG {
+	
 }
+
 #title {
-	background-color: #ffcc00;	
+	background-color: #ffcc00;
 }
 </style>
 </head>
 <body>
-	<%
-		ArrayList<ReviewDTO> arr = reDAO.reviewList(cp, listSize);
-		String sessionID = (String)session.getAttribute("id");
-		String testId;
-		if(sessionID == null || sessionID.equals("")){
-	         testId = request.getRemoteAddr();
-	      }else{
-	         testId = sessionID;
-	      }
-	%>
 	<header>
 		<%@include file="../header.jsp"%>
 	</header>
@@ -115,9 +92,6 @@ $(document).ready(function(){
 					<span class="glyphicon glyphicon-search"></span>검색
 				</button>
 			</form>
-			<%
-				if (request.getMethod().equals("GET")) {
-			%>
 			<form name="reviewlist" action="reviewWrite.jsp">
 				<table class="table table-hover">
 					<thead>
@@ -131,29 +105,40 @@ $(document).ready(function(){
 							<th id="ab">추천</th>
 						</tr>
 					</thead>
+					<tbody>
+						<c:choose>
+							<c:when test="${empty arr }">
+								<tr>
+									<td colspan="7">글이 없습니다.</td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<c:forEach var="dto" items="${arr }">
+									<tr>
+										<td id="idx">${dto.idx }</td>
+										<td id="subject"><a
+											href="reviewContent.do?idx=${dto.idx }"> ${dto.subject }<span
+												id="commentCount">[${commentCount }] </span>
+										</a></td>
+										<td id="writer" onmouseover="getUserInfo()"><a href="#"
+											data-toggle="popover" title="Popover Header"
+											data-content="Some content inside the popover">${dto.writer }</a></td>
+										<td id="writeDate">${dto.writedate }</td>
+										<td id="grade">${dto.grade }</td>
+										<td id="readnum">${dto.readnum }</td>
+										<td style="text-align: center;"><a
+											href="reviewRecommend.do?idx=${dto.idx }&id=${testId}"
+											class="btn btn-primary btn" id="recommendButton"><span
+												class="glyphicon glyphicon-thumbs-up" data-toggle="tooltip"
+												title="추천" id="recommend"></span>${dto.recommend }</a></td>
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</tbody>
 					<tfoot>
 						<tr>
-							<td colspan="2" align="center">
-								<%
-									if (groupNumber != 0) {
-								%><a
-								href="reviewList.jsp?cp=<%=(groupNumber - 1) * pageSize + pageSize%>">&lt;&lt;</a>
-								<%
-									}
-										for (int i = ((groupNumber * pageSize) + 1); i <= ((groupNumber * pageSize) + pageSize); i++) {
-								%> <a href="reviewList.jsp?cp=<%=i%>"><%=i%></a>&nbsp;&nbsp;&nbsp;
-								<%
-									if (i == pageCnt)
-												break;
-										}
-										if (groupNumber != ((pageCnt / pageSize) - (pageCnt % pageSize == 0 ? 1
-												: 0))) {
-								%> <a
-								href="reviewList.jsp?cp=<%=(groupNumber + 1) * pageSize + 1%>">&gt;&gt;</a>
-								<%
-									}
-								%>
-							</td>
+							<td colspan="2" align="center">${pageLogic }</td>
 
 							<td id="buttonG" colspan="5" align="right">
 								<button class="btn btn-danger" type="button"
@@ -164,60 +149,13 @@ $(document).ready(function(){
 							</td>
 						</tr>
 					</tfoot>
-					<tbody>
-						<%
-							if (arr == null || arr.size() == 0) {
-						%>
-						<tr>
-							<td colspan="7">글이 없습니다.</td>
-						</tr>
-						<%
-							} else {
-									for (int i = 0; i < arr.size(); i++) {
-						%>
-						<tr>
-							<td id="idx"><%=arr.get(i).getIdx()%></td>
-							<%
-								int commentCount = rcDAO.getCommentCount(arr.get(i).getIdx());
-							%>
-							<td id="subject"><a href="reviewContent.jsp?idx=<%=arr.get(i).getIdx()%>">
-									<%=arr.get(i).getSubject()%><span id="commentCount">[<%=commentCount %>]</span>
-							</a></td>
-							<%
-								for (int z = 1; z <= arr.get(i).getLev(); z++) {
-												out.println("&nbsp;&nbsp;");
-											}
-							%>
-							<td id="writer" onmouseover="getUserInfo()"><a href="#" data-toggle="popover" title="Popover Header" data-content="Some content inside the popover"><%=arr.get(i).getWriter()%></a></td>
-							<td id="writeDate"><%=arr.get(i).getWritedate()%></td>
-							<td id="grade"><%=arr.get(i).getGrade()%>
-							<td id="readnum"><%=arr.get(i).getReadnum()%></td>
-							<td style="text-align: center;"><a
-								href="reviewRecommend.jsp?idx=<%=arr.get(i).getIdx()%>&id=<%=testId %>"
-								class="btn btn-primary btn" id="recommendButton"><span
-									class="glyphicon glyphicon-thumbs-up" data-toggle="tooltip"
-									title="추천" id="recommend"></span><%=arr.get(i).getRecommend()%></a></td>
-						</tr>
-						<%
-							}
-								}
-						%>
-					</tbody>
 				</table>
 			</form>
-			<%
-				} else {
-			%>
-			<jsp:include page="reviewFind.jsp" />
-			<%
-				}
-			%>
-
+			<div class="col-sm-2"></div>
 		</div>
-		<div class="col-sm-2"></div>
 	</div>
-	<header>
+	<footer>
 		<%@include file="../footer.jsp"%>
-	</header>
+	</footer>
 </body>
 </html>

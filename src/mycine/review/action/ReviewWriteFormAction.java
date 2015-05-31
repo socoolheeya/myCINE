@@ -13,8 +13,9 @@ public class ReviewWriteFormAction implements CommandHandler {
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		
+		return "/review/reviewWrite.jsp";
 	}
 
 }

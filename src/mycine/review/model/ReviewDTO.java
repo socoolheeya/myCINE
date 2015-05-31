@@ -19,6 +19,19 @@ public class ReviewDTO {
 	/**DTO생성자*/
 	public ReviewDTO(){
 	}
+	
+	public ReviewDTO(int idx) {
+		super();
+		this.idx = idx;
+	}
+
+	public ReviewDTO(String writer, String subject, String content, int grade) {
+		super();
+		this.writer = writer;
+		this.subject = subject;
+		this.content = content;
+		this.grade = grade;
+	}
 
 	public ReviewDTO(int idx, String writer, String subject, String content,
 			int grade) {

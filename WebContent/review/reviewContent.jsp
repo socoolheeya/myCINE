@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="rcontent" value="${requestScope.rcontent }"/>
+<c:set var="dto" value="${requestScope.dto }"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,21 +21,12 @@ function reviewDel(){
 </script>
 </head>
 <body>
-	<%
-		String loginID = (String)session.getAttribute("id");
-			ReviewDTO redto = reDAO.reviewContent(idx);
-		//두번째 유효성 검사
-		if (redto == null) {
-	%>
-	<script>
-		window.alert("잘못된 접근입니다.");
-		location.href = "reviewList.jsp";
-	</script>
-	<%
-		return;
-		}
-		reDAO.getReadnum(idx);
-	%>
+	<c:if test="${empty dto }">
+		<script>
+			window.alert("잘못된 접근입니다.");
+			location.href = "/myCINE/reviewList.do";
+		</script>
+	</c:if>
 	<header>
 		<%@include file="../header.jsp"%>
 	</header>
@@ -54,13 +47,13 @@ function reviewDel(){
 				<thead>
 					<tr>
 						<th style="background-color: #ffff99;">작성자</th>
-						<td style="color: #0033ff;"><%=redto.getWriter()%></td>
+						<td style="color: #0033ff;">${dto.writer }</td>
 						<th style="background-color: #ffff99;">작성날짜</th>
-						<td><%=redto.getWritedate()%></td>
+						<td>${dto.writedate }</td>
 						<th style="background-color: #ffff99;">조회</th>
-						<td><%=redto.getReadnum()%></td>
+						<td>${dto.readnum }</td>
 						<th style="background-color: #ffff99;">추천</th>
-						<td><%=redto.getRecommend()%></td>
+						<td>${dto.recommend }</td>
 					</tr>
 				</thead>
 				<tfoot>
@@ -71,35 +64,30 @@ function reviewDel(){
 							&nbsp;&nbsp;|&nbsp;&nbsp; <a href="reviewList.jsp">목록으로<span
 								class="glyphicon glyphicon-th-list"></span></a>
 							&nbsp;&nbsp;|&nbsp;&nbsp; 
-							<%
- 							if (loginID != null && !loginID.equals("") && loginID.equals(redto.getWriter()) ) {
- 							%> 
- 							<a href="reviewUpdateWrite.jsp?idx=<%=redto.getIdx()%>&writer=<%=redto.getWriter()%>&pwd=<%=redto.getWritedate()%>&subject=<%=redto.getSubject()%>
-				&content=<%=redto.getContent()%>&grade=<%=redto.getGrade()%>">수정하기<span
+							<c:if test="${sessionScope.id == true }">
+									<a href="reviewUpdateWrite.jsp?idx=${dto.idx }&writer=${dto.writer }&pwd=${dto.writedate }&subject=${dto.subject }
+				&content=${dto.content }&grade=${dto.grade}">수정하기<span
 								class="glyphicon glyphicon-pencil"></span></a>
 							&nbsp;&nbsp;|&nbsp;&nbsp; <a href="javascript:reviewDel()">삭제하기<span
-								class="glyphicon glyphicon-remove"></span></a> &nbsp;&nbsp; 
-							<%
- 							}
- 							%>
-
+								class="glyphicon glyphicon-remove"></span></a> &nbsp;&nbsp;
+							</c:if>
 						</td>
 					</tr>
 				</tfoot>
 				<tbody>
 					<tr>
 						<th style="background-color: #ffff99;">제목</th>
-						<td colspan="5" align="left" id="subject"><%=redto.getSubject()%>
+						<td colspan="5" align="left" id="subject">${dto.subject }
 						</td>
 						<th style="background-color: #ffff99;">평점</th>
-						<td><%=redto.getGrade()%>점</td>
+						<td>${dto.grade }점</td>
 					</tr>
 					<tr>
 						<th colspan="8" style="background-color: #ffff99;">내용</th>
 					</tr>
 					<tr>
 						<td colspan="8"
-							style="overflow: scroll; height: 300px; width: 100%;"><%=redto.getContent().replace("\n", "<br>")%></td>
+							style="overflow: scroll; height: 300px; width: 100%;">${rcontent }</td>
 					</tr>
 				<tbody>
 			</table>

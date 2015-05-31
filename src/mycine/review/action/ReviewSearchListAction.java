@@ -34,9 +34,20 @@ public class ReviewSearchListAction implements CommandHandler {
 		//String fvalue=req.getParameter("fvalue");
 		
 		String requestSubject = req.getParameter("searchKeyword");
-		ArrayList<ReviewDTO> arr = dao.reviewList(cp, listSize);		
+		ArrayList<ReviewDTO> arr = dao.reviewList(cp, listSize);
+		
+		if(arr != null && arr.equals("") == false ) {
+			for(int i = 0; i < arr.size(); i++) {
+				if (arr.get(i).getSubject().contains(requestSubject)) {
+					
+				}
+			}
+		}
+		
 		
 		req.setAttribute("pageLogic", pageLogic);
+		req.setAttribute("requestSubject", requestSubject);
+		req.setAttribute("arr", arr);
 
 		return "/review/reviewSearchList.jsp";
 	}
