@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="arr" value="${requestScope.arr }"/>
 <c:set var="pageLogic" value="${requestScope.pageLogic }"/>
+<c:set var="loop" value="${requestScope.loop }" />
 <c:set var="requestSubject" value="${requestScope.requestSubject }"/>
 <!DOCTYPE html>
 <html>
@@ -57,37 +58,20 @@
 					</c:if>
 					<c:if test="${not empty arr }" >
 						<c:forEach var="dto" items="${arr }">
-						
+							<c:if test="${loop == true }">
+								<tr>
+									<td>${dto.idx }</td>
+									<td><a href="reviewContent.jsp?idx=${dto.idx }">
+										${dto.subject }
+									</a></td>
+									<td>${dto.writer }</td>
+									<td>${dto.writedate }</td>
+									<td>${dto.readnum }</td>
+									<td>${dto.recommend }</td>
+								</tr>
+							</c:if>
 						</c:forEach>
 					</c:if>
-						<%
-							String requestSubject = request.getParameter("searchKeyword");
-							ArrayList<ReviewDTO> arr = reDAO.reviewList(cp, listSize);						
-							if (arr == null || arr.size() == 0) {
-						%>
-						<tr>
-							<td colspan="6">글이 없습니다.</td>
-						</tr>
-						<%
-							} else {
-								for (int i = 0; i < arr.size(); i++) {
-									if (arr.get(i).getSubject().contains(requestSubject)) {
-						%>
-						<tr>
-							<td>${dto.idx }</td>
-							<td><a href="reviewContent.jsp?idx=${dto.idx }">
-									${dto.subject }
-							</a></td>
-							<td>${dto.writer }</td>
-							<td>${dto.writedate }</td>
-							<td>${dto.readnum }</td>
-							<td>${dto.recommend }</td>
-						</tr>
-						<%
-							}
-								}
-							}
-						%>
 					</tbody>
 				</table>
 			</form>
